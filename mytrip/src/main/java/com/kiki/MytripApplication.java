@@ -17,9 +17,12 @@ public class MytripApplication implements WebMvcConfigurer {
 		SpringApplication.run(MytripApplication.class, args);
 	}
 
+	// 정적 파일 경로 추가
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		WebMvcConfigurer.super.addResourceHandlers(registry);
+		registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/assets/css/");
+	    registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/assets/js/");
+	    registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/assets/img/");
 	}
 
 	@Override
