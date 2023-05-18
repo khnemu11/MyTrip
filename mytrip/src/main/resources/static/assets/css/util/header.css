@@ -1,0 +1,15 @@
+.logo{
+	width:200px;
+	margin-left: 100px;
+}
+.my-nav{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+.my-nav a{
+	padding-left:20px;
+	padding-right:20px;
+	font-size:18px;
+	font-weight:bold;
+}
