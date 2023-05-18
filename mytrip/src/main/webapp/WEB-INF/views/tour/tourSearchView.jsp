@@ -8,61 +8,36 @@
 	<link rel="stylesheet" href="/css/tour/tour.css" />
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/util/header.jsp"%>\
-	<div class="search-container">
+	<%@ include file="/WEB-INF/views/util/header.jsp"%>
+	<div class="search-container row">
 		<div class="col-lg-3 col-md-3 col-sm-3"></div>
-		<div class="col-lg-6 col-md-6 col-sm-6">
+		<div class="col-lg-6 col-md-6 col-sm-6 row">
 			<div id="search-bar">
-				<input class="form-control" id="search" type="text"
-								placeholder="검색어 입력">
-				<button type="button" class="btn btn-info text-white"
-								id="btn-search">검색</button>
+			<img src="/img/utill/only-logo.png" class="search-logo"/>
+			<p class="divider">|</p>
+				<input class="form-search" id="search" type="text"
+								placeholder="여행지 검색">
+				<button type="button" id="btn-search"><i class="fa-solid fa-magnifying-glass" style="color: #3F80F8;"></i></button>
+								
 			</div>
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-3"></div>
 	</div>
-	<div class="main-container">
-		<div class="col-lg-1 col-md-1 col-sm-1">
+	
+	<div class="row">
+		<div class="col-lg-3 col-md-3 col-sm-3">
 			
 		</div>
-		<div class="col-lg-10 col-md-10 col-sm-10">
-				
-		</div>
-		<div class="col-lg-1 col-md-1 col-sm-1">
-				
-		</div>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="container p-1">
-		<div class="container p-1">
-			<div class="row">
-				<div class="col-lg-12 col-md-12 col-sm-12">
-					<h2 class="my-3 py-3 shadow-sm bg-light text-center">관광지 목록</h2>
-				</div>
-			</div>
-			<div class="row select-row">
-				<div class=" col-md-2 col-sm-12 col-xs-12">
-					<select class="form-select" id="select-city"
+		<div class="col-lg-6 col-md-6 col-sm-6 row select-group">
+					<select class="form-select select-box" id="select-city"
 						onChange="onChangeCity();">
 						<option selected>도시</option>
 					</select>
-				</div>
-				<div class="col-md-2 col-sm-12 col-xs-12">
-					<select class="form-select" id="select-gun"
+						<select class="form-select select-box" id="select-gun"
 						onChange="onChangeGunGu();">
 						<option selected>시/군/구</option>
 					</select>
-				</div>
-				<div class="col-md-2 col-sm-12 col-xs-12">
-					<select class="form-select" id="select-contentTypeId"
+					<select class="form-select select-box" id="select-contentTypeId"
 						onChange="onChangeContentTypeId()">
 						<option selected value="">전체</option>
 						<option value="14">문화시설</option>
@@ -74,29 +49,37 @@
 						<option value="28">레포츠</option>
 						<option value="12">관광지</option>
 					</select>
-				</div>
-				<div class="col-md-6 col-sm-12 col-xs-12">
-					<div id="search-bar">
-						<input class="form-control" id="search" type="text"
-							placeholder="검색어 입력">
-						<button type="button" class="btn btn-info text-white"
-							id="btn-search">검색</button>
-					</div>
-				</div>
-			</div>
-
-
-
-			<!-- 공공데이터 관광지 출력 -->
-			<div class="row" id="location-container">
-				<div class="col-md-4 col-sm-4 col-xs-4" id="search-result">
-					<div id="location-list" class="row"></div>
-				</div>
-				<div class="col-md-8 col-sm-8 col-xs-8">
-					<%@ include file="/WEB-INF/views/tour/map.jsp"%>
-				</div>
-			</div>
+		</div>
+		<div class="col-lg-3 col-md-3 col-sm-3">
+				
 		</div>
 	</div>
+
+			<!-- 공공데이터 관광지 출력 -->
+			<div class="row">
+				<div class="col-md-2 col-sm-2 col-xs-2"></div>
+				<div class="col-md-8 col-sm-8 col-xs-8">
+					<div class="row sub-title-wrapper">
+						<div class="sub-title-container">
+							<span class="sub-title-label">|</span>
+							<span class="sub-title">인기있는 여행지</span>
+						</div>
+						<div class="sort-container">
+							<input type="radio" id="view" class="form-check-input" name="sort" value="view" checked>
+							<label for="view">인기 순</label>
+							<input type="radio" id="name" class="form-check-input" name="sort" value="view">	
+							<label for="name">이름 순</label>	
+						</div>
+										
+					</div>
+					
+				</div>
+				
+				<div class="col-md-2 col-sm-2 col-xs-2"></div>
+				</div>
+				<!-- <div class="row" id="location-container">
+				<div id="location-list" class="row"></div>
+				</div> -->
+				<!--  -->
 </body>
 </html>

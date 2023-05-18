@@ -23,3 +23,13 @@ nav, nav div{
 .main-background{
 	width:100%;
 }
+.my-nav a:after{
+	display:block;
+	content:'';
+	border-bottom:2px solid #3F80F8;
+	transform : scaleX(0);
+	transition : transform 250ms ease-in-out;
+}
+.my-nav a:hover:after{
+	transform : scaleX(1);
+}

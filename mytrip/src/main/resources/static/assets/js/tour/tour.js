@@ -5,7 +5,13 @@ let userinfo;
 let favoriteList=[];
 let key = 'opoKoaa3kaeINxgVEi1q%2BSrTFEFt%2FU8TOSyDXPcdAt6Ca5hjzRNGZZjSKUndxKSDlk%2FA164nPmQkpVk8c5f0NQ%3D%3D';
 
-document.querySelector('#btn-search').addEventListener('click',function(){
+document.querySelector('#search').addEventListener('keypress',function(e){
+	if(e.keyCode==13){
+		searchKeyword();
+	}
+})
+
+function searchKeyword(){
 	var keyWord = document.querySelector('#search').value;
 	console.log(keyWord);
 	if(keyWord == '' || keyWord == undefined){
@@ -17,6 +23,10 @@ document.querySelector('#btn-search').addEventListener('click',function(){
 		.then((response)=>response.json())
 		.then((data)=>listdata(data));
 	}
+}
+
+document.querySelector('#btn-search').addEventListener('click',function(){
+	searchKeyword();
 })
 
 fetch(`https://apis.data.go.kr/B551011/KorService1/areaBasedList1?serviceKey=opoKoaa3kaeINxgVEi1q%2BSrTFEFt%2FU8TOSyDXPcdAt6Ca5hjzRNGZZjSKUndxKSDlk%2FA164nPmQkpVk8c5f0NQ%3D%3D&numOfRows=12&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&areaCode=1&sigunguCode=1`)
