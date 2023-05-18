@@ -24,7 +24,7 @@ public class MytripApplication implements WebMvcConfigurer {
 	    registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/assets/js/");
 	    registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/assets/img/");
 	}
-
+	// 테스트 주석
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/").setViewName("index");
