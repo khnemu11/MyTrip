@@ -34,7 +34,7 @@
 				</div>
 				<div class="mb-3">
 					<input
-						type="password" class="form-control" id="pwdcheck"
+						type="password" class="form-control" id="pwcheck"
 						placeholder="비밀번호 확인" />
 				</div>
 				<div id="pwdcheck-result"></div>
