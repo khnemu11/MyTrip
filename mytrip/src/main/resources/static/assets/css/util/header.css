@@ -23,13 +23,31 @@ nav, nav div{
 .main-background{
 	width:100%;
 }
-.my-nav a:after{
+
+.my-nav a:hover:after{
+	transform : scaleX(1);
+}
+nav{
+	box-shadow: 2px 2px 5px#d3d3d3;
+	padding-bottom:0px !important;
+}
+.nav-link{
+	height:50px;
+	display:flex;
+	align-items:center;
+}
+
+.my-nav .nav{
+	display:flex;
+	align-items:center !important;
+}
+.nav-link-border:after{
 	display:block;
 	content:'';
 	border-bottom:2px solid #3F80F8;
 	transform : scaleX(0);
 	transition : transform 250ms ease-in-out;
 }
-.my-nav a:hover:after{
+.nav-link-border:hover:after{
 	transform : scaleX(1);
 }
