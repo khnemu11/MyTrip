@@ -11,4 +11,6 @@ public interface UserDao {
 	public List<UserDto> selectUsers();
 
 	public UserDto authenticateUser(String id, String password);
+
+	public int registerUser(UserDto registerForm);
 }

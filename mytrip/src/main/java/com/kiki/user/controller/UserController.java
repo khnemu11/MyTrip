@@ -23,13 +23,6 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@GetMapping("/search")
-	public String register() {
-		System.out.println(userService.selectUserList());
-		
-		return "index";
-	}
-	
 	@GetMapping("/login")
 	public String login() {
 		return "user/login";
@@ -46,10 +39,9 @@ public class UserController {
 				userDto.setPassword(null);
 				session.setAttribute("userInfo", userDto);
 				return "index";
-			} else {
-				model.addAttribute("loginMsg", "아이디 또는 비밀번호가 잘못되었습니다.");				
-				return "user/login";
-			}
+			} 
+			model.addAttribute("loginMsg", "아이디 또는 비밀번호가 잘못되었습니다.");				
+			return "user/login";
 		} catch(Exception e) {
 			e.printStackTrace();
 			return "error/error";
@@ -62,5 +54,25 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("/register")
+	public String register() {
+		return "user/register";
+	}
 	
+	@PostMapping("/register")
+	public String registerUser(UserDto registerForm, Model model) {
+		try {
+			System.out.println("heyhey");
+			int valid = userService.registerUser(registerForm);
+			if (valid == 1) {
+				model.addAttribute("registerMsg", "회원가입 성공");
+				return "redirect:/user/login";
+			} 
+			model.addAttribute("registerMsg", "회원가입에 실패하였습니다.");
+			return "user/register";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error/error";
+		}
+	}
 }

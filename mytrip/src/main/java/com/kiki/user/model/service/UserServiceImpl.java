@@ -23,4 +23,9 @@ public class UserServiceImpl implements UserService {
 	public UserDto authenticateUser(String id, String password) {
 		return dao.authenticateUser(id, password);
 	}
+
+	@Override
+	public int registerUser(UserDto registerForm) {
+		return dao.registerUser(registerForm);
+	}
 }

@@ -24,4 +24,9 @@
 		WHERE id = #{id}
 		AND password = #{password};
 	</select>
+	
+	<insert id="registerUser" parameterType="UserDto" >
+		INSERT INTO USER (id, password, name, email, phone_no, intro)
+		VALUES (#{id}, #{password}, #{name}, #{email}, #{phoneNo}, #{intro})
+	</insert>
 </mapper>

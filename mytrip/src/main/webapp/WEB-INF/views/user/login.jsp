@@ -17,7 +17,7 @@
 				<input type="hidden" name="action" value="login">
 				<div class = "mb-3">
 				<label for="userid" class = "form-label">아이디</label>
-				<input type = "text" class= "form-control" id = "userid" name = "id"/>
+				<input type = "text" class= "form-control" id = "id" name = "id"/>
 				</div>
 				<div class = "mb-3">
 					<label for= "userpassword" class ="from-label">비밀번호</label>
@@ -28,11 +28,11 @@
     margin-right: 16px;">
 						로그인
 					</button>
-					<button type="reset" class="btn btn-outline-success mb-3 ">취 소</button>
 				</div>
 			</form>
 		</div>
 	</div>
 	</div>
+	<%@ include file="/WEB-INF/views/util/footer.jsp"%>
 </body>
 </html>

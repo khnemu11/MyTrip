@@ -32,7 +32,7 @@
                    	  <c:if test="${not empty userInfo}">
                    		<a class="nav-link" href="/user/logout">로그아웃</a>
                    	  </c:if>
-                       <a class="nav-link" href="#">회원가입</a>
+                       <a class="nav-link" href="/user/register">회원가입</a>
                 </div>
             </div>
         </nav>
