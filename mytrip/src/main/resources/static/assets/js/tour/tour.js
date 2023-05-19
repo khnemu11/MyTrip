@@ -5,13 +5,7 @@ let userinfo;
 let favoriteList=[];
 let key = 'opoKoaa3kaeINxgVEi1q%2BSrTFEFt%2FU8TOSyDXPcdAt6Ca5hjzRNGZZjSKUndxKSDlk%2FA164nPmQkpVk8c5f0NQ%3D%3D';
 
-document.querySelector('#search').addEventListener('keypress',function(e){
-	if(e.keyCode==13){
-		searchKeyword();
-	}
-})
-
-function searchKeyword(){
+document.querySelector('#btn-search').addEventListener('click',function(){
 	var keyWord = document.querySelector('#search').value;
 	console.log(keyWord);
 	if(keyWord == '' || keyWord == undefined){
@@ -23,10 +17,6 @@ function searchKeyword(){
 		.then((response)=>response.json())
 		.then((data)=>listdata(data));
 	}
-}
-
-document.querySelector('#btn-search').addEventListener('click',function(){
-	searchKeyword();
 })
 
 fetch(`https://apis.data.go.kr/B551011/KorService1/areaBasedList1?serviceKey=opoKoaa3kaeINxgVEi1q%2BSrTFEFt%2FU8TOSyDXPcdAt6Ca5hjzRNGZZjSKUndxKSDlk%2FA164nPmQkpVk8c5f0NQ%3D%3D&numOfRows=12&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&areaCode=1&sigunguCode=1`)
@@ -36,6 +26,10 @@ fetch(`https://apis.data.go.kr/B551011/KorService1/areaBasedList1?serviceKey=opo
 fetch('https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey=opoKoaa3kaeINxgVEi1q%2BSrTFEFt%2FU8TOSyDXPcdAt6Ca5hjzRNGZZjSKUndxKSDlk%2FA164nPmQkpVk8c5f0NQ%3D%3D&numOfRows=20&pageNo=1&MobileOS=win&MobileApp=AppTest&_type=json')
 .then((response)=>response.json())
 .then((data)=>makeOption(data));
+
+fetch('https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey=opoKoaa3kaeINxgVEi1q%2BSrTFEFt%2FU8TOSyDXPcdAt6Ca5hjzRNGZZjSKUndxKSDlk%2FA164nPmQkpVk8c5f0NQ%3D%3D&numOfRows=100&pageNo=1&MobileOS=win&MobileApp=AppTest&areaCode=1&_type=json')
+		.then((response)=>response.json())
+.then((data)=>makeGunGuOption(data));
 
 fetch('/locations/list')
 .then((response)=>response.json())
@@ -230,119 +224,28 @@ function listdata(data){
 		 * console.log(jsonData);
 		 */
 		if(img == ""){
-			img = "/img/location/no-image.png";
+			img = "/img/tour/no-image.png";
 		}
 		
-		var context = `<div class="col-md-12 col-sm-12 col-xs-12" id="${cardId}" onclick='showMap(${divId})'>
-							<div class="card" data-toggle="modal" data-target="#myModal">
-								<img class="card-img-top img-config card-img-config" src="`+img+`" alt="Card image cap">
-								<button type="submit" class="favorite" data-title="${title}"data-addr="${addr}"data-mapx="${mapx}"data-mapy="${mapy}" id="`+divId+`"></button>	
-								<div class="card-body">
-									<h5 class="card-title">`+title+`</h5>
-									<p class="card-text">`+addr+`</p>
-									<button class="add-btn">+</button>
-								</div>
-							</div>
-						</div>`	
+		var context = `<div class="tour-card">
+					<img src="`+img+`">
+					<div class="tour-info">
+						<div class="tour-info-top">
+							<span class="tour-info-title">
+							`+title+`
+							</span>
+							<span class="tour-info-view">
+							<i class="fa-regular fa-eye" style="color: #ffffff;"></i>111,111
+							</span>
+						</div>
+					</div>
+				</div>`	
 		cards+=context;
 	}
 
 
-var pageNo = data.response.body.pageNo;
-var totalCnt = data.response.body.totalCount;
-var numOfRows  = data.response.body.numOfRows;
-var pageSize = 5;
-var pagenation = `<div class="pagination">`;
-var before = pageNo-5 > 0 ? pageNo-5 : 1;
-pagenation+=`<span id="`+pageId+`" data-page="`+before+`"><a href="javascript:void(0);" onclick="javascript:getPage(`+before+`);">`+`<`+`</a></span>`;
-
-
-for(var idx =0;idx<pageSize;idx++){
-	if((pageNo + idx) * numOfRows > totalCnt){
-		break;
-	}
-	var curr = pageNo+idx;
-	var pageId ="page"+curr;
-
-	/*
-	 * var link =
-	 * "https://apis.data.go.kr/B551011/KorService1/locationBasedList1?serviceKey=opoKoaa3kaeINxgVEi1q%2BSrTFEFt%2FU8TOSyDXPcdAt6Ca5hjzRNGZZjSKUndxKSDlk%2FA164nPmQkpVk8c5f0NQ%3D%3D&numOfRows=12&pageNo="+curr+"&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&mapX=126.981611&mapY=37.568477&radius=1000"
-	 */
-	pagenation+=`<span id="`+pageId+`" data-page="`+curr+`"><a href="javascript:void(0);" onclick="javascript:getPage(`+curr+`);">`+curr+`</a></span>`;
-	
-}
-
-
-var next = (pageNo + 5)*12 >= totalCnt ? (totalCnt-1)/12 + 1: pageNo+5;
-pagenation+=`<span id="`+pageId+`" data-page="`+next+`"><a href="javascript:void(0);" onclick="javascript:getPage(`+next+`);">`+`>`+`</a></span>`;
-pagenation +=`</div>`;
-cards+=pagenation;
 
 document.getElementById("location-list").innerHTML= cards;
-var pageId ="page"+pageNo;
-var currPage = document.getElementById(pageId);
-currPage.style.backgroundColor = "#0d6efd";
-currPage.style.borderRadius = "10px";
-currPage.firstChild.style.color="white";
-var locDivs = document.querySelectorAll(".favorite");
 
-
-for(var i=0;i<locDivs.length;i++){
-// console.log(locDivs[i]);
-	var id = locDivs[i].getAttribute("id");
-// console.log(id);
-	if(favoriteList.includes(locDivs[i].getAttribute("data-title"))){
-		document.getElementById(id).style.backgroundImage = "url('/img/tour/favorite_filled.png')";
-	}else{
-		document.getElementById(id).style.backgroundImage = "url('/img/tour/favorite_non_filled.png')";
-	}
-	
-	 
-	locDivs[i].addEventListener('click',function(event){
-		console.log(userinfo);
-		if(userinfo == undefined || userinfo.id==-1){
-			alert("로그인 후 이용할 수 있는 서비스입니다.");
-			return ;
-		}
-			
-		var id  = this.getAttribute("id");
-	
-		var jsonData = {
-				"title" : this.getAttribute("data-title"),
-				"address" : this.getAttribute("data-addr"),
-				"mapx" : this.getAttribute("data-mapx"),
-				"mapy" : this.getAttribute("data-mapy"),
-				"userid" : userinfo.id
-		}
-		fetch('/locations/add',{
-			method:"PUT",
-			headers:{
-				"content-type":"application/json",
-			},
-			body : JSON.stringify(jsonData),
-		})
-		.then(response=>response.text())
-		.then(data=>{
-			console.log(data);
-			if(data == 'add'){
-				console.log("change heart fill");
-				console.log(document.getElementById(id));
-				
-				var div = document.getElementById(id);
-				div.style.backgroundImage = "url('/img/tour/favorite_filled.png')";
-				favoriteList.push(div.getAttribute("data-title"));
-				console.log(favoriteList);
-			}else if(data == 'delete'){
-				var div = document.getElementById(id);
-				console.log("change heart empty");
-				div.style.backgroundImage = "url('/img/tour/favorite_non_filled.png')";
-				favoriteList.splice(favoriteList.indexOf(div.getAttribute("data-title")),1);
-				console.log(favoriteList);
-			}else{
-				console.log("fail");
-				}
-			})
-		});
-	}
 }
 	
