@@ -4,8 +4,8 @@
 <c:set var = "root" value = "${pageContext.request.contextPath}" scope = "session"></c:set>
 <link rel="stylesheet" href="/css/util/header.css" />
 <script>
-	<c:if test="${!empty msg}">
-		alert("${msg}");
+	<c:if test="${not empty loginMsg}">
+		alert("${loginMsg}");
 	</c:if>
 </script>
     <!-- 상단 header 시작 -->
@@ -21,13 +21,18 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse my-nav center" id="navbarSupportedContent">
-                            <a class="nav-link" href="/tour/search">여행지 검색</a>
-                            <a class="nav-link" href="#">경로 등록</a>
-                            <a class="nav-link" href="#">여행지 후기</a>
+                      <a class="nav-link" href="/tour/search">여행지 검색</a>
+                      <a class="nav-link" href="#">경로 등록</a>
+                      <a class="nav-link" href="#">여행지 후기</a>
                 </div>
                  <div class="collapse navbar-collapse my-nav right" id="navbarSupportedContent">
-                            <a class="nav-link" href="#">로그인</a>
-                            <a class="nav-link" href="#">회원가입</a>
+                      <c:if test="${empty userInfo}">
+                      	<a class="nav-link" href="/user/login">로그인</a>
+                  	  </c:if>
+                   	  <c:if test="${not empty userInfo}">
+                   		<a class="nav-link" href="/user/logout">로그아웃</a>
+                   	  </c:if>
+                       <a class="nav-link" href="#">회원가입</a>
                 </div>
             </div>
         </nav>

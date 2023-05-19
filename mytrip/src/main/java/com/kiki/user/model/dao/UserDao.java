@@ -9,4 +9,6 @@ import com.kiki.user.model.UserDto;
 @Mapper
 public interface UserDao {
 	public List<UserDto> selectUsers();
+
+	public UserDto authenticateUser(String id, String password);
 }

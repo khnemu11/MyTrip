@@ -1,4 +1,4 @@
-package com.kiki.tour.dto;
+package com.kiki.tour.model;
 
 public class TourDto {
 	private int seq;

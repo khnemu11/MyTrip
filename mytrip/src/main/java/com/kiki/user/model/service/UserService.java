@@ -8,4 +8,5 @@ import com.kiki.user.model.UserDto;
 
 public interface UserService {
 	public List<UserDto> selectUserList();
+	public UserDto authenticateUser(String id, String password);
 }

@@ -18,7 +18,10 @@
  -->
 
 	<!-- 사용자 정보를 저장한다. id는 repo클래스의 메소드 이름과 일치시킨다. -->
-	<select id="selectUsers" resultType="UserDto">
-		select * from emp99
+	<select id="authenticateUser" resultType="UserDto">
+		SELECT *
+		FROM USER
+		WHERE id = #{id}
+		AND password = #{password};
 	</select>
 </mapper>

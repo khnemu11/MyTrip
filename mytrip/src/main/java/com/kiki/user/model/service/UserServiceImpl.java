@@ -18,4 +18,9 @@ public class UserServiceImpl implements UserService {
 	public List<UserDto> selectUserList() {
 		return dao.selectUsers();
 	}
+
+	@Override
+	public UserDto authenticateUser(String id, String password) {
+		return dao.authenticateUser(id, password);
+	}
 }
