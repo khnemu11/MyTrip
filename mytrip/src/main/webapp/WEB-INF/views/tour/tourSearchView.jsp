@@ -97,10 +97,6 @@
 		<div class="col-md-2 col-sm-2 col-xs-2"></div>
 	</div>
 
-
-	<!-- <div class="row" id="location-container">
-				<div id="location-list" class="row"></div>
-				</div> -->
-	<!--  -->
+	<%@ include file="/WEB-INF/views/util/footer.jsp"%>
 </body>
 </html>

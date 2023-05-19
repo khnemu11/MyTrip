@@ -10,5 +10,6 @@
 <body>
 	<%@ include file="/WEB-INF/views/util/header.jsp"%>
 	<img src="/img/utill/main-background.png" class="main-background">
+	<%@ include file="/WEB-INF/views/util/footer.jsp"%>
 </body>
 </html>
