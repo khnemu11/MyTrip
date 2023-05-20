@@ -62,9 +62,9 @@
 				</div>
 				<div class="sort-container">
 					<input type="radio" id="view" class="form-check-input" name="sort"
-						value="view" checked> <label for="view">인기 순</label> <input
+						value="view"> <label for="view">인기 순</label> <input
 						type="radio" id="name" class="form-check-input" name="sort"
-						value="view"> <label for="name">이름 순</label>
+						value="view" checked> <label for="name">이름 순</label>
 				</div>
 
 			</div>
@@ -74,7 +74,12 @@
 	<div class="row">
 		<div class="col-md-2 col-sm-2 col-xs-2"></div>
 		<div class="col-md-8 col-sm-8 col-xs-8">
+			<div class="text-center loading-spinner">
+				<div class="spinner-border" role="status">
+				</div>
+			</div>
 			<div class="grid-3 tour-container" id="location-list">
+
 				<!-- <div class="tour-card">
 					<img src="/img/tour/no-image.png">
 					<div class="tour-info">
