@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kiki.tour.model.dao.TourDao">
+	<!-- 사용자 정보를 저장한다. id는 repo클래스의 메소드 이름과 일치시킨다. -->
+	<select id="selectTour" parameterType="TourDto" resultType="TourDto">
+		SELECT *
+		FROM tour
+		WHERE title = #{title}
+	</select>
+	
+	<insert id="insertTour" parameterType="TourDto">
+		
+	</insert>
+	<insert id="updateTourHit" parameterType="TourDto">
+		 INSERT INTO tour (title,address,latitude,longitude,telephone)
+		 VALUES 
+		 ( #{title} , #{address} , #{latitude} , #{longitude} , #{telephone} )
+		 ON DUPLICATE KEY UPDATE
+		 hits = hits+1;
+	</insert>
+</mapper>
