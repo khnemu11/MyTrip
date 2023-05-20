@@ -75,7 +75,7 @@
 		<div class="col-md-2 col-sm-2 col-xs-2"></div>
 		<div class="col-md-8 col-sm-8 col-xs-8">
 			<div class="grid-3 tour-container" id="location-list">
-				<div class="tour-card">
+				<!-- <div class="tour-card">
 					<img src="/img/tour/no-image.png">
 					<div class="tour-info">
 						<div class="tour-info-top">
@@ -86,12 +86,12 @@
 							<i class="fa-regular fa-eye" style="color: #ffffff;"></i>111,111
 							</span>
 						</div>
-						<!-- <div class="tour-info-bottom">
+						<div class="tour-info-bottom">
 							<div class="tour-info-address">
 							</div>
-						</div> -->
+						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 		<div class="col-md-2 col-sm-2 col-xs-2"></div>

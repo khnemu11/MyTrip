@@ -29,10 +29,7 @@
                 	</div>
                 	<div class="link-border">
                 		<a class="nav-link" href="#">여행지 후기</a>
-                	</div>
-                      
-                     
-                      
+                	</div>             
                 </div>
                  <div class="collapse navbar-collapse my-nav right" id="navbarSupportedContent">
                       <c:if test="${empty userInfo}">
