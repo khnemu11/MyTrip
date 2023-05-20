@@ -20,7 +20,7 @@
 					<div class="sub-title-container">
 						<span class="sub-title-left"> <span class="sub-title-label">|</span>
 							<span class="sub-title">여행지 상세</span>
-						</span> <span class="sub-title-right"> <span class="back back-icon"><i
+						</span> <span class="sub-title-right" onclick="window.history.back();"> <span class="back back-icon"><i
 								class="fa-solid fa-arrow-left"></i></span> <span class="back back-text">돌아가기</span>
 						</span>
 					</div>
@@ -141,6 +141,58 @@
 					</div>
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-2"></div>
+			</div>
+			<div class="col-md-2 col-sm-2 col-xs-2"></div>
+		</div>
+		<div class="row main-container">
+			<div class="col-md-2 col-sm-2 col-xs-2"></div>
+			
+			<div class="col-md-8 col-sm-8 col-xs-8 ">	
+				<div class="subsub-title">추천 영상</div>
+				<div class="grid-5">
+					<c:choose>
+						<c:when test="${youtubeList eq null}">
+							<div class="none-text">
+								추천 영상이 없습니다.
+							</div>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${youtubeList}" var="item">
+								<div class="card-thumbnail">
+									<img src="${item}">
+								</div>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+
+				</div>
+
+			</div>
+			<div class="col-md-2 col-sm-2 col-xs-2"></div>
+		</div>
+		<div class="row main-container">
+			<div class="col-md-2 col-sm-2 col-xs-2"></div>
+			
+			<div class="col-md-8 col-sm-8 col-xs-8 ">	
+				<div class="subsub-title">후기</div>
+				<div class="grid-5">
+					<div class="card-thumbnail">
+						<img src="/img/tour/no-image.png">
+					</div>
+					<div class="card-thumbnail">
+						<img src="/img/tour/no-image.png">
+					</div>
+					<div class="card-thumbnail">
+						<img src="/img/tour/no-image.png">
+					</div>
+					<div class="card-thumbnail">
+						<img src="/img/tour/no-image.png">
+					</div>
+					<div class="card-thumbnail">
+						<img src="/img/tour/no-image.png">
+					</div>
+				</div>
+
 			</div>
 			<div class="col-md-2 col-sm-2 col-xs-2"></div>
 		</div>
