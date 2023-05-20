@@ -206,6 +206,9 @@ body{
 .tour-card{
 	position:relative;
 }
+.tour-card:hover{
+	cursor:pointer;
+}
 .tour-card img{
 	border-radius:20px;
 	width:100%;
