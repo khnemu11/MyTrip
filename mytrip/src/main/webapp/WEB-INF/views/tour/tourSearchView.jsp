@@ -79,24 +79,6 @@
 				</div>
 			</div>
 			<div class="grid-3 tour-container" id="location-list">
-
-				<!-- <div class="tour-card">
-					<img src="/img/tour/no-image.png">
-					<div class="tour-info">
-						<div class="tour-info-top">
-							<span class="tour-info-title">
-							엄청엄청엄청엄청엄청엄청엄청엄청엄청엄청엄청엄청엄청긴식당
-							</span>
-							<span class="tour-info-view">
-							<i class="fa-regular fa-eye" style="color: #ffffff;"></i>111,111
-							</span>
-						</div>
-						<div class="tour-info-bottom">
-							<div class="tour-info-address">
-							</div>
-						</div>
-					</div>
-				</div> -->
 			</div>
 		</div>
 		<div class="col-md-2 col-sm-2 col-xs-2"></div>

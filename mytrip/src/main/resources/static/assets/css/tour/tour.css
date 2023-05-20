@@ -235,19 +235,10 @@ body{
 }
 .tour-info-title{
 	overflow:hidden;
-	width:70%;
+	width:100%;
 	white-space:nowrap;
 	text-overflow:ellipsis;
 	padding:10px !important;
-}
-.tour-info-view{
-	overflow:hidden;
-	width:30%;
-	padding-right:0px;
-	text-align:center;
-	white-space:nowrap;
-	text-overflow:ellipsis;
-	padding:10px;
 }
 .tour-info-view i{
 	padding-right:5px;

@@ -3,24 +3,13 @@ var sigunguCode=1;
 var contentTypeId="";
 let userinfo;
 let favoriteList=[];
-//let key = 'opoKoaa3kaeINxgVEi1q%2BSrTFEFt%2FU8TOSyDXPcdAt6Ca5hjzRNGZZjSKUndxKSDlk%2FA164nPmQkpVk8c5f0NQ%3D%3D';
 let key ='opoKoaa3kaeINxgVEi1q+SrTFEFt/U8TOSyDXPcdAt6Ca5hjzRNGZZjSKUndxKSDlk/A164nPmQkpVk8c5f0NQ==';
 let keyword = '';
 let isLoad=false;
 let pageNo= 1;
-document.addEventListener('DOMContentLoaded',function(){
-//	fetch(`https://apis.data.go.kr/B551011/KorService1/areaBasedList1?serviceKey=opoKoaa3kaeINxgVEi1q%2BSrTFEFt%2FU8TOSyDXPcdAt6Ca5hjzRNGZZjSKUndxKSDlk%2FA164nPmQkpVk8c5f0NQ%3D%3D&numOfRows=12&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&areaCode=1&sigunguCode=1`)
-//	.then((response)=>response.json())
-//	.then((data)=>listdata(data));
-	
-	init();
 
-//	fetch('/users/user')
-//	.then((response)=>response.json())
-//	.then((data)=>{
-//		userinfo = data;
-//		console.log(userinfo);
-//	})
+document.addEventListener('DOMContentLoaded',function(){
+	init();
 })
 async function init(){
 	
@@ -109,17 +98,6 @@ document.querySelector('#btn-search').addEventListener('click',function(){
 	document.querySelector('.loading-spinner').style.display='none';
 })
 
-
-/*
-function getPage(pageNo){
-	console.log(pageNo);
-	var link = `https://apis.data.go.kr/B551011/KorService1/areaBasedList1?serviceKey=opoKoaa3kaeINxgVEi1q%2BSrTFEFt%2FU8TOSyDXPcdAt6Ca5hjzRNGZZjSKUndxKSDlk%2FA164nPmQkpVk8c5f0NQ%3D%3D&numOfRows=12&pageNo=`+pageNo+`&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A&areaCode=`+areaCode+`&sigunguCode=`+sigunguCode
-	console.log(link);
-	fetch(link)
-	.then((response)=>response.json())
-	.then((data)=>listdata(data));
-}*/
-
 function onChangeContentTypeId(){
 	contentTypeId = document.getElementById("select-contentTypeId").value;
 	makeTourList(true);
@@ -186,43 +164,40 @@ async function makeTourList(isNew){
 				var mapx = locations[idx].mapx;
 				var mapy = locations[idx].mapy;
 				var img = locations[idx].firstimage;
-				var divId = "regist" + idx;
-				var cardId = "card" + idx;
-				
-				var jsonData = {
-					"title" : title,
-					"addr" : addr,
-					"mapx" : mapx,
-					"mapy" : mapy,
-					"userid" : "test"
-				}
+				var tel = locations[idx].tel;
+
 				if(img == ""){
 					img = "/img/tour/no-image.png";
 				}
 				
-				var context = `<div class="tour-card">
-							<img src="`+img+`">
-							<div class="tour-info">
-								<div class="tour-info-top">
-									<span class="tour-info-title">
-									`+title+`
-									</span>
-									<span class="tour-info-view">
-									<i class="fa-regular fa-eye" style="color: #ffffff;"></i>111,111
-									</span>
-								</div>
-							</div>
-						</div>`	
+				let baseUrl = '/tour/detail?';
+				
+				let url = baseUrl + paramUrl.toString();
+				console.log(url);
+				var context = `	
+								<form class="tour-card" action="${baseUrl}" method="get" onclick="submit()">
+									<input type="hidden" name="title" value="${title}"/>
+									<input type="hidden" name="address" value="${addr}"/>
+									<input type="hidden" name="longitude" value="${mapx}"/>
+									<input type="hidden" name="latitude" value="${mapy}"/>
+									<input type="hidden" name="telephone" value="${tel}"/>
+									
+									<img src="`+img+`">
+									<div class="tour-info">
+										<div class="tour-info-top">
+											<span class="tour-info-title">
+											`+title+`
+											</span>
+										</div>
+									</div>
+								</form>
+						</form>`	
 				list.insertAdjacentHTML('beforeend',context);
 			}
-
 		});
 }
 document.addEventListener('scroll',async function(e){
 //	let clientHeight = e.target.scrollingElement;
-	console.log(document.body.clientHeight);
-	console.log(document.body.scrollTop);
-	console.log(document.body.scrollHeight);
 	
 	if(document.body.scrollHeight>=document.body.scrollTop+document.body.clientHeight && !isLoad){
 		isLoad=true;
@@ -230,4 +205,8 @@ document.addEventListener('scroll',async function(e){
 		isLoad=false;
 	}
 })
+
+function submitChildForm(e){
+	console.log(e);
+}
 	
