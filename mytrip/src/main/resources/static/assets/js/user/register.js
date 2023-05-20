@@ -18,6 +18,32 @@ document.querySelector("#register-form").addEventListener("click", () => {
 	}
 })
 
-// 아이디는 몇자 이상 몇자 이하인지
+// 아이디 글자수, 중복 처리
+let isUseId = false;
+document.querySelector("#id").addEventListener("keyup", function () {
+    let userid = this.value;
+    console.log(userid);
+    let resultDiv = document.querySelector("#idcheck-result");
+    if(userid.length < 6 || userid.length > 20) {
+        resultDiv.setAttribute("class", "mb-3 text-dark");
+        resultDiv.textContent = "아이디는 6자 이상 20자 이하 입니다.";
+        isUseId = false;
+    } else {
+        fetch(`/user/login/idCheck/${userid}`)
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                if(data == 0) {
+                    resultDiv.setAttribute("class", "mb-3 text-primary");
+                    resultDiv.textContent = userid + "는 사용할 수 있습니다.";
+                    isUseId = true;
+                } else {
+                    resultDiv.setAttribute("class", "mb-3 text-danger");
+                    resultDiv.textContent = userid + "는 사용할 수 없습니다.";
+                    isUseId = false;
+                }
+            });
+        }
+    });
 // 이름 몇자 이상 몇자 이하
 // 비밀번호 일치

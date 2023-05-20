@@ -18,7 +18,7 @@
 				<div class="mb-3">
 					<input
 						type="text" class="form-control" id="id" name="id"
-						placeholder="아이디" />
+						placeholder="아이디" maxlength="20"/>
 				</div>
 				<div id="idcheck-result"></div>
 				<div class="mb-3">

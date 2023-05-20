@@ -28,4 +28,9 @@ public class UserServiceImpl implements UserService {
 	public int registerUser(UserDto registerForm) {
 		return dao.registerUser(registerForm);
 	}
+
+	@Override
+	public int checkId(String id) {
+		return dao.checkId(id);
+	}
 }

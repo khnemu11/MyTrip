@@ -10,4 +10,5 @@ public interface UserService {
 	public List<UserDto> selectUserList();
 	public UserDto authenticateUser(String id, String password);
 	public int registerUser(UserDto registerForm);
+	public int checkId(String id);
 }

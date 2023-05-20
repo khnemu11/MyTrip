@@ -17,16 +17,23 @@
 	</resultMap>
  -->
 
-	<!-- 사용자 정보를 저장한다. id는 repo클래스의 메소드 이름과 일치시킨다. -->
+	<!-- id는 repo클래스의 메소드 이름과 일치시킨다. -->
+	
 	<select id="authenticateUser" resultType="UserDto">
 		SELECT *
 		FROM USER
 		WHERE id = #{id}
-		AND password = #{password};
+		AND password = #{password}
 	</select>
 	
-	<insert id="registerUser" parameterType="UserDto" >
+	<insert id="registerUser" parameterType="UserDto">
 		INSERT INTO USER (id, password, name, email, phone_no, intro)
 		VALUES (#{id}, #{password}, #{name}, #{email}, #{phoneNo}, #{intro})
 	</insert>
+	
+	<select id="checkId" parameterType="String" resultType="int">
+		SELECT *
+		FROM USER
+		WHERE id = #{id}
+	</select>
 </mapper>

@@ -34,11 +34,11 @@
                  <div class="collapse navbar-collapse my-nav right" id="navbarSupportedContent">
                       <c:if test="${empty userInfo}">
                       	<a class="nav-link" href="/user/login">로그인</a>
+                      	<a class="nav-link" href="/user/register">회원가입</a>
                   	  </c:if>
                    	  <c:if test="${not empty userInfo}">
                    		<a class="nav-link" href="/user/logout">로그아웃</a>
-                   	  </c:if>
-                       <a class="nav-link" href="/user/register">회원가입</a>
+                   	  </c:if>       
                 </div>
             </div>
         </nav>
