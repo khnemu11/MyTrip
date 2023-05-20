@@ -21,9 +21,18 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse my-nav center" id="navbarSupportedContent">
-                      <a class="nav-link" href="/tour/search">여행지 검색</a>
-                      <a class="nav-link" href="#">경로 등록</a>
-                      <a class="nav-link" href="#">여행지 후기</a>
+                	<div class="link-border">
+                		<a class="nav-link" href="/tour/search">여행지 검색</a>
+                	</div >
+                	<div class="link-border">
+                		 <a class="nav-link" href="#">경로 등록</a>
+                	</div>
+                	<div class="link-border">
+                		<a class="nav-link" href="#">여행지 후기</a>
+                	</div>
+                      
+                     
+                      
                 </div>
                  <div class="collapse navbar-collapse my-nav right" id="navbarSupportedContent">
                       <c:if test="${empty userInfo}">

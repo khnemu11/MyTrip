@@ -41,13 +41,14 @@ nav{
 	display:flex;
 	align-items:center !important;
 }
-.nav-link-border:after{
+.link-border:after{
 	display:block;
 	content:'';
 	border-bottom:2px solid #3F80F8;
 	transform : scaleX(0);
-	transition : transform 250ms ease-in-out;
+	
 }
-.nav-link-border:hover:after{
+.link-border:hover:after{
 	transform : scaleX(1);
+	transition : transform 250ms ease-in-out;
 }
