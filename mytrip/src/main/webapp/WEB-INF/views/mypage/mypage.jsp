@@ -15,6 +15,8 @@
 		<div class="col-lg-10 col-md-10 col-sm-10 row">
 			<div class="col-lg-5 col-md-5 col-sm-5">
 				<h1>| 마이페이지</h1>
+				<a href="/mypage/authentication">수정</a>
+				<!-- 탈퇴는 onClick -->
 				<div class="info-row row">	
 					<div class="col-lg-3 col-md-3 col-sm-3 flex">
 						<span>아이디</span>

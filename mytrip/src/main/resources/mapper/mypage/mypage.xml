@@ -3,7 +3,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- name space는 UserRepo의 fully qualified name으로 설정한다. -->
 
-<mapper namespace="com.kiki.user.model.dao.UserDao">
+<mapper namespace="com.kiki.mypage.model.dao.MyPageDao">
 <!-- 	<resultMap type="UserDto" id="user">
 		<result column="id" property="id" />
 		<result column="pwd" property="pwd" />
@@ -19,21 +19,9 @@
 
 	<!-- id는 repo클래스의 메소드 이름과 일치시킨다. -->
 	
-	<select id="authenticateUser" resultType="UserDto">
-		SELECT *
-		FROM USER
-		WHERE id = #{id}
-		AND password = #{password}
-	</select>
-	
-	<insert id="registerUser" parameterType="UserDto">
-		INSERT INTO USER (id, password, name, email, phone_no, intro)
-		VALUES (#{id}, #{password}, #{name}, #{email}, #{phoneNo}, #{intro})
-	</insert>
-	
-	<select id="checkId" parameterType="String" resultType="int">
+	<select id="authenticateUser" resultType="int">
 		SELECT count(*)
 		FROM USER
-		WHERE id = #{id}
+		WHERE password = #{password}
 	</select>
 </mapper>

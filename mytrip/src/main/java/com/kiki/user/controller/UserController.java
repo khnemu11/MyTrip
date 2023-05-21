@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,7 +30,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public String authenticateUser(UserDto loginForm, Model model, HttpSession session) {
+	public String authenticateUser(@ModelAttribute("loginForm") UserDto loginForm, Model model, HttpSession session) {
 		String id = loginForm.getId();
 		String password = loginForm.getPassword();
 		try {
@@ -63,13 +64,14 @@ public class UserController {
 	public String registerUser(UserDto registerForm, Model model) {
 		try {
 			System.out.println("heyhey");
-			int valid = userService.registerUser(registerForm);
-			if (valid == 1) {
-				model.addAttribute("registerMsg", "회원가입 성공");
-				return "redirect:/user/login";
+			int validation = userService.registerUser(registerForm);
+			if (validation == 0) {
+				model.addAttribute("registerMsg", "회원가입에 실패하였습니다.");
+				return "user/register";
 			} 
-			model.addAttribute("registerMsg", "회원가입에 실패하였습니다.");
-			return "user/register";
+			model.addAttribute("registerMsg", "회원가입 성공");
+			return "redirect:/user/login";
+	
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error/error";
