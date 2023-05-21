@@ -16,7 +16,7 @@
 	<div class="col-lg-10 col-md-10 col-sm-10 row">
         <div class="col-lg-5 col-md-5 col-sm-5">
         	<h1>| 로그인</h1>
-			<form action="/user/login" method="post" id="form-login">
+			<form action="/user/login" method="POST" id="form-login">
 				<input type="hidden" name="action" value="login">
 				<div class = "mb-3">
 				<label for="userid" class = "form-label">아이디</label>

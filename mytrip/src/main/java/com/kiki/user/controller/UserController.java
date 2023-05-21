@@ -63,7 +63,6 @@ public class UserController {
 	@PostMapping("/register")
 	public String registerUser(UserDto registerForm, Model model) {
 		try {
-			System.out.println("heyhey");
 			int validation = userService.registerUser(registerForm);
 			if (validation == 0) {
 				model.addAttribute("registerMsg", "회원가입에 실패하였습니다.");

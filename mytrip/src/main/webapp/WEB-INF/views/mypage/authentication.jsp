@@ -6,13 +6,14 @@
 <head>
 	<%@ include file="/WEB-INF/views/util/head.jsp"%>
 	<script src="/js/user/register.js" defer></script>
-	<link rel="stylesheet" href="/css/mypage/mypage.css"/>
+	<link rel="stylesheet" href="/css/mypage/authentication.css"/>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/util/header.jsp"%>
 	<div class = "update-container row">	
 		<div class="col-md-4 col-sm-4 col-xs-4"></div>
 		<div class="col-md-4 col-sm-4 col-xs-4 flex">
+			<h1>| 내 정보 수정</h1>
 			<div>*비밀번호를 입력해주세요</div>
 			<form action="/mypage/authentication" method="POST">
 				<input

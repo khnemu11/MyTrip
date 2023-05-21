@@ -24,4 +24,10 @@
 		FROM USER
 		WHERE password = #{password}
 	</select>
+	
+	<update id="updateMyPage">
+		UPDATE user
+		SET name = #{name}, email = #{email}, phoneNo = #{phoneNo}, intro = #{intro}
+		where id = #{id} 
+	</update>
 </mapper>
