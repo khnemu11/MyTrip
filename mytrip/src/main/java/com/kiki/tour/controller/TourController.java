@@ -3,6 +3,7 @@ package com.kiki.tour.controller;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
@@ -41,8 +42,9 @@ public class TourController {
 			System.out.println("관광지 대상 : " + target);
 
 			model.addAttribute("tour", target);
-
-			URL url = new URL("https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + target.getTitle()
+//			String encodeTitle = new String(target.getTitle().getBytes(),"UTF-8");
+			
+			URL url = new URL("https://www.googleapis.com/youtube/v3/search?part=snippet&q=" +  URLEncoder.encode(target.getTitle(), "utf-8")
 					+ "&regionCode=kr&order=viewCount&maxResults=5&key=" + youtubeKey);
 			BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
 			
@@ -53,6 +55,7 @@ public class TourController {
 			}
 			JSONParser parser = new JSONParser();
 			JSONObject jsonObj = (JSONObject) parser.parse(JSONInput);
+			System.out.println(jsonObj);
 			JSONArray jsonArr = (JSONArray) jsonObj.get("items");
 
 			if(jsonArr.size()>0) {
