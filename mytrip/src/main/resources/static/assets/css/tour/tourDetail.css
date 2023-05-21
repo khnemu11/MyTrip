@@ -121,6 +121,8 @@ p{
 	height:100%;
 	max-height:320px;
 	object-fit:cover;
+	border-radius:20px;
+	box-shadow:1px 2px 2px 2px #d3d3d3
 }
 .subsub-title{
 	font-size:18px;
@@ -175,4 +177,13 @@ p{
 	grid-template-columns:1fr 1fr 1fr 1fr 1fr;
 	grid-auto-rows:auto;
 	grid-column-gap:20px;
+}
+.tour-list{
+	padding-left:10px;
+}
+#tour-img{
+	max-height:250px;
+}
+.sub-title-right:hover{
+	cursor:pointer;
 }

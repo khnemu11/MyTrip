@@ -3,6 +3,7 @@ package com.kiki.tour.controller;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kiki.tour.model.TourDto;
+import com.kiki.tour.model.TourYoutubeDto;
 import com.kiki.tour.model.service.TourService;
 
 @Controller
@@ -41,8 +43,9 @@ public class TourController {
 			System.out.println("관광지 대상 : " + target);
 
 			model.addAttribute("tour", target);
-
-			URL url = new URL("https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + target.getTitle()
+//			String encodeTitle = new String(target.getTitle().getBytes(),"UTF-8");
+			
+			URL url = new URL("https://www.googleapis.com/youtube/v3/search?part=snippet&q=" +  URLEncoder.encode(target.getTitle(), "utf-8")
 					+ "&regionCode=kr&order=viewCount&maxResults=5&key=" + youtubeKey);
 			BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
 			
@@ -53,15 +56,24 @@ public class TourController {
 			}
 			JSONParser parser = new JSONParser();
 			JSONObject jsonObj = (JSONObject) parser.parse(JSONInput);
+			System.out.println(jsonObj);
 			JSONArray jsonArr = (JSONArray) jsonObj.get("items");
 
 			if(jsonArr.size()>0) {
-				ArrayList<String> youtubeList = new ArrayList<>();
+				ArrayList<TourYoutubeDto> youtubeList = new ArrayList<>();
 				for (int i = 0; i < jsonArr.size(); i++) {
+					TourYoutubeDto tourYoutubeDto = new TourYoutubeDto();
+					
 					JSONObject item = (JSONObject)jsonArr.get(i);
+					System.out.println(item);
 					JSONObject thumbnail =(JSONObject) ((JSONObject)item.get("snippet")).get("thumbnails");
 					String img =(String) ((JSONObject)thumbnail.get("high")).get("url");
-					youtubeList.add(img);
+					tourYoutubeDto.setImgSrc(img);
+					
+					String videoId =(String) ((JSONObject)item.get("id")).get("videoId");
+					tourYoutubeDto.setVideoId(videoId);
+					
+					youtubeList.add(tourYoutubeDto);
 					
 				}
 				

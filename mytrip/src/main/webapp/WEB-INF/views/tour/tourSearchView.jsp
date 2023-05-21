@@ -6,6 +6,7 @@
 <%@ include file="/WEB-INF/views/util/head.jsp"%>
 <script src="/js/tour/tour.js" defer></script>
 <link rel="stylesheet" href="/css/tour/tour.css" />
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/util/header.jsp"%>
@@ -66,9 +67,7 @@
 						type="radio" id="name" class="form-check-input" name="sort"
 						value="view" checked> <label for="name">이름 순</label>
 				</div>
-
 			</div>
-
 		</div>
 	</div>
 	<div class="row">
