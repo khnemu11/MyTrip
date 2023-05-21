@@ -13,8 +13,8 @@ public class MyPageController {
 	@Autowired
 	UserService userService;
 	
-	@GetMapping("/{id}")
+	@GetMapping("/mypage")
 	public String mypage() {
-		return "mypage/id"; // id로 이동할 수 있도록 처리 // 계정과 일치하는 사람만 이동하도록 처리
+		return "mypage/mypage"; // id로 이동할 수 있도록 처리  // 계정과 일치하는 사람만 이동하도록 처리
 	}
 }

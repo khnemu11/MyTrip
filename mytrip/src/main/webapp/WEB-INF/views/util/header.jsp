@@ -38,6 +38,7 @@
                   	  </c:if>
                    	  <c:if test="${not empty userInfo}">
                    		<a class="nav-link" href="/user/logout">로그아웃</a>
+                   	  	<a class="nav-link" href="/mypage/mypage">마이 페이지</a>
                    	  </c:if>       
                 </div>
             </div>
