@@ -7,8 +7,9 @@
     padding-top:20px;
     padding-bottom:20px;
     padding-left:20px;
-    font-size:16px;
-    font-weight:bold;
+    font-size:20px;
+    font-weight:800;
+	width:100%;
 }
 body{
 	 font-family: 'Nanum Gothic', sans-serif;
@@ -16,13 +17,242 @@ body{
 .select-title{
 	display:flex;
 	justify-content:space-between;
-	padding-bottom:20px;
-
+	padding-bottom:40px;
+	padding-left:10px;
+	padding-top:20px;
+	font-weight:800;
+	font-size:18px;
 	
 }
 .select-title div{
 	padding-left:10px;
 	padding-right:10px;
+}
+.select-tour{
+	display:flex;
+	justify-content:space-between;
+}
+.tour-left{
+	width:30%;
+	display:flex;
+	justify-content:center;
+	font-size:18px;
+}
+.tour-left i{
+	font-size:28px;
+}
+.tour-right{
+	width:70%;
+	display:flex;
+	justify-content:space-between;
+	font-size:18px;
+	font-weight:bold;
+	padding-bottom:20px;
+	border-bottom:1px solid black;
+}
+.tour-delete{
+	padding-right:20px;
+}
+.select-submit{
+	display:flex;
+	justify-content:end;
+	margin-top:20px;
+	margin-bottom:100px;
+	margin-right:10px;
+}
+.select-submit i,.select-submit p{
+	color:white;
+	padding-left:5px;
+	padding-top:2px;
+	padding-bottom:2px;
+}
+.submit-btn{
+	display:flex;
+	align-items:center;
+	background-color:#39CCCC;
+}
+p{
+	margin:0px;
+}
+.primary1{
+	background-color: #39CCCC;
+}
+.primary2{
+	background-color: #3F80F8;
+}
+.search-tour-container{
+	border-left: 1px solid #d3d3d3;
+}
+.select-tour-container{
+	height:100%;
+}
+#map{
+	height:91vh;
+}
+.footer-container{
+	margin:0px !important;
+}
+#search-bar{
+	display:flex;
+	width:100%;
+	align-items:center;
+	border:2px solid #3F80F8;
+	border-radius:15px;
+	box-shadow:2px 2px 10px #d3d3d3;
+	justify-content:space-evenly;
+	margin-right:0px;
+	margin-top:20px;
+}
+.search-logo{
+	width:32px;
+	height:32px;
+}
+.divider{
+	font-size:30px;
+	margin-bottom:5px;	
+	color:#3F80F8;;
+}
+.form-search{
+	width:70%;
+	border:none;
+	color:#3F80F8;
+}
+.form-search::placeholder{
+	color:#808080;
+	font-size:17px;
+	opacity:40%;
+}
+.search-tour-container{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+}
+#btn-search {
+	background-color:transparent;
+	border:none;
+	font-size:26px;
+	padding-left:0px;
+	padding-right:0px;
+}
+.search-container{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	width:90%;
+}
+.select-group{
+	justify-content:space-between;
+	padding-top:50px;
+}
+.select-box{
+	border:1px solid rgba(25,31,52,.3);
+	width:24%;
+}
+.sub-title-wrapper{
+	padding-top:80px;
+	justify-content:space-between;
+}
+.sort-container{
+	width:100%;
+	display:flex;
+	justify-content:start;
+	margin-top:20px;
+	font-size:18px;
 	
+}
+.sub-title-container{
+	width:100%;
+	margin-top:20px;
+	margin-bottom:20px;
+}
+.sub-title{
+	font-size:18px;
+	font-weight:bold;
+	margin-right:5px;
+}
+.form-check-input{
+	margin-right:15px;
+}
+.result-count{
+	font-color:#808080;
+	font-weight:vold;
 	
+}
+#name{
+	margin-left:10px;
+
+}
+.select-box{
+	margin-top:15px;
+	width:100%;	
+	border:2px solid #3F80F8;
+	border-radius:15px;
+	box-shadow:2px 2px 10px #d3d3d3;
+	height:45px;
+}
+.select-tour{
+	margin-bottom:20px;
+}
+.circle{
+	background-color:#808080;
+	width:20px;
+	height:20px;
+	border-radius:20px;
+	margin-top:6px;
+}
+.card div img{
+	border-radius:20px;
+	margin:20px;
+	max-width:80%;
+	object-fit:cover;
+}
+.card{
+	flex-direction:row;
+	width:90%;
+	border-radius:20px;
+	box-shadow:2px 2px 10px #d3d3d3;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+#tour-list{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+}
+.card-address{
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+}
+.card-right{
+	display:flex;
+	flex-direction:column;
+	justify-content:space-around;
+}
+.card-title{
+	font-weight:bold;
+	font-size:18px;
+}
+.card-address-container{
+	display:flex;
+}
+.card-right div i{
+	margin-right:10px;
+}
+.card-button{
+	display:flex;
+	justify-content:space-around;
+}
+.btn-left{
+	background-color:#556DC2;
+}
+.btn-right{
+	background-color:#39CCCC;
+}
+.btn-right, .btn-left{
+	margin-bottom:20px;
+	padding-left:30px;
+	padding-right:30px;
+	color:white;
 }
