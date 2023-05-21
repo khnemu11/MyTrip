@@ -157,7 +157,7 @@
 								<div class="grid-5">
 									<c:forEach items="${youtubeList}" var="item">
 										<div class="card-thumbnail">
-											<img src="${item}">
+											<a href="https://www.youtube.com/watch?v=${item.videoId}"><img src="${item.imgSrc}"></a>
 										</div>
 									</c:forEach>
 								</div>

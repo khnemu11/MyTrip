@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kiki.tour.model.TourDto;
+import com.kiki.tour.model.TourYoutubeDto;
 import com.kiki.tour.model.service.TourService;
 
 @Controller
@@ -59,12 +60,20 @@ public class TourController {
 			JSONArray jsonArr = (JSONArray) jsonObj.get("items");
 
 			if(jsonArr.size()>0) {
-				ArrayList<String> youtubeList = new ArrayList<>();
+				ArrayList<TourYoutubeDto> youtubeList = new ArrayList<>();
 				for (int i = 0; i < jsonArr.size(); i++) {
+					TourYoutubeDto tourYoutubeDto = new TourYoutubeDto();
+					
 					JSONObject item = (JSONObject)jsonArr.get(i);
+					System.out.println(item);
 					JSONObject thumbnail =(JSONObject) ((JSONObject)item.get("snippet")).get("thumbnails");
 					String img =(String) ((JSONObject)thumbnail.get("high")).get("url");
-					youtubeList.add(img);
+					tourYoutubeDto.setImgSrc(img);
+					
+					String videoId =(String) ((JSONObject)item.get("id")).get("videoId");
+					tourYoutubeDto.setVideoId(videoId);
+					
+					youtubeList.add(tourYoutubeDto);
 					
 				}
 				
