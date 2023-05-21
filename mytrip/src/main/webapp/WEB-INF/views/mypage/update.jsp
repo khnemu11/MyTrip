@@ -13,6 +13,7 @@
 	<div class = "update-container row">
 		<div class="col-md-4 col-sm-4 col-xs-4"></div>
 		<!-- 세션에서 꺼내서 value 값넣고, 수정 method="post" -->
+		ddd
 		<div class="col-md-4 col-sm-4 col-xs-4"></div>
 		<div class="col-md-4 col-sm-4 col-xs-4"></div>
 	</div>
