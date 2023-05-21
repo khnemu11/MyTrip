@@ -1,0 +1,28 @@
+.row{
+    --bs-gutter-x:0px;
+}
+.title-bar{
+    background-color:#39CCCC;
+    color:white;
+    padding-top:20px;
+    padding-bottom:20px;
+    padding-left:20px;
+    font-size:16px;
+    font-weight:bold;
+}
+body{
+	 font-family: 'Nanum Gothic', sans-serif;
+}
+.select-title{
+	display:flex;
+	justify-content:space-between;
+	padding-bottom:20px;
+
+	
+}
+.select-title div{
+	padding-left:10px;
+	padding-right:10px;
+	
+	
+}
