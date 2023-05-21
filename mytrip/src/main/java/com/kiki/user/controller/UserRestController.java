@@ -20,7 +20,7 @@ public class UserRestController {
 	public ResponseEntity<?> checkId(@PathVariable("id") String id) {
 		try {
 			int valid = userService.checkId(id);
-			if (valid <= 0) {
+			if (valid == 0) {
 				return new ResponseEntity<Integer>(0, HttpStatus.OK);
 			}
 			return new ResponseEntity<Integer>(1, HttpStatus.OK);

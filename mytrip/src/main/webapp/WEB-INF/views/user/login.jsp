@@ -7,13 +7,15 @@
 <head>
 	<%@ include file="/WEB-INF/views/util/head.jsp"%>
 	<script src="/js/user/login.js" defer></script>
+	<link rel="stylesheet" href="/css/user/login.css"/>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/util/header.jsp"%>
-	<div class = "container">
-	<div>
-		<h1>| 로그인</h1>
-        <div class="col-lg-8 col-md-10 col-sm-12">
+	<div class = "login-container row">
+	<div class="col-lg-1 col-md-1 col-sm-1"></div>
+	<div class="col-lg-10 col-md-10 col-sm-10 row">
+        <div class="col-lg-5 col-md-5 col-sm-5">
+        	<h1>| 로그인</h1>
 			<form action="/user/login" method="post" id="form-login">
 				<input type="hidden" name="action" value="login">
 				<div class = "mb-3">
@@ -32,7 +34,10 @@
 				</div>
 			</form>
 		</div>
+		<div class="col-lg-2 col-md-2 col-sm-2"></div>
+		<div class="col-lg-5 col-md-5 col-sm-5"></div> <!-- 요기에 사진 넣어주세용 -->
 	</div>
+	<div class="col-lg-1 col-md-1 col-sm-1"></div>
 	</div>
 	<%@ include file="/WEB-INF/views/util/footer.jsp"%>
 </body>
