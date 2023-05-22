@@ -57,7 +57,8 @@
 			</select> <select class="form-select select-box" id="select-gun"
 				onChange="onChangeGunGu();">
 				<option selected>시/군/구</option>
-			</select> <select class="form-select select-box" id="select-contentTypeId"
+			</select> 
+			<select class="form-select select-box" id="select-contentTypeId"
 				onChange="onChangeContentTypeId()">
 				<option selected value="">전체</option>
 				<option value="14">문화시설</option>
@@ -74,11 +75,11 @@
 			</div>
 			</div>
 			<div id="tour-list-wrapper" style="height:200px">
-			<div id="tour-list">
-				<div class="text-center loading-spinner">
-				<div class="spinner-border" role="status"></div>
+				<div id="tour-list">
+					<div class="text-center loading-spinner">
+						<div class="spinner-border" role="status"></div>
+					</div>
 				</div>
-			</div>
 			</div> 
 		</div>
 		<div class="col-md-7 col-sm-7 col-xs-7 map-container">

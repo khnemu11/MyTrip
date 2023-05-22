@@ -21,7 +21,8 @@ let selected = [];
 document.addEventListener('DOMContentLoaded',function(){
 	makeMap(latitude,longitude);
 	init();
-})
+});
+
 async function init(){
 	await makeCityOption();
 	await makeGunGuOption();
@@ -68,7 +69,6 @@ async function makeGunGuOption(data){
 		}
 		let baseUrl = 'https://apis.data.go.kr/B551011/KorService1/areaCode1?';
 		let paramUrl = new URLSearchParams(params);
-		console.log(paramUrl.toString());
 		await fetch(baseUrl + paramUrl.toString())
 		.then((response)=>response.json()).
 		then(function(data){
@@ -109,8 +109,7 @@ async function makeCityOption(){
 	}
 	let baseUrl = 'https://apis.data.go.kr/B551011/KorService1/areaCode1?';
 	let paramUrl = new URLSearchParams(params);
-	console.log(paramUrl.toString());
-	
+
 	await fetch(baseUrl + paramUrl.toString())
 	.then((response)=>response.json())
 	.then(function(data){
@@ -178,7 +177,6 @@ async function makeTourList(isNew){
 		
 		let paramUrl = new URLSearchParams(params);
 		
-		console.log(paramUrl.toString());
 		await fetch(baseUrl + paramUrl.toString())
 		.then((response)=>response.json()).
 		then(function(data){
@@ -195,6 +193,9 @@ async function makeTourList(isNew){
 			
 			if(isNew){
 				list.innerHTML = "";
+			}else if(list.childNodes.length>0){
+				console.log(list.childNodes);
+				list.removeChild(list.childNodes[list.childNodes.length-1]);
 			}
 			
 			for(var idx in locations){
@@ -205,7 +206,6 @@ async function makeTourList(isNew){
 				var telephone = locations[idx].tel;
 				var img = locations[idx].firstimage;
 				var tel =  locations[idx].tel;
-				console.log(title);
 				params ={
 					title : locations[idx].title,
 					address : locations[idx].addr1,
@@ -278,8 +278,6 @@ function selectRoute(title,longitude,latitude){
 			return;
 		}
 	}
-	
-	
 	var context = 
 		`<span class="select-tour" id="${title}">	
 			<input type="hidden" name="title" value="${title}"/>
@@ -296,13 +294,30 @@ function selectRoute(title,longitude,latitude){
 	document.querySelector('#cnt').innerText = selected.length;
 	console.log(selectList);
 }
-document.addEventListener('scroll',async function(e){
-	if(document.body.scrollHeight>=document.body.scrollTop+document.body.clientHeight && !isLoad){
-		isLoad=true;0
+
+document.querySelector('#tour-list-wrapper').addEventListener('scroll' , async function(e){
+	console.log(e.target.offsetHeight);
+	console.log(e.target.scrollTop);
+	console.log(e.target.scrollHeight);
+	console.log(e.target.scrollHeight+" vs "+e.target.scrollTop+" + "+e.target.offsetHeight);
+	console.log(e.target);
+	
+	if(e.target.scrollHeight<=e.target.scrollTop+e.target.offsetHeight+1 && !isLoad){
+		isLoad=true;
+		
+		let tourList = document.querySelector('#tour-list');
+		let context = `
+					<div class="text-center loading-spinner">
+						<div class="spinner-border" role="status"></div>
+					</div>`;
+		tourList.insertAdjacentHTML('beforeend',context)
+
 		await makeTourList(false);
 		isLoad=false;
 	}
 })
+
+document.querySelector('#tour-list-wrapper').addEventListener('scroll' , ()=>console.log('scrolled'));
 
 function deleteTour(id){
 	for(let val in selected){
@@ -323,14 +338,3 @@ function deleteTour(id){
 		}
 	}
 }
-$(function() {
-    $( "#sortable" ).sortable({
-revert: true
-    });
-    $( "#draggable" ).draggable({
-      connectToSortable: "#sortable",
-      helper: "clone",
-      revert: "invalid"
-    });
-    $( "ul, li" ).disableSelection();
-  });
