@@ -274,28 +274,46 @@ function selectRoute(title,longitude,latitude){
 	}
 	
 	var context = 
-		`<span class="select-tour">	
+		`<span class="select-tour" id="${title}">	
 			<input type="hidden" name="title" value="${title}"/>
 			<input type="hidden" name="longitude" value="${longitude}"/>
 			<input type="hidden" name="latitude" value="${latitude}"/>
 			<span class="tour-left"><i class="fa-sharp fa-solid fa-location-dot"></i></span>
 			<span class="tour-right">
 				<span class="tour-title">${title}</span>
-				<span class="tour-delete"><i class="fa-solid fa-trash"></i></span>
+				<span class="tour-delete" onclick=deleteTour('${title}');><i class="fa-solid fa-trash"></i></span>
 			</span>
 		</span>`;
 	
 	selectList.insertAdjacentHTML('beforeend',context);
-	document.querySelector('#cnt').value = selected.length;
 	selected.push(data);
+	document.querySelector('#cnt').innerText = selected.length;
 	console.log(selectList);
 }
-
 document.addEventListener('scroll',async function(e){
 	if(document.body.scrollHeight>=document.body.scrollTop+document.body.clientHeight && !isLoad){
 		isLoad=true;0
-		
 		await makeTourList(false);
 		isLoad=false;
 	}
 })
+
+function deleteTour(id){
+	for(let val in selected){
+		if(selected[val].title == id){
+			selected.splice(val,1);
+			break;
+		}
+	}
+	let selectList = document.querySelector('.select-list').childNodes;
+	console.log(selectList);
+	for(let idx=1;idx<selectList.length;idx++){
+		console.log(selectList[idx]);
+		console.log(selectList[idx].getAttribute('id'));
+		if(selectList[idx].getAttribute('id') == id){
+			document.querySelector('.select-list').removeChild(selectList[idx]);
+			document.querySelector('#cnt').innerText = selected.length;
+			break;
+		}
+	}
+}

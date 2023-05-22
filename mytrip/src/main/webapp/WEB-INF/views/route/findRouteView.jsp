@@ -20,40 +20,10 @@
 			</div>
 			<div class="select-title">
 				<div class="select-title-left">여행지</div>
-				<div class="select-title-right"><p id="cnt">0</p> / 5</div>
+				<div class="select-title-right"><span id="cnt">0</span> / 5</div>
 			</div>
 			<form action="/route/registRouteView" method="GET">
 				<div class="select-list">
-				<!-- 	<span class="select-tour">	
-					<input type="hidden" name="title" value="가나돈까스의집"/>
-					<input type="hidden" name="longitude" value="127.0377755568"/>
-					<input type="hidden" name="latitude" value="37.5099674377"/>
-						<span class="tour-left"><i class="fa-sharp fa-solid fa-location-dot"></i></span>
-						<span class="tour-right">
-							<span class="tour-title">가니안 약국</span>
-							<span class="tour-delete"><i class="fa-solid fa-trash"></i></span>
-						</span>
-					</span>
-					<span class="select-tour">
-					<input type="hidden" name="title" value="가나안약국"/>
-					<input type="hidden" name="longitude" value="127.0208657845"/>
-					<input type="hidden" name="latitude" value="37.5170635319"/>
-						<span class="tour-left"><span class="circle"></span></span>
-						<span class="tour-right">
-							<span class="tour-title">가니안 약국</span>
-							<span class="tour-delete"><i class="fa-solid fa-trash"></i></span>
-						</span>
-					</span>
-					<span class="select-tour">
-					<input type="hidden" name="title" value="가람국시"/>
-					<input type="hidden" name="longitude" value="127.0341090296"/>
-					<input type="hidden" name="latitude" value="37.5168415735"/>
-						<span class="tour-left"><i class="fa-solid fa-location-pin"></i></span>
-						<span class="tour-right">
-							<span class="tour-title">가니안 약국</span>
-							<span class="tour-delete"><i class="fa-solid fa-trash"></i></span>
-						</span>
-					</span> -->
 				</div>
 				<div class="select-submit">
 					<button type="submit" class="btn submit-btn">경로생성</button>
