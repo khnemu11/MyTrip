@@ -102,16 +102,14 @@
 				<span class="sub-title">검색 결과</span><span id="result-count">( 1,930 )</span>
 			</div>
 			</div>
-			
-			<div id="tour-list-wrapper">
-			<div class="text-center loading-spinner">
-				<div class="spinner-border" role="status">
-				</div>
-			</div>
+			<div id="tour-list-wrapper" style="height:200px">
 			<div id="tour-list">
+				<div class="text-center loading-spinner">
+				<div class="spinner-border" role="status"></div>
+			</div>
+	
 			</div>
 			</div> 
-			
 		</div>
 		<div class="col-md-7 col-sm-7 col-xs-7 map-container">
 			<div id="map">map</div>

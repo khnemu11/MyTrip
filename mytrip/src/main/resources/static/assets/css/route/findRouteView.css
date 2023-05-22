@@ -22,7 +22,6 @@ body{
 	padding-top:20px;
 	font-weight:800;
 	font-size:18px;
-	
 }
 .select-title div{
 	padding-left:10px;
@@ -273,6 +272,9 @@ p{
 #tour-list{
 	overflow:auto;
 	margin-right:2px;
+}
+#tour-list::-webkit-scrollbar{
+	display:hidden;
 }
 #tour-list-wrapper{
 	overflow:auto;

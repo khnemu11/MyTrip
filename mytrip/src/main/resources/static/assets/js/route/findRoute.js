@@ -193,15 +193,29 @@ async function makeTourList(isNew){
 			for(var idx in locations){
 				var title = locations[idx].title;
 				var addr = locations[idx].addr1;
+				var longitude = locations[idx].mapx
+				var latitude = locations[idx].mapy;
+				var telephone = locations[idx].tel;
 				var img = locations[idx].firstimage;
-				var tel = locations[idx].tel;
+				var tel =  locations[idx].tel;
+				
+				params ={
+					title : locations[idx].title,
+					address : locations[idx].addr1,
+					longitude : locations[idx].mapx,
+					latitude : locations[idx].mapy,
+					telephone : locations[idx].tel,
+				}
+				
+				paramUrl = new URLSearchParams(params);
+				let baseUrl = '/tour/detail?';
+				let url = baseUrl + paramUrl.toString();
+				
 				if(img == ""){
 					img = "/img/tour/no-image.png";
 				}
 				
-				let baseUrl = '/tour/detail?';
-				
-				let url = baseUrl + paramUrl.toString();
+	
 				var context = `	
 					<div class="card row">
 					<div class="col-md-6 col-sm-6 col-xs-6">
@@ -220,7 +234,7 @@ async function makeTourList(isNew){
 						</div>
 					</div>
 					<div class="card-button">
-						<button type="button" class="btn btn-left">상세정보</button>
+						<button type="button" class="btn btn-left" onclick="window.location.href='${url}'">상세정보</button>
 						<button type="button" class="btn btn-right">경로추가</button>
 					</div>
 					</div>`	
@@ -232,13 +246,15 @@ async function makeTourList(isNew){
 			let mapHeight = document.querySelector('#map').offsetHeight;
 			let height = mapHeight - (searchHeight + titleHeight);
 
-			console.log(document.querySelector('#tour-list').style.height);
 			document.querySelector('#tour-list-wrapper').style.height = height;
-			document.querySelector('#tour-list').offsetHeight = height;
-			console.log('height : '+height);
-			console.log(document.querySelector('#tour-list-wrapper'));
-			console.log(document.querySelector('#tour-list'));
-			console.log(document.querySelector('#tour-list').style.height);
+			document.getElementById('tour-list-wrapper').setAttribute("style",`height:${height}px;`);
 			document.querySelector('.loading-spinner').style.display='none';
 		});
 }
+document.addEventListener('scroll',async function(e){
+	if(document.body.scrollHeight>=document.body.scrollTop+document.body.clientHeight && !isLoad){
+		isLoad=true;
+		await makeTourList(false);
+		isLoad=false;
+	}
+})
