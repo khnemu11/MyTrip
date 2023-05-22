@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `review` (
   `title` VARCHAR(30) NOT NULL, -- 제목
   `content` VARCHAR(500) NOT NULL, -- 내용
   `user_id` VARCHAR(20) NOT NULL, -- 사용자 id
-  `create_date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP, -- 생성 날짜
+  `created_date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP, -- 생성 날짜
   `modified_date` DATETIME NULL DEFAULT NULL, -- 수정 날짜
   `deleted_date` DATETIME NULL DEFAULT NULL, -- 삭제 날짜
   PRIMARY KEY (`seq`)

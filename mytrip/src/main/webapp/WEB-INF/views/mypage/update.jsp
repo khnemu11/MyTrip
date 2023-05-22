@@ -40,14 +40,14 @@
 						<span>새 비밀번호</span>
 					</div>
 					<div class="col-lg-9 col-md-9 col-sm-9 flex">
-						<input type ="password" id="password" name ="password" />
+						<input type ="password" id="password" name ="password"/>
 					</div>
 					
-					<div class="col-lg-3 col-md-3 col-sm-3 flex">
+					<div class="col-lg-3 col-md-3 col-sm-3 flex" >
 						<span>새 비밀번호 확인</span>
 					</div>
 					<div class="col-lg-9 col-md-9 col-sm-9 flex">
-						<input type ="password" id="confirm-password" name ="confirmPassword" />
+						<input type ="password" id="confirm-password" name ="confirmPassword"/>
 					</div>
 					
 					<div id="confirm-password-result"></div>

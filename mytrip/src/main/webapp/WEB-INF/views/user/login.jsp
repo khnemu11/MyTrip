@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-
 <html>
 <head>
 	<%@ include file="/WEB-INF/views/util/head.jsp"%>
@@ -10,6 +9,11 @@
 	<link rel="stylesheet" href="/css/user/login.css"/>
 </head>
 <body>
+<c:if test="${not empty loginMsg}">
+	<script>
+		alert("${loginMsg}");
+	</script>
+</c:if>
 	<%@ include file="/WEB-INF/views/util/header.jsp"%>
 	<div class = "login-container row">
 	<div class="col-lg-1 col-md-1 col-sm-1"></div>
