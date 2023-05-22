@@ -27,7 +27,7 @@
 	
 	<update id="updateMyPage">
 		UPDATE user
-		SET name = #{name}, email = #{email}, phone_no = #{phoneNo}, intro = #{intro}
+		SET name = #{name}, email = #{email}, password = #{password}, phone_no = #{phoneNo}, intro = #{intro}
 		WHERE id = #{id} 
 	</update>
 	

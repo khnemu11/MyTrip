@@ -17,14 +17,13 @@
         <div class="col-lg-5 col-md-5 col-sm-5">
         	<h1>| 로그인</h1>
 			<form action="/user/login" method="POST" id="form-login">
-				<input type="hidden" name="action" value="login">
 				<div class = "mb-3">
 				<label for="userid" class = "form-label">아이디</label>
-				<input type = "text" class= "form-control" id = "id" name = "id"/>
+				<input type = "text" class= "form-control" id = "id" name = "id" required/>
 				</div>
 				<div class = "mb-3">
 					<label for= "userpassword" class ="from-label">비밀번호</label>
-					<input type ="password" class = "form-control" id="password" name ="password" />
+					<input type ="password" class = "form-control" id="password" name ="password" required/>
 				</div>
 				<div class = "col-auto text-center">
 					<button type="submit" id="btn-login" class="btn btn-outline-primary mb-3" style="

@@ -9,6 +9,11 @@
 	<link rel="stylesheet" href="/css/mypage/mypage.css"/>
 </head>
 <body>
+<c:if test="${not empty mypageMsg}">
+	<script>
+	 alert("${mypageMsg}");
+	</script>
+</c:if>
 	<%@ include file="/WEB-INF/views/util/header.jsp"%>
 	<div class = "mypage-container row">
 		<div class="col-lg-1 col-md-1 col-sm-1"></div>
