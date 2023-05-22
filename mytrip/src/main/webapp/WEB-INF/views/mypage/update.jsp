@@ -19,7 +19,15 @@
 		<div class="col-md-4 col-sm-4 col-xs-4"></div>
 		<!-- 세션에서 꺼내서 value 값넣고, 수정 method="post" -->
 		<div class="col-md-4 col-sm-4 col-xs-4">
-			<h1>| 내 정보 수정</h1>
+			<div class="row sub-title-wrapper">
+				<div class="sub-title-container">
+					<span class="sub-title-left"> <span class="sub-title-label">|</span>
+						<span class="sub-title">내 정보 수정</span>
+					</span> <span class="sub-title-right" onClick="window.location.href = '/mypage/mypage';"/> <span class="back back-icon"><i
+							class="fa-solid fa-arrow-left"></i></span> <span class="back back-text">돌아가기</span>
+					</span>
+				</div>
+			</div>
 			<form action="/mypage/update" method="POST" id="update-form">
 				<div class="info-row row">						
 					<div class="col-lg-3 col-md-3 col-sm-3 flex">

@@ -19,7 +19,15 @@
 		<div class="col-lg-1 col-md-1 col-sm-1"></div>
 		<div class="col-lg-10 col-md-10 col-sm-10 row">
 			<div class="col-lg-5 col-md-5 col-sm-5">
-				<h1>| 마이페이지</h1>
+				<div class="row sub-title-wrapper">
+					<div class="sub-title-container">
+						<span class="sub-title-left"> <span class="sub-title-label">|</span>
+							<span class="sub-title">마이페이지</span>
+						</span> <span class="sub-title-right" onclick="window.history.back();"> <span class="back back-icon"><i
+							class="fa-solid fa-arrow-left"></i></span> <span class="back back-text">돌아가기</span>
+						</span>
+					</div>
+				</div>
 				<a href="/mypage/authentication">수정</a>
 				<a href="/mypage/withdrawal">탈퇴</a>
 				<div class="info-row row">	
@@ -65,6 +73,7 @@
 						<span>${userInfo.joinDate}</span>
 					</div>
 				</div>
+			</div>
 			<div class="col-lg-7 col-md-7 col-sm-7">
 				<!-- 여기에 나의 경로, 나의 후기 넣어주세용 -->
 			</div>

@@ -17,7 +17,15 @@
 	<div class = "update-container row">	
 		<div class="col-md-4 col-sm-4 col-xs-4"></div>
 		<div class="col-md-4 col-sm-4 col-xs-4 flex">
-			<h1>| 내 정보 수정</h1>
+			<div class="row sub-title-wrapper">
+				<div class="sub-title-container">
+					<span class="sub-title-left"> <span class="sub-title-label">|</span>
+						<span class="sub-title">내 정보 수정</span>
+					</span> <span class="sub-title-right" onclick="window.history.back();"> <span class="back back-icon"><i
+							class="fa-solid fa-arrow-left"></i></span> <span class="back back-text">돌아가기</span>
+					</span>
+				</div>
+			</div>
 			<div>*비밀번호를 입력해주세요</div>
 			<form action="/mypage/authentication" method="POST">
 				<input

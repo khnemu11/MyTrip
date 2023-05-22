@@ -19,17 +19,23 @@
 	<div class="col-lg-1 col-md-1 col-sm-1"></div>
 	<div class="col-lg-10 col-md-10 col-sm-10 row">
         <div class="col-lg-5 col-md-5 col-sm-5">
-        	<h1>| 로그인</h1>
+			<div class="row sub-title-wrapper">
+				<div class="sub-title-container">
+					<span class="sub-title-left"> <span class="sub-title-label">|</span>
+						<span class="sub-title">로그인</span>
+					</span> <span class="sub-title-right" onclick="window.history.back();"> <span class="back back-icon"><i
+							class="fa-solid fa-arrow-left"></i></span> <span class="back back-text">돌아가기</span>
+					</span>
+				</div>
+			</div>
 			<form action="/user/login" method="POST" id="form-login">
 				<div class = "mb-3">
-				<label for="userid" class = "form-label">아이디</label>
-				<input type = "text" class= "form-control" id = "id" name = "id" required/>
+				<input type = "text" class= "form-control" id = "id" name = "id" placeholder="아이디" required/>
 				</div>
 				<div class = "mb-3">
-					<label for= "userpassword" class ="from-label">비밀번호</label>
-					<input type ="password" class = "form-control" id="password" name ="password" required/>
+					<input type ="password" class = "form-control" id="password" name ="password" placeholder="비밀번호" required/>
 				</div>
-				<div class = "col-auto text-center">
+				<div class = "text-center">
 					<button type="submit" id="btn-login" class="btn btn-outline-primary mb-3" style="
     margin-right: 16px;">
 						로그인

@@ -5,7 +5,8 @@
 <html>
 <head>
 	<%@ include file="/WEB-INF/views/util/head.jsp"%>
-	<script src="/js/user/register.js" defer></script>
+	<!-- <script src="/js/user/register.js" defer></script> -->
+	<link rel="stylesheet" href="/css/user/register.css"/>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/util/header.jsp"%>
@@ -13,7 +14,15 @@
 		<div class="col-lg-1 col-md-1 col-sm-1"></div>
 		<div class="col-lg-10 col-md-10 col-sm-10 row">
 			<div class="col-lg-7 col-md-7 col-sm-7" id="form">
-				<h1>| 회원가입</h1>
+				<div class="row sub-title-wrapper">
+					<div class="sub-title-container">
+						<span class="sub-title-left"> <span class="sub-title-label">|</span>
+							<span class="sub-title">회원가입</span>
+						</span> <span class="sub-title-right" onclick="window.history.back();"> <span class="back back-icon"><i
+								class="fa-solid fa-arrow-left"></i></span> <span class="back back-text">돌아가기</span>
+						</span>
+					</div>
+				</div>
 				<form id="register-form" method="POST" action="/user/register">
 					<div class="mb-3">
 						<input
@@ -41,20 +50,12 @@
 		
 					<div class="mb-3">
 							<div class="input-group">
-								<input type="text" class="form-control" id="email"
-									name="email" placeholder="이메일" /> <span
-									class="input-group-text">@</span> <select class="form-select"
-									id="emaildomain" name="emaildomain" aria-label="이메일 도메인 선택">
-									<option selected>선택</option>
-									<option value="ssafy.com">ssafy.com</option>
-									<option value="gmail.com">gmail.com</option>
-									<option value="naver.com">naver.com</option>
-									<option value="daum.net">daum.net</option>
-								</select>
+								<input type="email" class="form-control" id="email"
+									name="email" placeholder="이메일" />
 							</div>
 					</div>
 					<div class="col-auto text-center">
-						<button type="submit" id="btn-join"
+						<button type="submit" id="btn-register"
 							class="btn btn-outline-primary mb-3">회원가입</button>
 					</div>
 				</form>
