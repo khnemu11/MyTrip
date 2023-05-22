@@ -4,36 +4,36 @@
 <!-- name space는 UserRepo의 fully qualified name으로 설정한다. -->
 
 <mapper namespace="com.kiki.user.model.dao.UserDao">
-<!-- 	<resultMap type="UserDto" id="user">
+	<resultMap type="UserDto" id="user">
 		<result column="id" property="id" />
-		<result column="pwd" property="pwd" />
-		<result column="nickname" property="nickName" />
+		<result column="password" property="password" />
+		<result column="name" property="name" />
 		<result column="email" property="email" />
-		<result column="address" property="address" />
-		<result column="createtime" property="createTime" />
-		<result column="modifytime" property="modifyTime" />
-		<result column="deletetime" property="deleteTime" />
-		<result column="ipaddress" property="ipAddress" />
+		<result column="phone_no" property="phoneNo" />
+		<result column="intro" property="intro" />
+		<result column="join_date" property="joinDate" />
+		<result column="modified_date" property="modifiedDate" />
+		<result column="delete_date" property="deleteDate" />
 	</resultMap>
- -->
+
 
 	<!-- id는 repo클래스의 메소드 이름과 일치시킨다. -->
 	
-	<select id="authenticateUser" resultType="UserDto">
+	<select id="authenticateUser" resultMap="user">
 		SELECT *
-		FROM USER
+		FROM user
 		WHERE id = #{id}
 		AND password = #{password}
 	</select>
 	
 	<insert id="registerUser" parameterType="UserDto">
-		INSERT INTO USER (id, password, name, email, phone_no, intro)
+		INSERT INTO user (id, password, name, email, phone_no, intro)
 		VALUES (#{id}, #{password}, #{name}, #{email}, #{phoneNo}, #{intro})
 	</insert>
 	
 	<select id="checkId" parameterType="String" resultType="int">
 		SELECT count(*)
-		FROM USER
+		FROM user
 		WHERE id = #{id}
 	</select>
 </mapper>

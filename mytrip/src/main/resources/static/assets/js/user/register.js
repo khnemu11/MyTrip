@@ -20,7 +20,7 @@ document.querySelector("#register-form").addEventListener("click", () => {
 
 // 아이디 글자수, 중복 처리
 let isUseId = false;
-document.querySelector("#id").addEventListener("keyup", function () {
+document.querySelector("#id").addEventListener("keyup", () => {
     let userid = this.value;
     console.log(userid);
     let resultDiv = document.querySelector("#idcheck-result");

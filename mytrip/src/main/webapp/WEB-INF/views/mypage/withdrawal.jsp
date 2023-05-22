@@ -5,7 +5,8 @@
 <html>
 <head>
 	<%@ include file="/WEB-INF/views/util/head.jsp"%>
-	<link rel="stylesheet" href="/css/mypage/authentication.css"/>
+	<script src="/js/mypage/withdrawal.js" defer></script>
+	<link rel="stylesheet" href="/css/mypage/withdrawal.css"/>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/util/header.jsp"%>
@@ -14,12 +15,10 @@
 		<div class="col-md-4 col-sm-4 col-xs-4 flex">
 			<h1>| 회원 탈퇴</h1>
 			<div>*비밀번호를 입력해주세요</div>
-			<form action="/mypage/authentication" method="POST">
-				<input
-				type="password" id="password" name="password"
-				placeholder="비밀번호" />
-				<button type="submit">확인</button>
-			</form>
+			<input
+			type="password" id="password" name="password"
+			placeholder="비밀번호" />
+			<button type="button" id="withdrawal">확인</button>
 		</div>
 		<div class="col-md-4 col-sm-4 col-xs-4"></div>
 	</div>

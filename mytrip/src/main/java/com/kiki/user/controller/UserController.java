@@ -31,14 +31,17 @@ public class UserController {
 	
 	@PostMapping("/login")
 	public String authenticateUser(@ModelAttribute("loginForm") UserDto loginForm, Model model, HttpSession session) {
+		System.out.println("LOGIN 시 작");
 		String id = loginForm.getId();
 		String password = loginForm.getPassword();
 		try {
+			System.out.println("로그인 입력 정보 : "+loginForm);
 			UserDto userDto = userService.authenticateUser(id, password);
-			System.out.println(userDto);
+			System.out.println("유저 정보 : "+userDto);
 			if (userDto != null) {
 				userDto.setPassword(null);
 				session.setAttribute("userInfo", userDto);
+				System.out.println("세션 정보 : "+session.getAttribute("userInfo"));
 				return "index";
 			} 
 			model.addAttribute("loginMsg", "아이디 또는 비밀번호가 잘못되었습니다.");				

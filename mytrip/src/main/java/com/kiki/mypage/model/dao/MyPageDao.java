@@ -9,6 +9,8 @@ public interface MyPageDao {
 
 	public int authenticateUser(String password);
 
-	public int updateMyPage(String id, UserDto updateForm);
+	public int updateMyPage(UserDto updateForm);
+
+	public int withdrawUser(String id);
 	
 }

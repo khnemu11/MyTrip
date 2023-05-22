@@ -5,7 +5,7 @@
 <html>
 <head>
 	<%@ include file="/WEB-INF/views/util/head.jsp"%>
-	<script src="/js/user/register.js" defer></script>
+	<script src="/js/mypage/mypage.js" defer></script>
 	<link rel="stylesheet" href="/css/mypage/mypage.css"/>
 </head>
 <body>
@@ -16,7 +16,7 @@
 			<div class="col-lg-5 col-md-5 col-sm-5">
 				<h1>| 마이페이지</h1>
 				<a href="/mypage/authentication">수정</a>
-				<!-- 탈퇴는 onClick -->
+				<a href="/mypage/withdrawal">탈퇴</a>
 				<div class="info-row row">	
 					<div class="col-lg-3 col-md-3 col-sm-3 flex">
 						<span>아이디</span>

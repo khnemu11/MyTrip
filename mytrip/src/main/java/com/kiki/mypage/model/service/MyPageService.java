@@ -6,6 +6,8 @@ public interface MyPageService {
 
 	int authenticateUser(String password);
 
-	int updateMyPage(String id, UserDto updateForm);
+	int updateMyPage(UserDto updateForm);
+
+	int withdrawUser(String id);
 	
 }

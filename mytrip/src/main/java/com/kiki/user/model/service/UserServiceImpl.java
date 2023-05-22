@@ -12,25 +12,25 @@ import com.kiki.user.model.dao.UserDao;
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired
-	UserDao dao;
+	UserDao userDao;
 	
 	@Override
 	public List<UserDto> selectUserList() {
-		return dao.selectUsers();
+		return userDao.selectUsers();
 	}
 
 	@Override
 	public UserDto authenticateUser(String id, String password) {
-		return dao.authenticateUser(id, password);
+		return userDao.authenticateUser(id, password);
 	}
 
 	@Override
 	public int registerUser(UserDto registerForm) {
-		return dao.registerUser(registerForm);
+		return userDao.registerUser(registerForm);
 	}
 
 	@Override
 	public int checkId(String id) {
-		return dao.checkId(id);
+		return userDao.checkId(id);
 	}
 }

@@ -51,26 +51,31 @@ public class MyPageController {
 		return "mypage/update";
 	}
 	
-	@PutMapping("/update")
-	public String update(UserDto updateForm, HttpSession session, Model model) {
-		String id = session.getId();
+	@PostMapping("/update")
+	public String updateMyPage(UserDto updateForm, HttpSession session, Model model) {
+		
 		try {
-			int valid = myPageService.updateMyPage(id, updateForm);
+			UserDto sessionUser = (UserDto) session.getAttribute("userInfo");
+			updateForm.setId(sessionUser.getId());
+			updateForm.setJoinDate(sessionUser.getJoinDate());
+			int valid = myPageService.updateMyPage(updateForm);
 			if (valid > 0) {
-				System.out.println("성공");
 				model.addAttribute("mypageMsg", "수정 성공했습니다.");
+				session.setAttribute("userInfo", updateForm);
 				return "mypage/mypage";
 			} else {
-				System.out.println("실패");
 				model.addAttribute("mypageMsg", "수정 실패하였습니다.");
 				return "mypage/update";
 			}
 		} catch (Exception e) {
-			System.out.println("에러");
 			e.printStackTrace();
 			return "error/error";
 		}
-		
+	}
+	
+	@GetMapping("/withdrawal")
+	public String withdrawal() {
+		return "mypage/withdrawal";	
 	}
 	
 }
