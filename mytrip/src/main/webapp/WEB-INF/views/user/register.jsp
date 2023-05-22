@@ -18,26 +18,26 @@
 					<div class="mb-3">
 						<input
 							type="text" class="form-control" id="id" name="id"
-							placeholder="아이디" maxlength="20"/>
+							placeholder="아이디" maxlength="20" required/>
 					</div>
 					<div id="idcheck-result"></div>
 					<div class="mb-3">
 						<input
 							type="text" class="form-control" id="name"
-							name="name" placeholder="이름" />
+							name="name" placeholder="이름" required/>
 					</div>
 					<div id="nicknamecheck-result"></div>
 					<div class="mb-3">
 						<input
 							type="password" class="form-control" id="password" name="password"
-							placeholder="비밀번호" />
+							placeholder="비밀번호" required/>
 					</div>
 					<div class="mb-3">
 						<input
-							type="password" class="form-control" id="pwcheck"
-							placeholder="비밀번호 확인" />
+							type="password" class="form-control" id="confirm-password"
+							placeholder="비밀번호 확인" required/>
 					</div>
-					<div id="pwdcheck-result"></div>
+					<div id="confirm-password-result"></div>
 		
 					<div class="mb-3">
 							<div class="input-group">
