@@ -247,8 +247,18 @@ p{
 .btn-left{
 	background-color:#556DC2;
 }
+.btn-left:hover{
+	background-color:#556DC2;
+	opacity:0.8;
+	color:white;
+}
 .btn-right{
 	background-color:#39CCCC;
+}
+.btn-right:hover,.submit-btn:hover{
+	background-color:#39CCCC;
+	opacity:0.8;
+	color:white;
 }
 .btn-right, .btn-left{
 	margin-bottom:20px;

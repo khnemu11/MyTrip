@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -94,4 +95,5 @@ public class TourController {
 		System.out.println("투어 검색 뷰 시작");
 		return "tour/tourSearchView";
 	}
+
 }

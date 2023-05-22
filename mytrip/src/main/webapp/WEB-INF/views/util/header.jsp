@@ -25,7 +25,7 @@
                 		<a class="nav-link" href="/tour/search">여행지 검색</a>
                 	</div >
                 	<div class="link-border">
-                		 <a class="nav-link" href="/route/findRoute">경로 등록</a>
+                		 <a class="nav-link" href="/route/findRouteView">경로 등록</a>
                 	</div>
                 	<div class="link-border">
                 		<a class="nav-link" href="#">여행지 후기</a>
