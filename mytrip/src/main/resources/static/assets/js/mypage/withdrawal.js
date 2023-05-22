@@ -1,4 +1,4 @@
-document.querySelector("#withdrawal").addEventListener("click", () => {
+document.querySelector("#password-submit").addEventListener("click", () => {
 	if (confirm("정말 회원 탈퇴하시겠습니까?")) {
 		const body = {
 				password : document.querySelector("#password").value

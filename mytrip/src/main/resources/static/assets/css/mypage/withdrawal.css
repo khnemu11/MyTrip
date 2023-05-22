@@ -32,3 +32,38 @@
 .sub-title-right:hover{
 	cursor:pointer;
 }
+.infor-password{
+	color:#3F80F8;
+	font-weight: bolder;
+}
+.form-control{
+	border-color: #3F80F8;
+	margin: 10px 0px;
+	padding-right: 0px;
+	width: 100%;
+}
+
+.form-control::placeholder{
+ 	color: #3F80F8; 
+	opacity: 0.7;
+ }
+ .button-wrapper{
+	width: 100%;
+	display:flex;
+	justify-content: flex-end;
+}
+.btn{
+	background-color:#3F80F8;
+}
+.btn:hover{
+	background-color:#3F80F8;
+	opacity:0.8;
+	color:white;
+}
+.btn {
+	margin-bottom:20px;
+	padding-left:30px;
+	padding-right:30px;
+	color:white;
+	
+}

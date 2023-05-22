@@ -27,11 +27,13 @@
 					</span>
 				</div>
 			</div>
-			<div>*비밀번호를 입력해주세요</div>
+			<div class="infor-password">*비밀번호를 입력해주세요</div>
 			<input
-			type="password" id="password" name="password"
-			placeholder="비밀번호" required />
-			<button type="button" id="withdrawal">확인</button>
+			type="password" id="password" class="form-control" name="password"
+			placeholder="비밀번호 확인" required />
+			<div class="button-wrapper">
+				<button type="submit" class="btn" id="password-submit">확인</button>
+			</div>
 		</div>
 		<div class="col-md-4 col-sm-4 col-xs-4"></div>
 	</div>
