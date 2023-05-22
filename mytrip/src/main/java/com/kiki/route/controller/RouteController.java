@@ -89,7 +89,7 @@ public class RouteController {
 				infoObject = new JSONObject();
 				infoObject.put("x", longitudeArr[i]);
 				infoObject.put("y", latitudeArr[i]);
-				infoObject.put("name", titleArr[i]);
+				infoObject.put("name", "a");
 				if (i == 0) {
 					jsonData.put("origin", infoObject);
 				} else if (i == titleArr.length - 1) {
@@ -116,18 +116,19 @@ public class RouteController {
 
 			http.setDoOutput(true); // outputstream으로 post데이터를 넘겨준다는 옵션
 
-			PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(http.getOutputStream()));
+			PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(http.getOutputStream(), "UTF-8"));
 			printWriter.write(jsonData.toString());
+			System.out.println(jsonData.toString());
 			printWriter.flush();
 			BufferedReader br = null;
 			int status = http.getResponseCode();
 			if (status == HttpURLConnection.HTTP_OK) {
 				System.out.println("카카오 길찾기 수신 성공!");
 
-				br = new BufferedReader(new InputStreamReader(http.getInputStream()));
+				br = new BufferedReader(new InputStreamReader(http.getInputStream(), "UTF-8"));
 			} else {
 				System.out.println("카카오 길찾기 수신 실패!");
-				br = new BufferedReader(new InputStreamReader(http.getErrorStream()));
+				br = new BufferedReader(new InputStreamReader(http.getErrorStream(), "UTF-8"));
 			}
 			StringBuilder responseBody = new StringBuilder();
 			String line = "";

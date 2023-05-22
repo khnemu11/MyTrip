@@ -16,6 +16,8 @@ let options = {
 	level: 3
 };
 
+let selected = [];
+
 document.addEventListener('DOMContentLoaded',function(){
 	makeMap(latitude,longitude);
 	init();
@@ -122,7 +124,6 @@ async function makeCityOption(){
 	});
 }
 document.querySelector('#btn-search').addEventListener('click',function(){
-
 	document.querySelector('.loading-spinner').style.display='block';
 	keyword = document.querySelector('#search').value;
 	makeTourList(true);
@@ -214,9 +215,8 @@ async function makeTourList(isNew){
 				if(img == ""){
 					img = "/img/tour/no-image.png";
 				}
-				
 	
-				var context = `	
+				var context = `
 					<div class="card row">
 					<div class="col-md-6 col-sm-6 col-xs-6">
 						<img src="${img}"/>
@@ -235,9 +235,9 @@ async function makeTourList(isNew){
 					</div>
 					<div class="card-button">
 						<button type="button" class="btn btn-left" onclick="window.location.href='${url}'">상세정보</button>
-						<button type="button" class="btn btn-right">경로추가</button>
+						<button type="button" class="btn btn-right" onclick="selectRoute('${title}',${longitude},${latitude})">경로추가</button>
 					</div>
-					</div>`	
+					</div>`
 				list.insertAdjacentHTML('beforeend',context);
 			}
 			
@@ -248,12 +248,53 @@ async function makeTourList(isNew){
 
 			document.querySelector('#tour-list-wrapper').style.height = height;
 			document.getElementById('tour-list-wrapper').setAttribute("style",`height:${height}px;`);
-			document.querySelector('.loading-spinner').style.display='none';
 		});
 }
+
+function selectRoute(title,longitude,latitude){
+	data={
+		title : title,
+		longitude : longitude,
+		latitude : latitude,
+	}
+	let selectList = document.querySelector('.select-list');
+	console.log(selectList);
+	
+	if(selected.length>=5){
+		alert('최대 가능한 개수를 초과하였습니다.');
+		return;
+	}
+	
+	for(let idx=0;idx<selected.length;idx++){
+		console.log(selected[idx].title +" vs "+ title);
+		if(selected[idx].title == title){
+			alert('중복된 여행지입니다.');
+			return;
+		}
+	}
+	
+	var context = 
+		`<span class="select-tour">	
+			<input type="hidden" name="title" value="${title}"/>
+			<input type="hidden" name="longitude" value="${longitude}"/>
+			<input type="hidden" name="latitude" value="${latitude}"/>
+			<span class="tour-left"><i class="fa-sharp fa-solid fa-location-dot"></i></span>
+			<span class="tour-right">
+				<span class="tour-title">${title}</span>
+				<span class="tour-delete"><i class="fa-solid fa-trash"></i></span>
+			</span>
+		</span>`;
+	
+	selectList.insertAdjacentHTML('beforeend',context);
+	document.querySelector('#cnt').value = selected.length;
+	selected.push(data);
+	console.log(selectList);
+}
+
 document.addEventListener('scroll',async function(e){
 	if(document.body.scrollHeight>=document.body.scrollTop+document.body.clientHeight && !isLoad){
-		isLoad=true;
+		isLoad=true;0
+		
 		await makeTourList(false);
 		isLoad=false;
 	}
