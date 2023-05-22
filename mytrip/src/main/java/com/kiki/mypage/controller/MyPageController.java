@@ -17,8 +17,13 @@ import com.kiki.user.model.UserDto;
 @Controller
 @RequestMapping("mypage")
 public class MyPageController {
-	@Autowired
+	
 	MyPageService myPageService;
+	@Autowired
+	public MyPageController(MyPageService myPageService) {
+		super();
+		this.myPageService = myPageService;
+	}
 	
 	@GetMapping("/mypage")
 	public String mypage() {
