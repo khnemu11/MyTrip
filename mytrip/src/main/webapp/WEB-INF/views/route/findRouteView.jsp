@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="/css/route/findRouteView.css">
 	<script type="text/javascript" src="/js/route/findRoute.js" defer></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1aedb50890494bc67a51873a9228153a"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/util/header.jsp"%>
@@ -20,43 +21,13 @@
 			</div>
 			<div class="select-title">
 				<div class="select-title-left">여행지</div>
-				<div class="select-title-right">1 / 5</div>
+				<div class="select-title-right"><span id="cnt">0</span> / 5</div>
 			</div>
-			<form action="/route/registRouteView" method="GET">
+			<form action="/route/registRouteView" method="GET" id="selectForm">
 				<div class="select-list">
-					<span class="select-tour">	
-					<input type="hidden" name="title" value="가나돈까스의집"/>
-					<input type="hidden" name="longitude" value="127.0377755568"/>
-					<input type="hidden" name="latitude" value="37.5099674377"/>
-						<span class="tour-left"><i class="fa-sharp fa-solid fa-location-dot"></i></span>
-						<span class="tour-right">
-							<span class="tour-title">가니안 약국</span>
-							<span class="tour-delete"><i class="fa-solid fa-trash"></i></span>
-						</span>
-					</span>
-					<span class="select-tour">
-					<input type="hidden" name="title" value="가나안약국"/>
-					<input type="hidden" name="longitude" value="127.0208657845"/>
-					<input type="hidden" name="latitude" value="37.5170635319"/>
-						<span class="tour-left"><span class="circle"></span></span>
-						<span class="tour-right">
-							<span class="tour-title">가니안 약국</span>
-							<span class="tour-delete"><i class="fa-solid fa-trash"></i></span>
-						</span>
-					</span>
-					<span class="select-tour">
-					<input type="hidden" name="title" value="가람국시"/>
-					<input type="hidden" name="longitude" value="127.0341090296"/>
-					<input type="hidden" name="latitude" value="37.5168415735"/>
-						<span class="tour-left"><i class="fa-solid fa-location-pin"></i></span>
-						<span class="tour-right">
-							<span class="tour-title">가니안 약국</span>
-							<span class="tour-delete"><i class="fa-solid fa-trash"></i></span>
-						</span>
-					</span>
 				</div>
 				<div class="select-submit">
-					<button type="submit" class="btn submit-btn">경로생성</button>
+					<button type="button" class="btn submit-btn" onclick="selectSubmit()">경로생성</button>
 				</div>
 			</form>
 		</div>
@@ -86,7 +57,8 @@
 			</select> <select class="form-select select-box" id="select-gun"
 				onChange="onChangeGunGu();">
 				<option selected>시/군/구</option>
-			</select> <select class="form-select select-box" id="select-contentTypeId"
+			</select> 
+			<select class="form-select select-box" id="select-contentTypeId"
 				onChange="onChangeContentTypeId()">
 				<option selected value="">전체</option>
 				<option value="14">문화시설</option>
@@ -103,12 +75,11 @@
 			</div>
 			</div>
 			<div id="tour-list-wrapper" style="height:200px">
-			<div id="tour-list">
-				<div class="text-center loading-spinner">
-				<div class="spinner-border" role="status"></div>
-			</div>
-	
-			</div>
+				<div id="tour-list">
+					<div class="text-center loading-spinner">
+						<div class="spinner-border" role="status"></div>
+					</div>
+				</div>
 			</div> 
 		</div>
 		<div class="col-md-7 col-sm-7 col-xs-7 map-container">

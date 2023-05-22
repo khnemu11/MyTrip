@@ -293,3 +293,6 @@ p{
   background: #808080;
   border-radius:20px;
 }
+.loading-spinner{
+	overflow:hidden;
+}

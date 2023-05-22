@@ -16,10 +16,13 @@ let options = {
 	level: 3
 };
 
+let selected = [];
+
 document.addEventListener('DOMContentLoaded',function(){
 	makeMap(latitude,longitude);
 	init();
-})
+});
+
 async function init(){
 	await makeCityOption();
 	await makeGunGuOption();
@@ -55,10 +58,9 @@ function makeMap(lat,lng){
 }
 async function makeGunGuOption(data){
 	console.log('makeGunGuOption 실행');
-	document.querySelector('.loading-spinner').style.display='block';
 	let params = {
 			serviceKey : key,
-			numOfRows : 20,
+			numOfRows : 30,
 			pageNo : 1,
 			MobileOS : 'win',
 			MobileApp : 'mytrip',
@@ -67,7 +69,6 @@ async function makeGunGuOption(data){
 		}
 		let baseUrl = 'https://apis.data.go.kr/B551011/KorService1/areaCode1?';
 		let paramUrl = new URLSearchParams(params);
-		console.log(paramUrl.toString());
 		await fetch(baseUrl + paramUrl.toString())
 		.then((response)=>response.json()).
 		then(function(data){
@@ -87,12 +88,20 @@ async function makeGunGuOption(data){
 }
 
 
+function selectSubmit(){
+	console.log(selected);
+	if(selected.length<2){
+		alert('최소 2개 이상의 여행지를 선택해주세요');
+	}else{
+		document.querySelector('#selectForm').submit();
+	}
+}
+
 async function makeCityOption(){
 	console.log('makeCityOption 실행');
-	document.querySelector('.loading-spinner').style.display='block';
 	let params = {
 		serviceKey : key,
-		numOfRows : 20,
+		numOfRows :30,
 		pageNo : 1,
 		MobileOS : 'win',
 		MobileApp : 'mytrip',
@@ -100,8 +109,7 @@ async function makeCityOption(){
 	}
 	let baseUrl = 'https://apis.data.go.kr/B551011/KorService1/areaCode1?';
 	let paramUrl = new URLSearchParams(params);
-	console.log(paramUrl.toString());
-	
+
 	await fetch(baseUrl + paramUrl.toString())
 	.then((response)=>response.json())
 	.then(function(data){
@@ -122,8 +130,6 @@ async function makeCityOption(){
 	});
 }
 document.querySelector('#btn-search').addEventListener('click',function(){
-
-	document.querySelector('.loading-spinner').style.display='block';
 	keyword = document.querySelector('#search').value;
 	makeTourList(true);
 })
@@ -171,7 +177,6 @@ async function makeTourList(isNew){
 		
 		let paramUrl = new URLSearchParams(params);
 		
-		console.log(paramUrl.toString());
 		await fetch(baseUrl + paramUrl.toString())
 		.then((response)=>response.json()).
 		then(function(data){
@@ -188,17 +193,19 @@ async function makeTourList(isNew){
 			
 			if(isNew){
 				list.innerHTML = "";
+			}else if(list.childNodes.length>0){
+				console.log(list.childNodes);
+				list.removeChild(list.childNodes[list.childNodes.length-1]);
 			}
 			
 			for(var idx in locations){
-				var title = locations[idx].title;
+				var title = locations[idx].title.replace(/\s/g,'');
 				var addr = locations[idx].addr1;
 				var longitude = locations[idx].mapx
 				var latitude = locations[idx].mapy;
 				var telephone = locations[idx].tel;
 				var img = locations[idx].firstimage;
 				var tel =  locations[idx].tel;
-				
 				params ={
 					title : locations[idx].title,
 					address : locations[idx].addr1,
@@ -214,9 +221,8 @@ async function makeTourList(isNew){
 				if(img == ""){
 					img = "/img/tour/no-image.png";
 				}
-				
 	
-				var context = `	
+				var context = `
 					<div class="card row">
 					<div class="col-md-6 col-sm-6 col-xs-6">
 						<img src="${img}"/>
@@ -235,9 +241,9 @@ async function makeTourList(isNew){
 					</div>
 					<div class="card-button">
 						<button type="button" class="btn btn-left" onclick="window.location.href='${url}'">상세정보</button>
-						<button type="button" class="btn btn-right">경로추가</button>
+						<button type="button" class="btn btn-right" onclick="selectRoute('${title}',${longitude},${latitude})">경로추가</button>
 					</div>
-					</div>`	
+					</div>`
 				list.insertAdjacentHTML('beforeend',context);
 			}
 			
@@ -248,13 +254,87 @@ async function makeTourList(isNew){
 
 			document.querySelector('#tour-list-wrapper').style.height = height;
 			document.getElementById('tour-list-wrapper').setAttribute("style",`height:${height}px;`);
-			document.querySelector('.loading-spinner').style.display='none';
 		});
 }
-document.addEventListener('scroll',async function(e){
-	if(document.body.scrollHeight>=document.body.scrollTop+document.body.clientHeight && !isLoad){
+
+function selectRoute(title,longitude,latitude){
+	data={
+		title : title,
+		longitude : longitude,
+		latitude : latitude,
+	}
+	let selectList = document.querySelector('.select-list');
+	console.log(selectList);
+	
+	if(selected.length>=5){
+		alert('최대 가능한 개수를 초과하였습니다.');
+		return;
+	}
+	
+	for(let idx=0;idx<selected.length;idx++){
+		console.log(selected[idx].title +" vs "+ title);
+		if(selected[idx].title == title){
+			alert('중복된 여행지입니다.');
+			return;
+		}
+	}
+	var context = 
+		`<span class="select-tour" id="${title}">	
+			<input type="hidden" name="title" value="${title}"/>
+			<input type="hidden" name="longitude" value="${longitude}"/>
+			<input type="hidden" name="latitude" value="${latitude}"/>
+			<span class="tour-left"><i class="fa-sharp fa-solid fa-location-dot"></i></span>
+			<span class="tour-right">
+				<span class="tour-title">${title}</span>
+				<span class="tour-delete" onclick=deleteTour("${title}");><i class="fa-solid fa-trash"></i></span>
+			</span>
+		</span>`;
+	selectList.insertAdjacentHTML('beforeend',context);
+	selected.push(data);
+	document.querySelector('#cnt').innerText = selected.length;
+	console.log(selectList);
+}
+
+document.querySelector('#tour-list-wrapper').addEventListener('scroll' , async function(e){
+	console.log(e.target.offsetHeight);
+	console.log(e.target.scrollTop);
+	console.log(e.target.scrollHeight);
+	console.log(e.target.scrollHeight+" vs "+e.target.scrollTop+" + "+e.target.offsetHeight);
+	console.log(e.target);
+	
+	if(e.target.scrollHeight<=e.target.scrollTop+e.target.offsetHeight+1 && !isLoad){
 		isLoad=true;
+		
+		let tourList = document.querySelector('#tour-list');
+		let context = `
+					<div class="text-center loading-spinner">
+						<div class="spinner-border" role="status"></div>
+					</div>`;
+		tourList.insertAdjacentHTML('beforeend',context)
+
 		await makeTourList(false);
 		isLoad=false;
 	}
 })
+
+document.querySelector('#tour-list-wrapper').addEventListener('scroll' , ()=>console.log('scrolled'));
+
+function deleteTour(id){
+	for(let val in selected){
+		if(selected[val].title == id){
+			selected.splice(val,1);
+			break;
+		}
+	}
+	let selectList = document.querySelector('.select-list').childNodes;
+	console.log(selectList);
+	for(let idx=1;idx<selectList.length;idx++){
+		console.log(selectList[idx]);
+		console.log(selectList[idx].getAttribute('id'));
+		if(selectList[idx].getAttribute('id') == id){
+			document.querySelector('.select-list').removeChild(selectList[idx]);
+			document.querySelector('#cnt').innerText = selected.length;
+			break;
+		}
+	}
+}
