@@ -176,10 +176,9 @@ p{
 .form-check-input{
 	margin-right:15px;
 }
-.result-count{
+#result-count{
 	font-color:#808080;
-	font-weight:vold;
-	
+	font-weight:vold;	
 }
 #name{
 	margin-left:10px;
@@ -207,6 +206,8 @@ p{
 	border-radius:20px;
 	margin:20px;
 	max-width:80%;
+	width:100%;
+	height:130px;
 	object-fit:cover;
 }
 .card{
@@ -268,4 +269,25 @@ p{
 	padding-left:30px;
 	padding-right:30px;
 	color:white;
+}
+#tour-list{
+	overflow:auto;
+	margin-right:2px;
+}
+#tour-list-wrapper{
+	overflow:auto;
+	height:365px;
+	margin-right:2px;
+}
+#tour-list-wrapper::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #d3d3d3; 
+	
+  border-radius:20px;
+}
+
+#tour-list-wrapper::-webkit-scrollbar-thumb {
+  background: #808080;
+  border-radius:20px;
 }

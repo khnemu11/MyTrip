@@ -64,7 +64,7 @@
 			<div class="title-bar primary2">
 				여행지 검색
 			</div>
-			<div class="search-container">
+			<div class="search-container" id="search">
 				<div id="search-bar">
 				<img src="/img/utill/only-logo.png" class="search-logo" />
 				<p class="divider">|</p>
@@ -76,12 +76,18 @@
 			</div>
 				<div class="sort-container">
 					<input type="radio" id="view" class="form-check-input" name="sort"
-						value="view"> <label for="view">인기 순</label> <input
+						value="view" checked> <label for="view">검색 순</label> <input
 						type="radio" id="name" class="form-check-input" name="sort"
-						value="view" checked> <label for="name">이름 순</label>
+						value="view"> <label for="name">즐겨찾기 순</label>
 				</div>
-			<select class="form-select select-box" id="select-contentTypeId"
-				onChange="return;">
+			<select class="form-select select-box" id="select-city"
+				onChange="onChangeCity();">
+				<option selected>도시</option>
+			</select> <select class="form-select select-box" id="select-gun"
+				onChange="onChangeGunGu();">
+				<option selected>시/군/구</option>
+			</select> <select class="form-select select-box" id="select-contentTypeId"
+				onChange="onChangeContentTypeId()">
 				<option selected value="">전체</option>
 				<option value="14">문화시설</option>
 				<option value="15">축제공연행사</option>
@@ -93,36 +99,21 @@
 				<option value="12">관광지</option>
 			</select>
 			<div class="sub-title-container">
-				<span class="sub-title">검색 결과</span><span class="result-count">( 1,930 )</span></div>
+				<span class="sub-title">검색 결과</span><span id="result-count">( 1,930 )</span>
+			</div>
 			</div>
 			
-			<div id="tour-list">
-				<div class="card row">
-					<div class="col-md-6 col-sm-6 col-xs-6">
-						<img src="/img/tour/no-image.png"/>
-					</div>
-					<div class="col-md-6 col-sm-6 col-xs-6 card-right">
-						<div class="card-title">가나해수욕장</div>	
-						<div class="card-description">
-							<div class="card-address-container">
-								<i class="fa-solid fa-location-dot"></i>
-								<div class="card-address">엄청엄청엄청엄청엄청엄청엄청엄청엄청엄청긴</div>
-							</div>
-							<div class="card-tel-container">
-								<i class="fa-solid fa-phone"></i><span class="card-tel">010-9220-0441</span>
-							</div>	
-						</div>
-						
-					</div>
-					<div class="card-button">
-						<button type="button" class="btn btn-left">상세정보</button>
-						<button type="button" class="btn btn-right">경로추가</button>
-					</div>
+			<div id="tour-list-wrapper">
+			<div class="text-center loading-spinner">
+				<div class="spinner-border" role="status">
 				</div>
 			</div>
+			<div id="tour-list">
+			</div>
+			</div> 
+			
 		</div>
 		<div class="col-md-7 col-sm-7 col-xs-7 map-container">
-			<div id="roadview">roadview</div>
 			<div id="map">map</div>
 		</div>
 	</div>

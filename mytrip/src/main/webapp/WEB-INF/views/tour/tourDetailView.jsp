@@ -128,7 +128,7 @@
 									<div class="tour-description-bottom">
 										<span>
 											<span><i class="fa-solid fa-location-dot"></i>
-											<span class="tour-address">아주아주	아주아주아주아주아주아주아주아주아주아주긴아주아주아주아주아주아주아주아주아주아주아주아주긴아주아주아주아주아주아주아주아주아주아주아주아주긴 주소</span>
+											<span class="tour-address">아주아주아주아주아주아주아주아주아주아주아주아주긴아주아주아주아주아주아주아주아주아주아주아주아주긴아주아주아주아주아주아주아주아주아주아주아주아주긴 주소</span>
 											</span>
 										</span>
 										<span><i class="fa-solid fa-phone"></i><span class="tour-tel">010-9220-0441</span></span>

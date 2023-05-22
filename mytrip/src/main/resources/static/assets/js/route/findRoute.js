@@ -3,9 +3,14 @@ let longitude = 126.570667;
 let title = '';
 let map;
 let key ='opoKoaa3kaeINxgVEi1q+SrTFEFt/U8TOSyDXPcdAt6Ca5hjzRNGZZjSKUndxKSDlk/A164nPmQkpVk8c5f0NQ==';
-
+var areaCode=1;
+var sigunguCode=1;
+var contentTypeId="";
+let userinfo;
+let keyword = '';
+let isLoad=false;
+let pageNo= 1;
 let container = document.getElementById('map');
-let roadviewContainer = document.getElementById('roadview');
 let options = {
 	center: new kakao.maps.LatLng(latitude, longitude),
 	level: 3
@@ -13,8 +18,13 @@ let options = {
 
 document.addEventListener('DOMContentLoaded',function(){
 	makeMap(latitude,longitude);
+	init();
 })
-
+async function init(){
+	await makeCityOption();
+	await makeGunGuOption();
+	await makeTourList(true);
+}
 function makeMap(lat,lng){
 	latitude = lat;
 	longitude = lng;
@@ -42,14 +52,193 @@ function makeMap(lat,lng){
 	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
 	marker.setMap(map);
+}
+async function makeGunGuOption(data){
+	console.log('makeGunGuOption 실행');
+	document.querySelector('.loading-spinner').style.display='block';
+	let params = {
+			serviceKey : key,
+			numOfRows : 20,
+			pageNo : 1,
+			MobileOS : 'win',
+			MobileApp : 'mytrip',
+			_type : 'json',
+			areaCode: areaCode,
+		}
+		let baseUrl = 'https://apis.data.go.kr/B551011/KorService1/areaCode1?';
+		let paramUrl = new URLSearchParams(params);
+		console.log(paramUrl.toString());
+		await fetch(baseUrl + paramUrl.toString())
+		.then((response)=>response.json()).
+		then(function(data){
+			var select = document.getElementById("select-gun");
+			var options = "";
+			var sigungus = data.response.body.items.item;
+			sigunguCode = sigungus[0].code;
+			for(var idx in sigungus){
+				var sigungu = sigungus[idx].code;
+				var name = sigungus[idx].name;
+				var row = `<option value = "` + sigungu+`">`+ name+`</option>`;
+				options+=row;
+			}
+			select.innerHTML = options;
+			console.log("시/군/구 코드 옵션 생성 끝");
+		})
+}
+
+
+async function makeCityOption(){
+	console.log('makeCityOption 실행');
+	document.querySelector('.loading-spinner').style.display='block';
+	let params = {
+		serviceKey : key,
+		numOfRows : 20,
+		pageNo : 1,
+		MobileOS : 'win',
+		MobileApp : 'mytrip',
+		_type : 'json',
+	}
+	let baseUrl = 'https://apis.data.go.kr/B551011/KorService1/areaCode1?';
+	let paramUrl = new URLSearchParams(params);
+	console.log(paramUrl.toString());
 	
-	var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
-	var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
-
-	var position = new kakao.maps.LatLng(33.450701, 126.570667);
-
-	// 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
-	roadviewClient.getNearestPanoId(position, 50, function(panoId) {
-	    roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
+	await fetch(baseUrl + paramUrl.toString())
+	.then((response)=>response.json())
+	.then(function(data){
+		console.log(data);
+		var select = document.getElementById("select-city");
+		var options = "";
+		var cities = data.response.body.items.item;
+		
+		for(var idx in cities){
+			var area = cities[idx].code;
+			var name = cities[idx].name;
+			var row = `<option value = "` + area+`">`+ name+`</option>`;
+			options+=row;
+		}
+		
+		select.innerHTML = options;
+		console.log("도시 코드 옵션 생성 끝");
 	});
+}
+document.querySelector('#btn-search').addEventListener('click',function(){
+
+	document.querySelector('.loading-spinner').style.display='block';
+	keyword = document.querySelector('#search').value;
+	makeTourList(true);
+})
+
+function onChangeContentTypeId(){
+	contentTypeId = document.getElementById("select-contentTypeId").value;
+	makeTourList(true);
+}
+
+function onChangeGunGu(){
+	sigunguCode =  document.getElementById("select-gun").value;
+	makeTourList(true);
+}
+
+async function onChangeCity(){
+	areaCode =  document.getElementById("select-city").value;
+	await makeGunGuOption();
+	await makeTourList(true);		
+}
+
+async function makeTourList(isNew){
+		if(isNew){
+			pageNo = 1;
+		}else{
+			pageNo= pageNo+1;
+		}
+		
+		let params = {
+			serviceKey : key,
+			numOfRows : 12,
+			pageNo : pageNo,
+			MobileOS : 'win',
+			MobileApp : 'mytrip',
+			_type : 'json',
+			areaCode: areaCode,
+			sigunguCode : sigunguCode,
+			contentTypeId : contentTypeId,
+		}
+		let baseUrl = 'https://apis.data.go.kr/B551011/KorService1/areaBasedList1?';
+		
+		if(keyword !=''){
+			baseUrl = 'https://apis.data.go.kr/B551011/KorService1/searchKeyword1?';
+			params.keyword = keyword;
+		}
+		
+		let paramUrl = new URLSearchParams(params);
+		
+		console.log(paramUrl.toString());
+		await fetch(baseUrl + paramUrl.toString())
+		.then((response)=>response.json()).
+		then(function(data){
+			console.log(data);
+			var locations = data.response.body.items.item;
+			let totalCnt = data.response.body.totalCount.toLocaleString('ko-KR');
+			document.getElementById('result-count').innerHTML = `( ${totalCnt} )`
+			if(data.response.body.totalCount == 0){
+				document.getElementById("tour-list").innerHTML = `<div>해당 조건에 맞는 관광지가 없습니다.</div>`
+				return 0;
+			}
+			
+			let list = document.getElementById("tour-list");
+			
+			if(isNew){
+				list.innerHTML = "";
+			}
+			
+			for(var idx in locations){
+				var title = locations[idx].title;
+				var addr = locations[idx].addr1;
+				var img = locations[idx].firstimage;
+				var tel = locations[idx].tel;
+				if(img == ""){
+					img = "/img/tour/no-image.png";
+				}
+				
+				let baseUrl = '/tour/detail?';
+				
+				let url = baseUrl + paramUrl.toString();
+				var context = `	
+					<div class="card row">
+					<div class="col-md-6 col-sm-6 col-xs-6">
+						<img src="${img}"/>
+					</div>
+					<div class="col-md-6 col-sm-6 col-xs-6 card-right">
+						<div class="card-title">${title}</div>	
+						<div class="card-description">
+							<div class="card-address-container">
+								<i class="fa-solid fa-location-dot"></i>
+								<div class="card-address">${addr}</div>
+							</div>
+							<div class="card-tel-container">
+								<i class="fa-solid fa-phone"></i><span class="card-tel">${tel}</span>
+							</div>	
+						</div>
+					</div>
+					<div class="card-button">
+						<button type="button" class="btn btn-left">상세정보</button>
+						<button type="button" class="btn btn-right">경로추가</button>
+					</div>
+					</div>`	
+				list.insertAdjacentHTML('beforeend',context);
+			}
+			
+			let titleHeight = document.querySelector('.title-bar').offsetHeight;
+			let searchHeight = document.querySelector('#search').offsetHeight;
+			let mapHeight = document.querySelector('#map').offsetHeight;
+			let height = mapHeight - (searchHeight + titleHeight);
+
+			console.log(document.querySelector('#tour-list').style.height);
+			document.querySelector('#tour-list-wrapper').style.height = height;
+			document.querySelector('#tour-list').offsetHeight = height;
+			console.log('height : '+height);
+			console.log(document.querySelector('#tour-list-wrapper'));
+			console.log(document.querySelector('#tour-list'));
+			console.log(document.querySelector('#tour-list').style.height);
+			document.querySelector('.loading-spinner').style.display='none';
+		});
 }
