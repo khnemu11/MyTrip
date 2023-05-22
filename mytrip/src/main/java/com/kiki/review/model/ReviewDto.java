@@ -6,7 +6,7 @@ public class ReviewDto {
 	private String content;
 	private String userId;
 	private String createdDate;
-	private String modifedDate;
+	private String modifiedDate;
 	private String deletedDate;
 	public int getSeq() {
 		return seq;
@@ -38,11 +38,11 @@ public class ReviewDto {
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
-	public String getModifedDate() {
-		return modifedDate;
+	public String getModifiedDate() {
+		return modifiedDate;
 	}
-	public void setModifedDate(String modifedDate) {
-		this.modifedDate = modifedDate;
+	public void setModifiedDate(String modifiedDate) {
+		this.modifiedDate = modifiedDate;
 	}
 	public String getDeletedDate() {
 		return deletedDate;
@@ -53,7 +53,7 @@ public class ReviewDto {
 	@Override
 	public String toString() {
 		return "ReviewDto [seq=" + seq + ", title=" + title + ", content=" + content + ", userId=" + userId
-				+ ", createdDate=" + createdDate + ", modifedDate=" + modifedDate + ", deletedDate=" + deletedDate
+				+ ", createdDate=" + createdDate + ", modifedDate=" + modifiedDate + ", deletedDate=" + deletedDate
 				+ "]";
 	}
 	

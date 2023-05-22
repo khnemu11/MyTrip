@@ -118,6 +118,7 @@ public class RouteController {
 
 			PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(http.getOutputStream()));
 			printWriter.write(jsonData.toString());
+			System.out.println(jsonData.toString());
 			printWriter.flush();
 			BufferedReader br = null;
 			int status = http.getResponseCode();
