@@ -58,10 +58,12 @@ public class MyPageController {
 			UserDto sessionUser = (UserDto) session.getAttribute("userInfo");
 			updateForm.setId(sessionUser.getId());
 			updateForm.setJoinDate(sessionUser.getJoinDate());
+			if (updateForm.getPassword() == "") {
+				updateForm.setPassword(sessionUser.getPassword());
+			}
 			int valid = myPageService.updateMyPage(updateForm);
 			if (valid > 0) {
 				model.addAttribute("mypageMsg", "수정 성공했습니다.");
-				updateForm.setPassword("");
 				session.setAttribute("userInfo", updateForm);
 				return "mypage/mypage";
 			} else {
