@@ -146,7 +146,7 @@ public class RouteController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return new ResponseEntity<String>(data, HttpStatus.METHOD_FAILURE);
+		return new ResponseEntity<String>(data, HttpStatus.OK);
 	}
 
 	@GetMapping("/search")

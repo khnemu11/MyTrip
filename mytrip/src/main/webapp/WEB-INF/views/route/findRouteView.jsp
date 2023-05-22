@@ -56,7 +56,7 @@
 					</span>
 				</div>
 				<div class="select-submit">
-					<button type="submit" class="btn submit-btn"><p>경로생성</p><i class="fa-solid fa-pen"></i> </button>
+					<button type="submit" class="btn submit-btn">경로생성</button>
 				</div>
 			</form>
 		</div>
