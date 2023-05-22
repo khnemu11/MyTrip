@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="/css/route/findRouteView.css">
 	<script type="text/javascript" src="/js/route/findRoute.js" defer></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1aedb50890494bc67a51873a9228153a"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/util/header.jsp"%>
@@ -22,11 +23,11 @@
 				<div class="select-title-left">여행지</div>
 				<div class="select-title-right"><span id="cnt">0</span> / 5</div>
 			</div>
-			<form action="/route/registRouteView" method="GET">
+			<form action="/route/registRouteView" method="GET" id="selectForm">
 				<div class="select-list">
 				</div>
 				<div class="select-submit">
-					<button type="submit" class="btn submit-btn">경로생성</button>
+					<button type="button" class="btn submit-btn" onclick="selectSubmit()">경로생성</button>
 				</div>
 			</form>
 		</div>
@@ -76,8 +77,7 @@
 			<div id="tour-list">
 				<div class="text-center loading-spinner">
 				<div class="spinner-border" role="status"></div>
-			</div>
-	
+				</div>
 			</div>
 			</div> 
 		</div>

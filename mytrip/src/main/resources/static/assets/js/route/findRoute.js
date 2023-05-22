@@ -57,10 +57,9 @@ function makeMap(lat,lng){
 }
 async function makeGunGuOption(data){
 	console.log('makeGunGuOption 실행');
-	document.querySelector('.loading-spinner').style.display='block';
 	let params = {
 			serviceKey : key,
-			numOfRows : 20,
+			numOfRows : 30,
 			pageNo : 1,
 			MobileOS : 'win',
 			MobileApp : 'mytrip',
@@ -89,12 +88,20 @@ async function makeGunGuOption(data){
 }
 
 
+function selectSubmit(){
+	console.log(selected);
+	if(selected.length<2){
+		alert('최소 2개 이상의 여행지를 선택해주세요');
+	}else{
+		document.querySelector('#selectForm').submit();
+	}
+}
+
 async function makeCityOption(){
 	console.log('makeCityOption 실행');
-	document.querySelector('.loading-spinner').style.display='block';
 	let params = {
 		serviceKey : key,
-		numOfRows : 20,
+		numOfRows :30,
 		pageNo : 1,
 		MobileOS : 'win',
 		MobileApp : 'mytrip',
@@ -124,7 +131,6 @@ async function makeCityOption(){
 	});
 }
 document.querySelector('#btn-search').addEventListener('click',function(){
-	document.querySelector('.loading-spinner').style.display='block';
 	keyword = document.querySelector('#search').value;
 	makeTourList(true);
 })
@@ -192,14 +198,14 @@ async function makeTourList(isNew){
 			}
 			
 			for(var idx in locations){
-				var title = locations[idx].title;
+				var title = locations[idx].title.replace(/\s/g,'');
 				var addr = locations[idx].addr1;
 				var longitude = locations[idx].mapx
 				var latitude = locations[idx].mapy;
 				var telephone = locations[idx].tel;
 				var img = locations[idx].firstimage;
 				var tel =  locations[idx].tel;
-				
+				console.log(title);
 				params ={
 					title : locations[idx].title,
 					address : locations[idx].addr1,
@@ -273,6 +279,7 @@ function selectRoute(title,longitude,latitude){
 		}
 	}
 	
+	
 	var context = 
 		`<span class="select-tour" id="${title}">	
 			<input type="hidden" name="title" value="${title}"/>
@@ -281,10 +288,9 @@ function selectRoute(title,longitude,latitude){
 			<span class="tour-left"><i class="fa-sharp fa-solid fa-location-dot"></i></span>
 			<span class="tour-right">
 				<span class="tour-title">${title}</span>
-				<span class="tour-delete" onclick=deleteTour('${title}');><i class="fa-solid fa-trash"></i></span>
+				<span class="tour-delete" onclick=deleteTour("${title}");><i class="fa-solid fa-trash"></i></span>
 			</span>
 		</span>`;
-	
 	selectList.insertAdjacentHTML('beforeend',context);
 	selected.push(data);
 	document.querySelector('#cnt').innerText = selected.length;
@@ -317,3 +323,14 @@ function deleteTour(id){
 		}
 	}
 }
+$(function() {
+    $( "#sortable" ).sortable({
+revert: true
+    });
+    $( "#draggable" ).draggable({
+      connectToSortable: "#sortable",
+      helper: "clone",
+      revert: "invalid"
+    });
+    $( "ul, li" ).disableSelection();
+  });
