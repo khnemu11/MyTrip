@@ -39,16 +39,28 @@
 					<div class="sub-container">
 						<div class="sub-title">여행 경로</div>
 						<c:forEach items="${list}" var="item" varStatus="status">
-							<div class="data" data-lat = "${item.tourDto.latitude}" data-lng="${item.tourDto.longitude}">
+							<div class="data" data-lat = "${item.tourDto.latitude}" data-lng="${item.tourDto.longitude}" data-title="${item.tourDto.title}">
 							</div>
 							<span class="select-tour" id="${item.tourDto.title}">	
-								<span class="tour-left"></span>
+								<span class="tour-left">
+								<c:choose>
+									<c:when test="${status.first}">
+										<i class="fa-sharp fa-solid fa-location-dot"></i>
+									</c:when>
+									<c:when test="${status.last}">
+										<i class="fa-solid fa-location-pin"></i>
+									</c:when>
+									<c:otherwise>
+										<span class="circle"></span>
+									</c:otherwise>
+								</c:choose>
+								</span>
 								<span class="tour-right row">
 									<div class="col-md-7 col-sm-7 col-xs-7">
 										<span class="tour-title">${item.tourDto.title}</span>
 									</div>
 									<div class="col-md-5 col-sm-5 col-xs-5">
-										<span class="data-container"><p class="distance">${item.distance}km</p><p class="duration">(${item.time}분)</p></span>
+										<span class="data-container"><p class="distance"></p><p class="duration"></p></span>
 									</div>
 								</span>
 							</span>
@@ -57,13 +69,13 @@
 					<div class="sub-container">
 						<div class="sub-title">예상 비용</div>
 						<div id="predict-time">
-							<span class="sub-sub-title" id="total-time">${plan.expectedTime}분</span>
-							<span class="sub-context" id="total-distance">${plan.expectedDistance}km</span>
+							<span class="sub-sub-title" id="total-time"></span>
+							<span class="sub-context" id="total-distance"></span>
 						</div>
 						<div id="predict-cost">
-							<span class="sub-context" id="total-taxi">${plan.taxiCost}</span>
+							<span class="sub-context" id="total-taxi"></span>
 							<span class="sub-context">|</span>
-							<span class="sub-context" id="total-toll">통행비 약 ${plan.fuelCost}원</span>
+							<span class="sub-context" id="total-toll"></span>
 						</div>
 					</div>
 				</div>

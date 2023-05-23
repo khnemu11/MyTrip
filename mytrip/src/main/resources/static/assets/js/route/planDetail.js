@@ -5,17 +5,18 @@ let map;
 let key ='opoKoaa3kaeINxgVEi1q+SrTFEFt/U8TOSyDXPcdAt6Ca5hjzRNGZZjSKUndxKSDlk/A164nPmQkpVk8c5f0NQ==';
 
 let container = document.getElementById('map');
+//let roadviewContainer = document.getElementById('roadview');
 let options = {
 	center: new kakao.maps.LatLng(latitude, longitude),
 	level: 3
 };
 
 document.addEventListener('DOMContentLoaded',function(){
-	makeMap();
+	getRoute();
 })
 function makeTourList(){
 	let tourList = document.querySelector("#tour-list");
-	let paramsDiv = document.querySelectorAll('.data');
+	let paramsDiv = document.querySelectorAll('.routeParams');
 	console.log(paramsDiv);
 	for(let idx=0; idx < paramsDiv.length;idx++){
 		console.log(paramsDiv[idx]);
@@ -51,15 +52,67 @@ function makeTourList(){
 	}
 }
 
-function makeMap(){
-//	let center_y = (data.summary.bound.min_y+data.summary.bound.max_y)/2; 
-//	let center_x = (data.summary.bound.min_x+data.summary.bound.max_x)/2;
-//	console.log(center_y+" , "+center_x);
+function getRoute(){
 	let paramsDiv = document.querySelectorAll('.data');
-	let linePath = [];
+	let baseUrl = '/route/findRoute?';
+	let paramUrl = '';
+	console.log(paramsDiv);
+	
+	for(let idx=0; idx < paramsDiv.length;idx++){
+		console.log(paramsDiv[idx]);
+		let params = {
+			title : paramsDiv[idx].dataset.title,
+			latitude : paramsDiv[idx].dataset.lat,
+			longitude : paramsDiv[idx].dataset.lng,
+		}
+		paramUrl = paramUrl + '&'+new URLSearchParams(params).toString();
+	}
+	fetch(baseUrl+paramUrl.substr(1))
+	.then(response => response.json())
+	.then(function(data){
+		console.log(data);
+		makeMap(data);
+		setData(data);
+	})
+}
+function setData(data){
+	console.log("Set Data");
+	console.log(data);
+	let totalDistance = Math.floor(data.summary.distance/1000);
+	let totalTime = Math.floor(data.summary.duration / 60);
+	console.log(totalDistance +" , "+totalTime);
+	//총 거리 저장
+	document.querySelector('#total-distance').innerText= totalDistance+"km";
+	//총 시간 저장
+	let timeContext = totalTime+"분";
+	if(totalTime >= 60){
+		timeContext =  Math.floor(totalTime/60)+"시간" + (totalTime%60)+"분"
+	}
+	document.querySelector('#total-time').innerText = timeContext;
+	
+	//택시 비용 저장
+	document.querySelector('#total-taxi').innerText = "택시비 약 "+data.summary.fare.taxi.toLocaleString()+"원";
+	//통행 비용 저장
+	document.querySelector('#total-toll').innerText = "통행비 약 "+data.summary.fare.toll.toLocaleString()+"원";
+	
+	let tourList = document.querySelectorAll(".data-container");
+	console.log(tourList);
+	for(let idx=1; idx < tourList.length;idx++){
+		console.log(tourList[idx].childNodes);
+		let distance = Math.floor(data.sections[idx-1].distance/1000).toLocaleString('ko-KR');
+		let time = Math.floor(data.sections[idx-1].duration / 60);
+		tourList[idx].childNodes[0].innerText = distance+"km";
+		tourList[idx].childNodes[1].innerText = `(${time}분)`;
+		console.log("파라미터 노드");
+	}
+}
+function makeMap(data){
+	let center_y = (data.summary.bound.min_y+data.summary.bound.max_y)/2; 
+	let center_x = (data.summary.bound.min_x+data.summary.bound.max_x)/2;
+	console.log(center_y+" , "+center_x);
 	
 	options = {
-			center: new kakao.maps.LatLng(126.570667,33.450701),
+			center: new kakao.maps.LatLng(center_y,center_x),
 //			center: new kakao.maps.LatLng(latitude,longitude),
 			level: 12,
 	};
@@ -67,13 +120,7 @@ function makeMap(){
 	map = new kakao.maps.Map(container, options);
 	
 	let linePath = [];
-	let positions =[];
-	
-	console.log(paramsDiv);
-	console.log(paramsDiv[0].getAttribute('data-title'));
-	
-	
-	linePath.push(new kakao.maps.LatLng(paramsDiv[0].getAttribute('data-lat'), data.summary.origin.x));
+	linePath.push(new kakao.maps.LatLng(data.summary.origin.y, data.summary.origin.x));
 	console.log(data.sections);
 	
 	for(let section in data.sections){
@@ -111,6 +158,7 @@ function makeMap(){
 ////
 ////	// 지도에 선을 표시합니다 
 	polyline.setMap(map); 
+	
 	
 	var positions =[];
 	let position = {
