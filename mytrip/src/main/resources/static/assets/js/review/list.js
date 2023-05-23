@@ -18,15 +18,17 @@ const getList = () => {
 	.then((reviewList) => {
 		let list = document.querySelector(".review-container");
 		
-		if(reviewList.length == 0) {
-			list.innerHTML = `<div>해당 조건에 맞는 관광지가 없습니다.</div>`;
-			return 0;
-		}
-		
 		if(isNew){
 			list.innerHTML = "";
 		}
 		
+		if(reviewList.length != 0) {
+			document.querySelector(".no-match").style.display = "none";
+		} else {
+			document.querySelector(".no-match").style.display = "block";
+			return 0;
+		}
+
 		for (let idx in reviewList){
 			let seq = reviewList[idx].seq;
 			let title = reviewList[idx].title;

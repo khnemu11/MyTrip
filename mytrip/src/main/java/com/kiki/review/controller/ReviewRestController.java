@@ -35,10 +35,10 @@ public class ReviewRestController {
 			for(int i=0; i<reviewList.size(); i++) {
 				System.out.println(reviewList.get(i));
 			}
-			System.out.println("성공!!shflj");
+			System.out.println("restController 성공!");
 			return new ResponseEntity<List<ReviewDto>>(reviewList, HttpStatus.OK);
 		} catch (Exception e) {
-			System.out.println("에러낫어용!");
+			System.out.println("restController 에러낫어용!");
 			e.printStackTrace();
 			return new ResponseEntity<String>("오류가 발생했습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}

@@ -32,7 +32,7 @@ public class ReviewController {
 	public String list(Model model) {
 		try {
 			List<ReviewDto> list = reviewService.getList();
-			System.out.println("꺄ㅑㅑㅑㅑㅑㅑㅑㅑ");
+			System.out.println("controller 성공");
 			for(int i=0; i<list.size(); i++) {
 				System.out.println(list.get(i));
 			}
@@ -42,6 +42,7 @@ public class ReviewController {
 
 		} catch(Exception e) {
 			e.printStackTrace();
+			System.out.println("controller 에러났어요");
 			return "error/error";
 		}
 		

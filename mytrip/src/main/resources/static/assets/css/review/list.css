@@ -145,3 +145,7 @@
 .sub-title-right{
 	cursor:pointer;
 }
+.no-match{
+	display: none;
+	font-weight: bolder;
+}

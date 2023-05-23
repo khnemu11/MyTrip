@@ -47,18 +47,21 @@
 				</div>
 			</div>
 			
-			<div class="review-container">
-				<c:forEach var="review" items="${reviewList}">	
-					<form class="review-card" action="/review/detail/${review.seq}" method="get" onclick="submit()">		
-						<c:if test="${not empty review.imageCode}">
-							<img class="review-img" src="/img/review/${review.imageCode}.png">
-						</c:if>					
-						<c:if test="${empty review.imageCode}">
-							<img class="review-img" src="/img/review/no-image.png">
-						</c:if>	
-						<span class="review-title">&nbsp; ${review.title}</span>
-					</form>
-				</c:forEach>
+			<div class="review-wrapper">
+				<div class="no-match">해당 조건에 맞는 관광지가 없습니다.</div>
+				<div class="review-container">
+					<c:forEach var="review" items="${reviewList}">	
+						<form class="review-card" action="/review/detail/${review.seq}" method="get" onclick="submit()">		
+							<c:if test="${not empty review.imageCode}">
+								<img class="review-img" src="/img/review/${review.imageCode}.png">
+							</c:if>					
+							<c:if test="${empty review.imageCode}">
+								<img class="review-img" src="/img/review/no-image.png">
+							</c:if>	
+							<span class="review-title">&nbsp; ${review.title}</span>
+						</form>
+					</c:forEach>
+				</div>
 			</div>
 			
 		</div>
