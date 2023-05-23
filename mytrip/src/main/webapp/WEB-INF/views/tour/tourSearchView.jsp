@@ -4,9 +4,8 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/views/util/head.jsp"%>
-<script src="/js/tour/tour.js" defer></script>
-<link rel="stylesheet" href="/css/tour/tour.css" />
-
+	<script src="/js/tour/tour.js" defer></script>
+	<link rel="stylesheet" href="/css/tour/tour.css" />
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/util/header.jsp"%>

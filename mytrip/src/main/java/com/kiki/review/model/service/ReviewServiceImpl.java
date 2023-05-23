@@ -1,5 +1,7 @@
 package com.kiki.review.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +20,13 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	@Override
 	public int writeReview(ReviewDto reviewForm) {
-		System.out.println();
+		System.out.println(reviewForm);
 		return reviewDao.writeReview(reviewForm);
+	}
+
+	@Override
+	public List<ReviewDto> getList() {
+		return reviewDao.getList();
 	}
 	
 }

@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `review` (
   `seq` INT NOT NULL AUTO_INCREMENT, -- 후기 seq
   `title` VARCHAR(30) NOT NULL, -- 제목
   `content` VARCHAR(500) NOT NULL, -- 내용
-  `user_id` VARCHAR(20) NOT NULL, -- 사용자 id
+  `user_name` VARCHAR(20) NOT NULL, -- 사용자 이름
   `created_date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP, -- 생성 날짜
   `modified_date` DATETIME NULL DEFAULT NULL, -- 수정 날짜
   `deleted_date` DATETIME NULL DEFAULT NULL, -- 삭제 날짜
@@ -62,7 +62,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `review_image` (
   `seq` INT NOT NULL, -- 사진 seq
   `review_seq` INT NOT NULL, -- 후기 seq
-  `image_name` VARCHAR(50) NOT NULL, -- 사진 이름
+  `image_name` VARCHAR(50) NOT NULL, -- 사진 이름 (사용자용)
+  `image_code` VARCHAR(100) NOT NULL, -- 사진 이름 (서버 저장용)
   PRIMARY KEY (`seq`)
   )
 ENGINE = InnoDB;
@@ -79,6 +80,7 @@ CREATE TABLE IF NOT EXISTS `plan` (
   `expected_distance` FLOAT, -- 예상 거리
   `taxi_cost` INT, -- 택시비
   `fuel_cost` INT, -- 주유비
+  `created_time` TIMESTAMP, -- 생성 날짜
   PRIMARY KEY (`seq`)
   )
 ENGINE = InnoDB;

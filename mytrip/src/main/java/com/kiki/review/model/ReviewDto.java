@@ -1,13 +1,16 @@
 package com.kiki.review.model;
 
+import java.util.List;
+
 public class ReviewDto {
 	private int seq;
 	private String title;
 	private String content;
-	private String userId;
+	private String userName;
 	private String createdDate;
 	private String modifiedDate;
 	private String deletedDate;
+	private String imageCode;
 	public int getSeq() {
 		return seq;
 	}
@@ -26,11 +29,11 @@ public class ReviewDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getUserId() {
-		return userId;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getCreatedDate() {
 		return createdDate;
@@ -50,11 +53,18 @@ public class ReviewDto {
 	public void setDeletedDate(String deletedDate) {
 		this.deletedDate = deletedDate;
 	}
+
+	public String getImageCode() {
+		return imageCode;
+	}
+	public void setImageCode(String imageCode) {
+		this.imageCode = imageCode;
+	}
 	@Override
 	public String toString() {
-		return "ReviewDto [seq=" + seq + ", title=" + title + ", content=" + content + ", userId=" + userId
-				+ ", createdDate=" + createdDate + ", modifedDate=" + modifiedDate + ", deletedDate=" + deletedDate
-				+ "]";
+		return "ReviewDto [seq=" + seq + ", title=" + title + ", content=" + content + ", userName=" + userName
+				+ ", createdDate=" + createdDate + ", modifiedDate=" + modifiedDate + ", deletedDate=" + deletedDate
+				+ ", imageCode=" + imageCode + "]";
 	}
-	
+
 }

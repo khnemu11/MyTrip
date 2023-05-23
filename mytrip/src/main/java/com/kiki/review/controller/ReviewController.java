@@ -1,9 +1,12 @@
 package com.kiki.review.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +29,22 @@ public class ReviewController {
 	}
 	
 	@GetMapping("/list")
-	public String list() {
-		return "review/list";
+	public String list(Model model) {
+		try {
+			List<ReviewDto> list = reviewService.getList();
+			System.out.println("꺄ㅑㅑㅑㅑㅑㅑㅑㅑ");
+			for(int i=0; i<list.size(); i++) {
+				System.out.println(list.get(i));
+			}
+			
+			model.addAttribute("reviewList", list);
+			return "review/list";
+
+		} catch(Exception e) {
+			e.printStackTrace();
+			return "error/error";
+		}
+		
 	}
 	
 	@GetMapping("/write")
@@ -38,19 +55,17 @@ public class ReviewController {
 	@PostMapping("/write")
 	public String writeReview(@ModelAttribute("reviewForm") ReviewDto reviewForm, HttpSession session) {
 		try {
-			String id = ((UserDto)session.getAttribute("userInfo")).getId();
-			reviewForm.setUserId(id);
+			String name = ((UserDto)session.getAttribute("userInfo")).getName();
+			reviewForm.setUserName(name);
+			System.out.println(reviewForm);
 			int valid = reviewService.writeReview(reviewForm);
 			if(valid > 0) {
-				System.out.println("성공");
 				return "review/detail";
 			} else {
-				System.out.println("실패");
 				return "review/write";
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
-			System.out.println("에러");
 			return "error/error";
 		}
 	}

@@ -25,7 +25,7 @@
 			<form action="/review/write" method="POST" >
 				<div class="sub-title">제목</div>
 				<input type = "text" class= "form-control title-form" id = "title" name = "title" placeholder="제목을 작성해주세요" required/>
-				<!-- 검색 기능 -->
+				<!-- 검색 기능 넣어주세용 -->
 				<div class="sub-title">사진 선택</div>
 				<!-- 여기에 파일업로드 넣어주세용 -->
 				<div class="sub-title">내용</div>

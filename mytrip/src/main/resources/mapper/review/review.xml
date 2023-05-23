@@ -4,22 +4,30 @@
 <!-- name space는 UserRepo의 fully qualified name으로 설정한다. -->
 
 <mapper namespace="com.kiki.review.model.dao.ReviewDao">
-<!-- 	<resultMap type="UserDto" id="user">
-		<result column="id" property="id" />
-		<result column="password" property="password" />
-		<result column="name" property="name" />
-		<result column="email" property="email" />
-		<result column="phone_no" property="phoneNo" />
-		<result column="intro" property="intro" />
-		<result column="join_date" property="joinDate" />
-		<result column="modified_date" property="modifiedDate" />
-		<result column="delete_date" property="deleteDate" />
-	</resultMap> -->
+	<resultMap type="ReviewDto" id="reviewList">
+		<id column="seq" property="seq" />
+		<id column="title" property="title" />
+		<id column="content" property="content" />
+		<id column="user_name" property="userName" />
+		<id column="created_date" property="createdDate" />
+		<id column="modified_date" property="modifiedDate" />
+		<id column="deleted_date" property="deletedDate" />
+		<id column="image_code" property="imageCode" />
+	</resultMap>
 
 
 	<!-- id는 repo클래스의 메소드 이름과 일치시킨다. -->
 	<insert id="writeReview" parameterType="ReviewDto">
-		INSERT INTO review (title, content, user_id, modified_date, deleted_date)
-		VALUES (#{title}, #{content}, #{userId}, #{modifiedDate}, #{deletedDate})
+		INSERT INTO review (title, content, user_name, modified_date, deleted_date)
+		VALUES (#{title}, #{content}, #{userName}, #{modifiedDate}, #{deletedDate})
 	</insert>
+	
+	<select id="getList" resultMap="reviewList">
+		SELECT r.seq, r.title, r.content, r.user_name, r.created_date, r.modified_date, r.deleted_date, i.image_code
+		FROM review AS r
+		LEFT JOIN review_image As i
+		ON r.seq = i.review_seq
+		GROUP BY r.seq
+		ORDER BY r.seq
+	</select>
 </mapper>
