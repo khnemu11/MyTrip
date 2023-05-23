@@ -43,7 +43,6 @@ public class MyPageRestController {
 					return ResponseEntity.ok("회원 탈퇴가 완료되었습니다.");
 				}
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<String>("오류가 발생했습니다", HttpStatus.INTERNAL_SERVER_ERROR);

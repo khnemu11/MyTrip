@@ -13,4 +13,6 @@ public interface ReviewDao {
 
 	public List<ReviewDto> getList();
 
+	public List<ReviewDto> searchReview(String keyword);
+
 }

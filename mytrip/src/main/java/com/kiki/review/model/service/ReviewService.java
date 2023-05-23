@@ -10,4 +10,7 @@ public interface ReviewService {
 
 	List<ReviewDto> getList();
 
+	List<ReviewDto> searchReview(String keyword);
+
+
 }

@@ -28,5 +28,10 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<ReviewDto> getList() {
 		return reviewDao.getList();
 	}
-	
+
+	@Override
+	public List<ReviewDto> searchReview(String keyword) {
+		return reviewDao.searchReview(keyword);
+	}
+
 }

@@ -23,11 +23,23 @@
 			</div>
 			
 			<!-- 검색바 요기에 넣어주세여어엉 -->
-			
-			<div class="btn-wrapper">
-				<button type="button" class="btn" onclick="window.location.href='/review/write';">후기작성</button>
+			<div class="function-container">
+				<div class="search-container" id="search">
+					<div id="search-bar">
+					<img src="/img/utill/only-logo.png" class="search-logo" />
+					<p class="divider">|</p>
+					<input class="form-search" id="search" type="text"
+						placeholder="여행지 검색">
+					<button type="button" id="btn-search">
+						<i class="fa-solid fa-magnifying-glass" style="color: #3F80F8;"></i>
+					</button>
+					</div>
+				</div>
+				<div class="btn-wrapper">
+					<button type="button" class="btn" onclick="window.location.href='/review/write';">후기작성</button>
+				</div>
 			</div>
-
+			
 			<div class="review-container">
 				<c:forEach var="review" items="${reviewList}">	
 					<form class="review-card" action="/review/detail/${review.seq}" method="get" onclick="submit()">		
