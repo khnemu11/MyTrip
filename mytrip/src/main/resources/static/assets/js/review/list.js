@@ -1,3 +1,5 @@
+let pageNo = 1;
+
 document.addEventListener('DOMContentLoaded',function(){
 	
 })

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -71,8 +72,9 @@ public class ReviewController {
 		}
 	}
 	
-	@GetMapping("/detail")
-	public String detail() {
+	@GetMapping("/detail/{seq}")
+	public String detail(@PathVariable("seq") int seq) {
+		// 내가 혼자 할게
 		return "review/detail";
 	}
 }
