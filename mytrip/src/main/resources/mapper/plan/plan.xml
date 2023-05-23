@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kiki.route.model.dao.PlanDao">
+	<insert id="insertPlan" parameterType="PlanDto">
+		 INSERT INTO plan (title,user_id,content,expected_time,expected_distance,taxi_cost,fuel_cost)
+		  VALUES ( #{title} , #{userId} , #{content} ,#{expectedTime}, #{expectedDistance} , #{taxiCost},#{fuelCost} )
+	</insert>
+	<select id="selectPlanSeq" parameterType="PlanDto" resultType="int">
+		 SELECT seq FROM plan WHERE title = #{title} AND user_id = #{userId} ORDER BY created_time DESC LIMIT 1; 
+	</select>
+	<insert id="insertPlanOrder" parameterType="PlanOrderDto">
+		 INSERT INTO plan_order (plan_seq,`order`,tour_seq,distance,time)
+		  VALUES ( #{planSeq} , #{order},#{tourSeq},#{distance},#{time})
+	</insert>
+</mapper>

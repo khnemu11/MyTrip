@@ -13,8 +13,8 @@ body{
     width:100%;
 }
 #map{
-    height:60vh;
-    max-height:600px;
+    height:70vh;
+    max-height:1000px;
 }
 
 .title-container{
@@ -81,3 +81,74 @@ body{
     opacity:0.7;
     color:white;
 }
+
+#tour-list{
+	display:flex;
+	flex-direction:column;
+}
+#tour-list span{
+	display:flex;
+	align-items:center;
+	margin-left:5px;
+	margin-bottom:5px;
+}
+.tour-title{
+	margin-left:20px;
+	font-weight:bold;
+	width:100%;
+}
+.tour-left{
+	width:50px;
+	display:flex;
+	align-items:center;
+}
+.data-container{
+	font-size:12px;
+	font-weight:600;
+	margin-left:10px;
+	margin-bottom:0px;
+	display:flex;
+	justify-content:flex-end;
+	
+}
+.distance-container{
+	width:100%;
+	display:flex;
+	justify-content:flex-end;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+p{
+	margin:0px;
+}
+.tour-right{
+	width:100%;
+	display:flex;
+	justify-content:space-between;
+}
+span .circle{
+	background-color:#808080;
+	width:8px;
+	height:8px;
+	border-radius:20px;
+	margin-left:3px !important;
+	margin-top:5px !important;
+}
+.duration{
+	margin-left:5px;
+}
+
+#predict-time{
+	margin-top:15px;
+}
+.sub-sub-title{
+	font-size:20px;
+	font-weight:bold;
+	margin-right:5px;
+	
+}
+.sub-context{
+	font-size:16px;
+	color:#777777;
+}
+

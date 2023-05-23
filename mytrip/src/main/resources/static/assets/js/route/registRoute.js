@@ -13,7 +13,45 @@ let options = {
 
 document.addEventListener('DOMContentLoaded',function(){
 	getRoute();
+	makeTourList();
 })
+function makeTourList(){
+	let tourList = document.querySelector("#tour-list");
+	let paramsDiv = document.querySelectorAll('.routeParams');
+	console.log(paramsDiv);
+	for(let idx=0; idx < paramsDiv.length;idx++){
+		console.log(paramsDiv[idx]);
+		let params = {
+			title : paramsDiv[idx].getAttribute('data-title'),
+			latitude : paramsDiv[idx].getAttribute('data-latitude'),
+			longitude : paramsDiv[idx].getAttribute('data-longitude'),
+		}
+		let iconContext = '';
+		if(idx == 0){
+			iconContext = '<i class="fa-sharp fa-solid fa-location-dot"></i>';
+		}else if(idx == paramsDiv.length-1){
+			iconContext = '<i class="fa-solid fa-location-pin"></i>';
+		}else{
+			iconContext = '<span class="circle"></span>';
+		}
+		
+		let context = `
+			<span class="select-tour" id="${params.title}">	
+				<span class="tour-left">${iconContext}</span>
+				<span class="tour-right row">
+					<div class="col-md-7 col-sm-7 col-xs-7">
+						<span class="tour-title">${params.title}</span>
+					</div>
+					<div class="col-md-5 col-sm-5 col-xs-5">
+						<span class="data-container"><p class="distance"></p><p class="duration"></p></span>
+					</div>
+				</span>
+			</span>
+			`;
+		console.log(context);
+		tourList.insertAdjacentHTML('beforeend',context);
+	}
+}
 
 function getRoute(){
 	let paramsDiv = document.querySelectorAll('.routeParams');
@@ -34,7 +72,49 @@ function getRoute(){
 	.then(function(data){
 		console.log(data);
 		makeMap(data);
+		setData(data);
 	})
+}
+function setData(data){
+	console.log("Set Data");
+	console.log(data);
+	let totalDistance = Math.floor(data.summary.distance/1000);
+	let totalTime = Math.floor(data.summary.duration / 60);
+	console.log(totalDistance +" , "+totalTime);
+	//총 거리 저장
+	document.querySelector('#expectedDistance').value= totalDistance;
+	document.querySelector('#total-distance').innerText= totalDistance+"km";
+	
+	//총 시간 저장
+	document.querySelector('#expectedTime').value = totalTime;
+	
+	let timeContext = totalTime+"분";
+	if(totalTime >= 60){
+		timeContext =  Math.floor(totalTime/60)+"시간" + (totalTime%60)+"분"
+	}
+	document.querySelector('#total-time').innerText = timeContext;
+	
+	//택시 비용 저장
+	document.querySelector('#taxiCost').value = data.summary.fare.taxi;
+	document.querySelector('#total-taxi').innerText = "택시비 약 "+data.summary.fare.taxi.toLocaleString()+"원";
+	//통행 비용 저장
+	document.querySelector('#fuelCost').value= data.summary.fare.toll;
+	document.querySelector('#total-toll').innerText = "통행비 약 "+data.summary.fare.toll.toLocaleString()+"원";
+	
+	let tourList = document.querySelectorAll(".data-container");
+	let paramList = document.querySelectorAll(".routeParams");
+	console.log(paramList);
+	for(let idx=1; idx < tourList.length;idx++){
+		console.log(tourList[idx].childNodes);
+		let distance = Math.floor(data.sections[idx-1].distance/1000).toLocaleString('ko-KR');
+		let time = Math.floor(data.sections[idx-1].duration / 60);
+		tourList[idx].childNodes[0].innerText = distance+"km";
+		tourList[idx].childNodes[1].innerText = `(${time}분)`;
+		console.log("파라미터 노드");
+		paramList[idx].querySelector('[name = tourDistance]').value = distance;
+		paramList[idx].querySelector('[name = tourTime]').value = time;
+		
+	}
 }
 function makeMap(data){
 	let center_y = (data.summary.bound.min_y+data.summary.bound.max_y)/2; 

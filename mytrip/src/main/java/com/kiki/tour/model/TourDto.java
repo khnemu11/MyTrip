@@ -10,7 +10,21 @@ public class TourDto {
 	private float latitude;
 	private float longitude;
 	private int hits;
+	private int distance;
+	private int time;
 	
+	public int getDistance() {
+		return distance;
+	}
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+	public int getTime() {
+		return time;
+	}
+	public void setTime(int time) {
+		this.time = time;
+	}
 	public int getSeq() {
 		return seq;
 	}
@@ -69,6 +83,7 @@ public class TourDto {
 	public String toString() {
 		return "TourDto [seq=" + seq + ", title=" + title + ", typeNo=" + typeNo + ", typeName=" + typeName
 				+ ", telephone=" + telephone + ", address=" + address + ", latitude=" + latitude + ", longitude="
-				+ longitude + ", hits=" + hits + "]";
+				+ longitude + ", hits=" + hits + ", distance=" + distance + ", time=" + time + "]";
 	}
+	
 }
