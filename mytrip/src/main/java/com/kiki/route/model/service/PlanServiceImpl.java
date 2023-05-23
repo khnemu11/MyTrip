@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kiki.route.model.PlanDto;
 import com.kiki.route.model.PlanOrderDto;
+import com.kiki.route.model.SearchDto;
 import com.kiki.route.model.dao.PlanDao;
 import com.kiki.tour.model.TourDto;
 import com.kiki.tour.model.dao.TourDao;
@@ -53,5 +54,27 @@ public class PlanServiceImpl implements PlanService {
 			return 0;
 		}
 		return 1;
+	}
+
+	@Override
+	public List<PlanDto> selectPlanList(SearchDto searchDto) {
+		searchDto.setOffset((searchDto.getPageNo()-1)*searchDto.getPageSize());
+		
+		return planDao.selectPlanList(searchDto);
+	}
+
+	@Override
+	public int countPlanList(SearchDto searchDto) {
+		return planDao.countPlanList(searchDto);
+	}
+
+	@Override
+	public PlanDto selectPlan(int seq) {
+		return planDao.selectPlan(seq);
+	}
+
+	@Override
+	public List<PlanOrderDto> selectPlanOrderList(int seq) {
+		return planDao.selectPlanOrderList(seq);
 	}
 }

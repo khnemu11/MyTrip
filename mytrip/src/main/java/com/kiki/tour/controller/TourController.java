@@ -27,7 +27,7 @@ public class TourController {
 	TourService tourService;
 	@Value("${youtube.key}")
 	private String youtubeKey;
-
+	
 	@Autowired
 	public TourController(TourService tourService) {
 		super();

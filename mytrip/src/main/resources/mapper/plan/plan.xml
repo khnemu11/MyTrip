@@ -3,12 +3,64 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.kiki.route.model.dao.PlanDao">
+	<resultMap type="PlanDto" id="plan">
+		<result column="seq" property="seq" />
+		<result column="user_id" property="userId" />
+		<result column="title" property="title" />
+		<result column="expected_time" property="expectedTime" />
+		<result column="expected_distance" property="expectedDistance" />
+		<result column="taxi_cost" property="taxiCost" />
+		<result column="fuel_cost" property="fuelCost" />
+		<result column="created_time" property="createdTime" />
+	</resultMap>
+	<resultMap type="PlanOrderDto" id="planOrder">
+		<result column="seq" property="seq" />
+		<result column="order" property="order" />
+		<result column="distance" property="distance" />
+		<result column="time" property="time" />
+		<association property="tourDto"  javaType="TourDto" >
+             <result property="title"  column="title" />
+             <result property="telephone"  column="telephone" />
+             <result property="address"  column="address" />
+             <result property="latitude"  column="latitude" />
+             <result property="longitude"  column="longitude" />
+        </association>
+	</resultMap>
 	<insert id="insertPlan" parameterType="PlanDto">
 		 INSERT INTO plan (title,user_id,content,expected_time,expected_distance,taxi_cost,fuel_cost)
 		  VALUES ( #{title} , #{userId} , #{content} ,#{expectedTime}, #{expectedDistance} , #{taxiCost},#{fuelCost} )
 	</insert>
 	<select id="selectPlanSeq" parameterType="PlanDto" resultType="int">
-		 SELECT seq FROM plan WHERE title = #{title} AND user_id = #{userId} ORDER BY created_time DESC LIMIT 1; 
+		 SELECT seq FROM plan WHERE title = #{title} AND user_id = #{userId} 
+		 ORDER BY created_time DESC LIMIT 1
+	</select>
+	<select id="selectPlanList" parameterType="SearchDto" resultMap="plan">
+		 SELECT * FROM plan 
+		 WHERE user_id = #{userId}
+		<if test='keyword !=null'>
+		AND keyword like CONCAT('%',#{keyword},'%')		
+		</if> 
+		 ORDER BY created_time DESC 
+		 LIMIT #{pageSize} OFFSET #{offset}
+	</select>
+	<select id="selectPlan" parameterType="int" resultMap="plan">
+		 SELECT * FROM plan 
+		 WHERE seq = ${seq}
+	</select>
+	<select id="selectPlanOrderList" parameterType="int" resultMap="planOrder">
+		SELECT plan_order.seq ,`order`,distance,`time`,title,telephone,address,latitude,longitude
+		FROM plan_order,tour
+		WHERE plan_seq = 294 AND plan_order.tour_seq = tour.seq
+		order by `order`;
+	</select>
+	<select id="countPlanList" parameterType="SearchDto" resultType="int">
+		 SELECT count(*) FROM plan 
+		 WHERE user_id = #{userId}
+		<if test='keyword !=null'>
+		AND keyword = #{keyword}		
+		</if> 
+		 ORDER BY created_time DESC 
+		 LIMIT #{pageSize} OFFSET #{offset}
 	</select>
 	<insert id="insertPlanOrder" parameterType="PlanOrderDto">
 		 INSERT INTO plan_order (plan_seq,`order`,tour_seq,distance,time)

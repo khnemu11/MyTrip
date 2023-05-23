@@ -25,9 +25,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kiki.route.model.PlanDto;
+import com.kiki.route.model.PlanOrderDto;
+import com.kiki.route.model.SearchDto;
 import com.kiki.route.model.service.PlanService;
 import com.kiki.tour.model.TourDto;
 import com.kiki.user.model.UserDto;
@@ -36,6 +39,7 @@ import com.kiki.user.model.UserDto;
 @RequestMapping("route")
 public class RouteController {
 	PlanService planService;
+
 	@Value("${youtube.key}")
 	private String youtubeKey;
 
@@ -44,22 +48,56 @@ public class RouteController {
 		super();
 		this.planService = planService;
 	}
+	@GetMapping("/planDetail")
+	public String planDetail(HttpServletRequest request, Model model, @RequestParam(name = "seq") int seq) {
+		System.out.println(seq);
+		
+		PlanDto planDto = planService.selectPlan(seq);
+		System.out.println(planDto);
+		List<PlanOrderDto> planOrderDtoList = planService.selectPlanOrderList(seq);
+		System.out.println(planOrderDtoList);
+		
+		model.addAttribute("plan", planDto);
+		model.addAttribute("list", planOrderDtoList);
+		
+		return "/route/planDetailView";
+	}
+	@GetMapping("/listPlan")
+	public String listPlan(HttpServletRequest request,HttpSession session, Model model, SearchDto searchDto) {
+		System.out.println("경로 리스트 시작");
+		
+		if (searchDto.getPageNo() == 0) {
+			System.out.println("비어있음!");
+			searchDto.setPageNo(1);
+		}
+		
+		System.out.println(searchDto);
+		searchDto.setUserId(((UserDto)session.getAttribute("userInfo")).getId());
+		List<PlanDto> list = planService.selectPlanList(searchDto);
+		System.out.println(list);
+		int totalCount = planService.countPlanList(searchDto);
+		System.out.println(totalCount);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pagination", searchDto);
+
+		return "route/listPlanView";
+	}
 
 	@GetMapping("/findRouteView")
 	public String findRouteView(HttpServletRequest request, Model model) {
 		System.out.println("경로 검색 페이지 시작");
-
 		return "route/findRouteView";
 	}
 
 	@GetMapping("/registRoute")
-	public String registRoute(HttpServletRequest request, Model model,HttpSession session) {
+	public String registRoute(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("경로 등록 시작");
 		Map<String, String[]> parameterMap = request.getParameterMap();
 		for (String key : request.getParameterMap().keySet()) {
-			System.out.println(key+" : "+Arrays.toString(request.getParameterMap().get(key)));
+			System.out.println(key + " : " + Arrays.toString(request.getParameterMap().get(key)));
 		}
-		
+
 		PlanDto planDto = new PlanDto();
 		planDto.setContent(parameterMap.get("content")[0]);
 		planDto.setTitle(parameterMap.get("title")[0]);
@@ -67,12 +105,12 @@ public class RouteController {
 		planDto.setExpectedTime(parameterMap.get("expectedTime")[0]);
 		planDto.setTaxiCost(Integer.valueOf(parameterMap.get("taxiCost")[0]));
 		planDto.setFuelCost(Integer.valueOf(parameterMap.get("fuelCost")[0]));
-//		planDto.setUserId(((UserDto)session.getAttribute("userInfo")).getId());
-		planDto.setUserId("test");
-		
+		planDto.setUserId(((UserDto) session.getAttribute("userInfo")).getId());
+//		planDto.setUserId("test");
+
 		List<TourDto> tourList = new ArrayList<>();
-		
-		for(int i=0;i<parameterMap.get("tourTitle").length;i++) {
+
+		for (int i = 0; i < parameterMap.get("tourTitle").length; i++) {
 			TourDto tourDto = new TourDto();
 			tourDto.setLatitude(Float.parseFloat(parameterMap.get("tourLatitude")[i]));
 			tourDto.setLongitude(Float.parseFloat(parameterMap.get("tourlongitude")[i]));
@@ -81,11 +119,11 @@ public class RouteController {
 			tourDto.setTelephone(parameterMap.get("tourTel")[i]);
 			tourDto.setDistance(Integer.valueOf(parameterMap.get("tourDistance")[i]));
 			tourDto.setTime(Integer.valueOf(parameterMap.get("tourTime")[i]));
-			tourList.add(tourDto);		
+			tourList.add(tourDto);
 		}
-		
+
 		planService.insertRoute(planDto, tourList);
-		
+
 		return "error/error";
 	}
 
@@ -167,11 +205,11 @@ public class RouteController {
 			printWriter.write(jsonData.toString());
 			System.out.println(jsonData.toString());
 			printWriter.flush();
+
 			BufferedReader br = null;
 			int status = http.getResponseCode();
 			if (status == HttpURLConnection.HTTP_OK) {
 				System.out.println("카카오 길찾기 수신 성공!");
-
 				br = new BufferedReader(new InputStreamReader(http.getInputStream(), "UTF-8"));
 			} else {
 				System.out.println("카카오 길찾기 수신 실패!");

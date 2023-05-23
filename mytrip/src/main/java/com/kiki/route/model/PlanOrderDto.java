@@ -1,5 +1,7 @@
 package com.kiki.route.model;
 
+import com.kiki.tour.model.TourDto;
+
 public class PlanOrderDto{
 	private int seq;
 	private int planSeq;
@@ -7,7 +9,14 @@ public class PlanOrderDto{
 	private int tourSeq;
 	private int distance;
 	private int time;
+	private TourDto tourDto;
 	
+	public TourDto getTourDto() {
+		return tourDto;
+	}
+	public void setTourDto(TourDto tourDto) {
+		this.tourDto = tourDto;
+	}
 	public int getDistance() {
 		return distance;
 	}
@@ -47,6 +56,6 @@ public class PlanOrderDto{
 	@Override
 	public String toString() {
 		return "PlanOrderDto [seq=" + seq + ", planSeq=" + planSeq + ", order=" + order + ", tourSeq=" + tourSeq
-				+ ", distance=" + distance + ", time=" + time + "]";
+				+ ", distance=" + distance + ", time=" + time + ", tourDto=" + tourDto + "]";
 	}
 }
