@@ -1,0 +1,32 @@
+.sub-title{
+	padding-left:15px;	
+}
+.sub-title-label, .sub-title{
+	font-size:28px;
+	font-weight:bold;
+}
+.sub-title-wrapper{
+	padding-top:80px;
+	justify-content:space-between;
+}
+.sub-title-container{
+	width:100%;
+	display:flex;
+	justify-content:space-between;
+	margin-bottom:20px;
+}
+.sub-title-left{
+	font-size:32px;
+}
+.sub-title-right{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	font-size:18px;
+	color:#3F80F8;
+	font-weight:bold;
+}
+.back-text{
+	padding-left:5px;
+	cursor: pointer;
+}

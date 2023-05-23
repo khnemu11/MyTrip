@@ -28,15 +28,17 @@
 }
 .back-text{
 	padding-left:5px;
+	cursor: pointer;
 }
 .btn-wrapper{
 	display:flex;
 	justify-content:end;
 	margin-top:20px;
-	margin-bottom:100px;
 }
 .btn{
 	background-color:#39CCCC;
+	width: 140px;
+	height: 90% 
 }
 .btn:hover{
 	background-color:#39CCCC;
@@ -55,7 +57,6 @@
 .review-card{
 	position:relative;
 	width:100%;
-	cursor:pointer;
 }
 .review-title:hover{
 	opacity:0.9;
@@ -91,7 +92,7 @@
 }
 #search-bar{
 	display:flex;
-	width:100%;
+	width:50%;
 	align-items:center;
 	border:2px solid #3F80F8;
 	border-radius:15px;
@@ -134,9 +135,13 @@
 .search-container{
 	display:flex;
 	flex-direction:column;
-	align-items:center;
 	width:100%;
 }
 .function-container{
 	display:flex;
+	justify-content: space-between;
+	margin-bottom: 50px;	
+}
+.sub-title-right{
+	cursor:pointer;
 }

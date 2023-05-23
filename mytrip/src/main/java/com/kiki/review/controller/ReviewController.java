@@ -69,4 +69,9 @@ public class ReviewController {
 			return "error/error";
 		}
 	}
+	
+	@GetMapping("/detail")
+	public String detail() {
+		return "review/detail";
+	}
 }
