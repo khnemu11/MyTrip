@@ -67,4 +67,14 @@ public class PlanServiceImpl implements PlanService {
 	public int countPlanList(SearchDto searchDto) {
 		return planDao.countPlanList(searchDto);
 	}
+
+	@Override
+	public PlanDto selectPlan(int seq) {
+		return planDao.selectPlan(seq);
+	}
+
+	@Override
+	public List<PlanOrderDto> selectPlanOrderList(int seq) {
+		return planDao.selectPlanOrderList(seq);
+	}
 }

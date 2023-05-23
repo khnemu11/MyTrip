@@ -25,9 +25,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kiki.route.model.PlanDto;
+import com.kiki.route.model.PlanOrderDto;
 import com.kiki.route.model.SearchDto;
 import com.kiki.route.model.service.PlanService;
 import com.kiki.tour.model.TourDto;
@@ -46,7 +48,20 @@ public class RouteController {
 		super();
 		this.planService = planService;
 	}
-
+	@GetMapping("/planDetail")
+	public String planDetail(HttpServletRequest request, Model model, @RequestParam(name = "seq") int seq) {
+		System.out.println(seq);
+		
+		PlanDto planDto = planService.selectPlan(seq);
+		System.out.println(planDto);
+		List<PlanOrderDto> planOrderDtoList = planService.selectPlanOrderList(seq);
+		System.out.println(planOrderDtoList);
+		
+		model.addAttribute("plan", planDto);
+		model.addAttribute("list", planOrderDtoList);
+		
+		return "/route/planDetailView";
+	}
 	@GetMapping("/listPlan")
 	public String listPlan(HttpServletRequest request,HttpSession session, Model model, SearchDto searchDto) {
 		System.out.println("경로 리스트 시작");

@@ -34,11 +34,11 @@
 				  </thead>
 				  <tbody>
 				  <c:forEach items="${list}" var="item" varStatus="idx" begin="0" >
-				  	 <tr>
-				      <td class="no">${idx.count}</td>
-				      <td class="title">${item.title}</td>
-				      <td class="create">${item.createdTime}</td>
-				    </tr>
+					  	<tr>
+				  	 		<td class="no">${idx.count}</td>
+						    <td class="title"><a href="/route/planDetail?seq=${item.seq}">${item.title}</a></td>
+						    <td class="create">${item.createdTime}</td>
+				    	</tr>
 				  </c:forEach>
 				  </tbody>
 				</table>
