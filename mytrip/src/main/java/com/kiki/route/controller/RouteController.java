@@ -9,8 +9,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -25,54 +27,99 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kiki.route.model.PlanDto;
+import com.kiki.route.model.service.PlanService;
 import com.kiki.tour.model.TourDto;
-import com.kiki.tour.model.service.TourService;
+import com.kiki.user.model.UserDto;
 
 @Controller
 @RequestMapping("route")
 public class RouteController {
-	TourService tourService;
+	PlanService planService;
 	@Value("${youtube.key}")
 	private String youtubeKey;
 
 	@Autowired
-	public RouteController(TourService tourService) {
+	public RouteController(PlanService planService) {
 		super();
-		this.tourService = tourService;
+		this.planService = planService;
 	}
 
 	@GetMapping("/findRouteView")
 	public String findRouteView(HttpServletRequest request, Model model) {
 		System.out.println("경로 검색 페이지 시작");
-		
+
 		return "route/findRouteView";
 	}
+
+	@GetMapping("/registRoute")
+	public String registRoute(HttpServletRequest request, Model model,HttpSession session) {
+		System.out.println("경로 등록 시작");
+		Map<String, String[]> parameterMap = request.getParameterMap();
+		for (String key : request.getParameterMap().keySet()) {
+			System.out.println(key+" : "+Arrays.toString(request.getParameterMap().get(key)));
+		}
+		
+		PlanDto planDto = new PlanDto();
+		planDto.setContent(parameterMap.get("content")[0]);
+		planDto.setTitle(parameterMap.get("title")[0]);
+		planDto.setExpectedDistance(parameterMap.get("expectedDistance")[0]);
+		planDto.setExpectedTime(parameterMap.get("expectedTime")[0]);
+		planDto.setTaxiCost(Integer.valueOf(parameterMap.get("taxiCost")[0]));
+		planDto.setFuelCost(Integer.valueOf(parameterMap.get("fuelCost")[0]));
+//		planDto.setUserId(((UserDto)session.getAttribute("userInfo")).getId());
+		planDto.setUserId("test");
+		
+		List<TourDto> tourList = new ArrayList<>();
+		
+		for(int i=0;i<parameterMap.get("tourTitle").length;i++) {
+			TourDto tourDto = new TourDto();
+			tourDto.setLatitude(Float.parseFloat(parameterMap.get("tourLatitude")[i]));
+			tourDto.setLongitude(Float.parseFloat(parameterMap.get("tourlongitude")[i]));
+			tourDto.setTitle(parameterMap.get("tourTitle")[i]);
+			tourDto.setAddress(parameterMap.get("tourAddress")[i]);
+			tourDto.setTelephone(parameterMap.get("tourTel")[i]);
+			tourDto.setDistance(Integer.valueOf(parameterMap.get("tourDistance")[i]));
+			tourDto.setTime(Integer.valueOf(parameterMap.get("tourTime")[i]));
+			tourList.add(tourDto);		
+		}
+		
+		planService.insertRoute(planDto, tourList);
+		
+		return "error/error";
+	}
+
 	@GetMapping("/registRouteView")
 	public String registRouteView(HttpServletRequest request, Model model) {
 		System.out.println("경로 상세 페이지 시작");
 		String titleArr[] = request.getParameterValues("title");
 		String latitudeArr[] = request.getParameterValues("latitude");
 		String longitudeArr[] = request.getParameterValues("longitude");
-		
-		List<TourDto> tourList= new ArrayList<>();
-		
-		for(int i=0;i<titleArr.length;i++) {
+		String addressArr[] = request.getParameterValues("address");
+		String telArr[] = request.getParameterValues("tel");
+
+		List<TourDto> tourList = new ArrayList<>();
+
+		for (int i = 0; i < titleArr.length; i++) {
 			TourDto tour = new TourDto();
-			
+
 			tour.setTitle(titleArr[i]);
 			tour.setLatitude(Float.parseFloat(latitudeArr[i]));
 			tour.setLongitude(Float.parseFloat(longitudeArr[i]));
+			tour.setAddress(addressArr[i]);
+			tour.setTelephone(telArr[i]);
 			System.out.println(tour);
 			tourList.add(tour);
 		}
-		
-		model.addAttribute("tourList",tourList);
-		
+
+		model.addAttribute("tourList", tourList);
+
 		return "route/registRouteView";
 	}
+
 	@GetMapping("/findRoute")
 	@ResponseBody
-	public ResponseEntity<?> registRoute(HttpServletRequest request, Model model) {
+	public ResponseEntity<?> findRoute(HttpServletRequest request, Model model) {
 		System.out.println("경로 탐색 시작");
 		String titleArr[] = request.getParameterValues("title");
 		String latitudeArr[] = request.getParameterValues("latitude");

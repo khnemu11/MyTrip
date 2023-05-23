@@ -7,12 +7,14 @@
 	<select id="selectTour" parameterType="TourDto" resultType="TourDto">
 		SELECT *
 		FROM tour
-		WHERE title = #{title}
+		WHERE title = #{title} limit 1;
 	</select>
 	
 	<insert id="insertTour" parameterType="TourDto">
-		
+		 INSERT INTO tour (title, address, latitude, longitude, telephone)
+		 VALUES ( #{title} , #{address} , #{latitude} , #{longitude} , #{telephone} )
 	</insert>
+	
 	<insert id="updateTourHit" parameterType="TourDto">
 		 INSERT INTO tour (title,address,latitude,longitude,telephone)
 		 VALUES 

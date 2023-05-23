@@ -296,3 +296,5 @@ p{
 .loading-spinner{
 	overflow:hidden;
 }
+.tour-delete:hover{
+	cursor:pointer;

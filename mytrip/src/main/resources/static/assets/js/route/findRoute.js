@@ -16,6 +16,7 @@ let options = {
 	level: 3
 };
 
+let markers=[];
 let selected = [];
 
 document.addEventListener('DOMContentLoaded',function(){
@@ -38,12 +39,13 @@ function makeMap(lat,lng){
 	};
 	map = new kakao.maps.Map(container, options);
 	
-	var markerPosition  = new kakao.maps.LatLng(lat,lng, lng); 
+	var markerPosition  = new kakao.maps.LatLng(lat,lng); 
 
 	// 마커를 생성합니다
 	var marker = new kakao.maps.Marker({
 	    position: markerPosition
 	});
+	markers.push(marker);
 	var mapTypeControl = new kakao.maps.MapTypeControl();
 
 	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
@@ -221,9 +223,12 @@ async function makeTourList(isNew){
 				if(img == ""){
 					img = "/img/tour/no-image.png";
 				}
+				if(tel==""){
+					tel = "-"
+				}
 	
 				var context = `
-					<div class="card row">
+					<div class="card row" onclick="movemap('${longitude}','${latitude}')">
 					<div class="col-md-6 col-sm-6 col-xs-6">
 						<img src="${img}"/>
 					</div>
@@ -241,7 +246,7 @@ async function makeTourList(isNew){
 					</div>
 					<div class="card-button">
 						<button type="button" class="btn btn-left" onclick="window.location.href='${url}'">상세정보</button>
-						<button type="button" class="btn btn-right" onclick="selectRoute('${title}',${longitude},${latitude})">경로추가</button>
+						<button type="button" class="btn btn-right" onclick="selectRoute('${title}','${longitude}','${latitude}','${addr}','${tel}')">경로추가</button>
 					</div>
 					</div>`
 				list.insertAdjacentHTML('beforeend',context);
@@ -257,7 +262,7 @@ async function makeTourList(isNew){
 		});
 }
 
-function selectRoute(title,longitude,latitude){
+function selectRoute(title,longitude,latitude,address,tel){
 	data={
 		title : title,
 		longitude : longitude,
@@ -279,10 +284,12 @@ function selectRoute(title,longitude,latitude){
 		}
 	}
 	var context = 
-		`<span class="select-tour" id="${title}">	
+		`<span class="select-tour" id="${title}" onclick="movemap('${longitude}','${latitude}')">	
 			<input type="hidden" name="title" value="${title}"/>
 			<input type="hidden" name="longitude" value="${longitude}"/>
 			<input type="hidden" name="latitude" value="${latitude}"/>
+			<input type="hidden" name="address" value="${address}"/>
+			<input type="hidden" name="tel" value="${tel}"/>
 			<span class="tour-left"><i class="fa-sharp fa-solid fa-location-dot"></i></span>
 			<span class="tour-right">
 				<span class="tour-title">${title}</span>
@@ -317,7 +324,6 @@ document.querySelector('#tour-list-wrapper').addEventListener('scroll' , async f
 	}
 })
 
-document.querySelector('#tour-list-wrapper').addEventListener('scroll' , ()=>console.log('scrolled'));
 
 function deleteTour(id){
 	for(let val in selected){
@@ -337,4 +343,20 @@ function deleteTour(id){
 			break;
 		}
 	}
+}
+function movemap(lng,lat){
+	console.log("moveMap start");
+	latitude=lng;
+	latitude=lat;
+	
+	var markerPosition  = new kakao.maps.LatLng(lat,lng); 
+
+	// 마커를 생성합니다
+	var marker = new kakao.maps.Marker({
+	    position: markerPosition
+	});
+	
+	markers.push(marker);
+	marker.setMap(map);
+	map.setCenter(new kakao.maps.LatLng(lat,lng));
 }

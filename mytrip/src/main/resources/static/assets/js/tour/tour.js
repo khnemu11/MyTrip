@@ -190,7 +190,7 @@ async function makeTourList(isNew){
 										</div>
 									</div>
 								</form>
-						</form>`	
+								`	
 				list.insertAdjacentHTML('beforeend',context);
 			}
 		});
