@@ -12,7 +12,11 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/util/header.jsp"%>
-	
+	<c:if test="${not empty msg}">
+		<script>
+			alert("${msg}");
+		</script>
+	</c:if>
 	<div class="row">
 		<div class="col-md-2 col-sm-2 col-xs-2 select-tour-container">
 			<div class="title-bar primary1">

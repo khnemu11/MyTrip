@@ -122,38 +122,42 @@ public class RouteController {
 	@GetMapping("/registRoute")
 	public String registRoute(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("경로 등록 시작");
-		Map<String, String[]> parameterMap = request.getParameterMap();
-		for (String key : request.getParameterMap().keySet()) {
-			System.out.println(key + " : " + Arrays.toString(request.getParameterMap().get(key)));
+		String msg = "";
+		try{
+			Map<String, String[]> parameterMap = request.getParameterMap();
+			
+			PlanDto planDto = new PlanDto();
+			planDto.setContent(parameterMap.get("content")[0]);
+			planDto.setTitle(parameterMap.get("title")[0]);
+			planDto.setExpectedDistance(parameterMap.get("expectedDistance")[0]);
+			planDto.setExpectedTime(parameterMap.get("expectedTime")[0]);
+			planDto.setTaxiCost(Integer.valueOf(parameterMap.get("taxiCost")[0]));
+			planDto.setFuelCost(Integer.valueOf(parameterMap.get("fuelCost")[0]));
+			planDto.setUserId(((UserDto) session.getAttribute("userInfo")).getId());
+//			planDto.setUserId("test");
+
+			List<TourDto> tourList = new ArrayList<>();
+
+			for (int i = 0; i < parameterMap.get("tourTitle").length; i++) {
+				TourDto tourDto = new TourDto();
+				tourDto.setLatitude(Float.parseFloat(parameterMap.get("tourLatitude")[i]));
+				tourDto.setLongitude(Float.parseFloat(parameterMap.get("tourlongitude")[i]));
+				tourDto.setTitle(parameterMap.get("tourTitle")[i]);
+				tourDto.setAddress(parameterMap.get("tourAddress")[i]);
+				tourDto.setTelephone(parameterMap.get("tourTel")[i]);
+				tourDto.setDistance(Integer.valueOf(parameterMap.get("tourDistance")[i]));
+				tourDto.setTime(Integer.valueOf(parameterMap.get("tourTime")[i]));
+				tourList.add(tourDto);
+			}
+			planService.insertRoute(planDto, tourList);
+			msg="여행 계획 등록을 성공했습니다.";
+		}catch(Exception e) {
+			e.printStackTrace();
+			msg="여행 계획 등록을 실패했습니다.";
 		}
-
-		PlanDto planDto = new PlanDto();
-		planDto.setContent(parameterMap.get("content")[0]);
-		planDto.setTitle(parameterMap.get("title")[0]);
-		planDto.setExpectedDistance(parameterMap.get("expectedDistance")[0]);
-		planDto.setExpectedTime(parameterMap.get("expectedTime")[0]);
-		planDto.setTaxiCost(Integer.valueOf(parameterMap.get("taxiCost")[0]));
-		planDto.setFuelCost(Integer.valueOf(parameterMap.get("fuelCost")[0]));
-		planDto.setUserId(((UserDto) session.getAttribute("userInfo")).getId());
-//		planDto.setUserId("test");
-
-		List<TourDto> tourList = new ArrayList<>();
-
-		for (int i = 0; i < parameterMap.get("tourTitle").length; i++) {
-			TourDto tourDto = new TourDto();
-			tourDto.setLatitude(Float.parseFloat(parameterMap.get("tourLatitude")[i]));
-			tourDto.setLongitude(Float.parseFloat(parameterMap.get("tourlongitude")[i]));
-			tourDto.setTitle(parameterMap.get("tourTitle")[i]);
-			tourDto.setAddress(parameterMap.get("tourAddress")[i]);
-			tourDto.setTelephone(parameterMap.get("tourTel")[i]);
-			tourDto.setDistance(Integer.valueOf(parameterMap.get("tourDistance")[i]));
-			tourDto.setTime(Integer.valueOf(parameterMap.get("tourTime")[i]));
-			tourList.add(tourDto);
-		}
-
-		planService.insertRoute(planDto, tourList);
-
-		return "error/error";
+		model.addAttribute("msg",msg);
+		
+		return "route/findRouteView";
 	}
 
 	@GetMapping("/registRouteView")
