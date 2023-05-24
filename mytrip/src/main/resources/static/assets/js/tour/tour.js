@@ -208,12 +208,3 @@ document.addEventListener('scroll',async function(e){
 function submitChildForm(e){
 	console.log(e);
 }
-document.addEventListener('scroll',async function(e){
-//	let clientHeight = e.target.scrollingElement;
-	if(document.body.scrollHeight>=document.body.scrollTop+document.body.clientHeight && !isLoad){
-		isLoad=true;
-		await makeTourList(false);
-		isLoad=false;
-	}
-})
-	
