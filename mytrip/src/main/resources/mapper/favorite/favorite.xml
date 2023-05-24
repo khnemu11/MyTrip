@@ -4,6 +4,16 @@
 <!-- name space는 UserRepo의 fully qualified name으로 설정한다. -->
 
 <mapper namespace="com.kiki.favorite.model.dao.FavoriteDao">
+	<resultMap type="TourDto" id="tour">
+		<result column="seq" property="seq" />
+		<result column="title" property="title" />
+		<result column="telephone" property="telephone" />
+		<result column="address" property="address" />
+		<result column="longitude" property="longitude" />
+		<result column="latitude" property="latitude" />
+		<result column="count" property="hits" />
+	</resultMap>
+
 	<select id="isFavorite" parameterType="FavoriteDto" resultType="int">
 		SELECT count(*)
 		FROM favorite,tour
@@ -24,4 +34,12 @@
 		FROM favorite
 		WHERE user_id = #{userId} AND tour_seq = #{tourSeq}
 	</delete>
+	<select id="selectMostFavorite" resultMap="tour">
+		SELECT tour.seq seq, tour.title title,tour.telephone telephone,tour.address address, tour.longitude longitude,
+		tour.latitude latitude, COUNT(tour.title) count
+		FROM favorite, tour WHERE favorite.tour_seq = tour.seq
+		GROUP BY title
+		ORDER BY count desc
+		LIMIT 5;
+	</select>
 </mapper>

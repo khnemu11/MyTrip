@@ -31,11 +31,14 @@ public class MainController {
 			List<TourDto> tourList = tourService.selectHotTourList();
 			model.addAttribute("tourList", tourList);
 			System.out.println(tourList);
+			
+			List<TourDto> favoriteList = favoriteService.selectMostFavorite();
+			model.addAttribute("favoriteList", favoriteList);
+			System.out.println(favoriteList);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error/error";
 		}
-
 		return "index";
 	}
 }

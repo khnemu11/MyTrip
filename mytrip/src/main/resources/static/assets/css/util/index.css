@@ -16,9 +16,7 @@
 	white-space:nowrap;
 	overflow:hidden;
 	text-overflow:ellipsis;
-	margin-bottom:5px;
-	margin-left:10px;
-	margin-right:5px;
+	font-weight:bold;
 }
 .card-description-container{
 	position:absolute;
@@ -26,9 +24,8 @@
 	width:100%;
 	display:flex;
 	justify-content:center;
-	align-items:end;
+	align-items:center;
 	color:white;
-
 	opacity:0;
 }
 .card-description-container:hover{
@@ -60,4 +57,9 @@
 .main-background{
 	height:400px;
 	object-fit:cover;
+}
+.card-hits{
+	position:absolute;
+	bottom:5px;
+	left:10px;
 }
