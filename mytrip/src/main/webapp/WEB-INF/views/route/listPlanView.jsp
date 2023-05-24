@@ -24,6 +24,20 @@
 						</span>
 					</div>
 				</div>
+				<form action="/route/listPlan" method="get">
+					<div class="search-container">
+						<input type="hidden" name="pageSize" value="10">
+						<div id="search-bar">
+							<img src="/img/utill/only-logo.png" class="search-logo" />
+							<p class="divider">|</p>
+							<input class="form-search" id="search" type="text"
+								placeholder="여행지 검색" name ="keyword">
+							<button type="submit" id="btn-search">
+								<i class="fa-solid fa-magnifying-glass" style="color: #3F80F8;"></i>
+							</button>
+						</div>
+					</div>
+				</form>
 				<table class="table">
 				  <thead>
 				    <tr>
@@ -45,8 +59,55 @@
 			</div>
 			<div class="col-md-2 col-sm-2 col-xs-2"></div>
 		</div>
+		<div class="row main-container">
+			<div class="col-md-2 col-sm-2 col-xs-2"></div>
+			<div class="col-md-8 col-sm-8 col-xs-8">
+			<div class="center-container">
+		<nav aria-label="Page navigation example" id="pagination-nav">
+		  <ul class="pagination">
+		     <c:if test="${pagination.before}">
+		      <li class="page-item">
+				<form action="/route/listPlan" method="get" id="move${pagination.start - 1}">
+					<input type="hidden" name="pageSize" value="10">
+					<input type="hidden" name="keyword" value="${pagination.keyword}">
+					<input type="hidden" name="pageNo" value="${pagination.start - 1}">	    
+				      <a class="page-link" href="#" aria-label="Previous" onclick="document.getElementById('move${pagination.start - 1}')submit()">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				</form>
+				</li>
+			</c:if>
+		    <c:forEach var="page" begin="${pagination.start}" end="${pagination.end}">
+				<li class="page-item">
+					<form action="/route/listPlan" method="get" id="move${page}">
+						<input type="hidden" name="pageSize" value="10">
+						<input type="hidden" name="keyword" value="${pagination.keyword}">
+						<input type="hidden" name="pageNo" value="${page}">
+						<a class="page-link" type="submit" href="#" aria-label="Previous" onclick="document.getElementById('move${page}').submit()">
+				        	<span aria-hidden="true">${page}</span>
+				      	</a>
+					</form>
+				</li>
+			</c:forEach>
+			<c:if test="${pagination.next}">
+			<li class="page-item">
+				<form action="/route/listPlan" method="get" id="move${pagination.end + 1}">
+					<input type="hidden" name="pageSize" value="10">
+					<input type="hidden" name="keyword" value="${pagination.keyword}">
+					<input type="hidden" name="pageNo" value="${page.end + 1}">
+			      <a class="page-link" href="#" aria-label="Next" onclick="document.getElementById('move${pagination.end + 1}').submit()">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+				</form>
+				 </li>
+			</c:if>
+		  </ul>
+		</nav>
+		</div>
+			</div>
+			<div class="col-md-2 col-sm-2 col-xs-2"></div>
+		</div>
 	</div>
-		
 	<%@ include file="/WEB-INF/views/util/footer.jsp"%>
 </body>
 </html>

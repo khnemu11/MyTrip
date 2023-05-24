@@ -9,6 +9,26 @@ public class SearchDto {
 	private String userId;
 	private int pageSize = 10;
 	private int offset;
+	private boolean before;
+	private int start;
+	private int end;
+	private boolean next;
+	
+	public boolean isBefore() {
+		return before;
+	}
+
+	public void setBefore(boolean before) {
+		this.before = before;
+	}
+
+	public boolean isNext() {
+		return next;
+	}
+
+	public void setNext(boolean next) {
+		this.next = next;
+	}
 
 	public int getOffset() {
 		return offset;
@@ -58,11 +78,21 @@ public class SearchDto {
 		this.userId = userId;
 	}
 
-	@Override
-	public String toString() {
-		return "SearchDto [keyword=" + keyword + ", totalCount=" + totalCount + ", pageNo=" + pageNo + ", userId="
-				+ userId + ", pageSize=" + pageSize + ", offset=" + offset + "]";
+	public int getStart() {
+		return start;
 	}
 
+	public void setStart(int start) {
+		this.start = start;
+	}
 
+	public int getEnd() {
+		return end;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
+	}
+	
+	
 }

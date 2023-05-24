@@ -53,3 +53,45 @@ th, td{
 .title{
 	width:70%;
 }
+.pagination{
+	border:none;
+}
+ul{
+	margin-bottom:0px;
+	border:none;
+}
+.center-container{
+	display:flex;
+	justify-content:center;
+	margin-top:50px;
+}
+#search-bar{
+	display:flex;
+	width:40%;
+	align-items:center;
+	border:1px solid #3F80F8;
+	border-radius:15px;
+	justify-content:space-evenly;
+	margin-right:0px;
+	height:40px;
+}
+.search-logo{
+	width:20px;
+	height:20px;
+}
+.divider{
+	font-size:20px;
+	margin-bottom:5px;	
+	color:#3F80F8;;
+}
+.search-container{
+	display:flex;
+	justify-content:end;
+}
+#search{
+	border:none;
+}
+#btn-search{
+	border:none;
+	background-color:white;
+}

@@ -48,39 +48,68 @@ public class RouteController {
 		super();
 		this.planService = planService;
 	}
+
 	@GetMapping("/planDetail")
 	public String planDetail(HttpServletRequest request, Model model, @RequestParam(name = "seq") int seq) {
 		System.out.println(seq);
-		
+
 		PlanDto planDto = planService.selectPlan(seq);
 		System.out.println(planDto);
 		List<PlanOrderDto> planOrderDtoList = planService.selectPlanOrderList(seq);
 		System.out.println(planOrderDtoList);
-		
+
 		model.addAttribute("plan", planDto);
 		model.addAttribute("list", planOrderDtoList);
-		
+
 		return "/route/planDetailView";
 	}
+
 	@GetMapping("/listPlan")
-	public String listPlan(HttpServletRequest request,HttpSession session, Model model, SearchDto searchDto) {
+	public String listPlan(HttpServletRequest request, HttpSession session, Model model, SearchDto searchDto) {
 		System.out.println("경로 리스트 시작");
-		
+
 		if (searchDto.getPageNo() == 0) {
 			System.out.println("비어있음!");
 			searchDto.setPageNo(1);
 		}
-		
+		searchDto.setOffset((searchDto.getPageNo()-1)*searchDto.getPageSize());
 		System.out.println(searchDto);
-		searchDto.setUserId(((UserDto)session.getAttribute("userInfo")).getId());
+		searchDto.setUserId(((UserDto) session.getAttribute("userInfo")).getId());
 		List<PlanDto> list = planService.selectPlanList(searchDto);
+		
+		if(list==null) {
+			System.out.println("허용되지 않는 범위");
+			return "redirect:/route/listPan";
+		}
+		
 		System.out.println(list);
+		
 		int totalCount = planService.countPlanList(searchDto);
 		System.out.println(totalCount);
+		searchDto.setTotalCount(totalCount);
+
+		if(searchDto.getPageNo()!=1) {
+			searchDto.setBefore(true);
+		}
+		searchDto.setStart(searchDto.getPageNo());
+		searchDto.setEnd(searchDto.getPageNo());
+		
+		for (int i = 1; i < 5; i++) {
+			if(searchDto.getOffset() + searchDto.getPageSize()* i >totalCount) {
+				break;
+			}
+			searchDto.setEnd(searchDto.getEnd()+1);
+		}
+
+		if (searchDto.getTotalCount() > searchDto.getPageSize() * searchDto.getEnd()) {
+			searchDto.setNext(true);
+		}
+		
+		System.out.println(searchDto);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pagination", searchDto);
-
+		
 		return "route/listPlanView";
 	}
 

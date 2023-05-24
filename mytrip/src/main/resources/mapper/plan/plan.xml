@@ -38,7 +38,7 @@
 		 SELECT * FROM plan 
 		 WHERE user_id = #{userId}
 		<if test='keyword !=null'>
-		AND keyword like CONCAT('%',#{keyword},'%')		
+		AND title like CONCAT('%',#{keyword},'%')		
 		</if> 
 		 ORDER BY created_time DESC 
 		 LIMIT #{pageSize} OFFSET #{offset}
@@ -57,7 +57,7 @@
 		 SELECT count(*) FROM plan 
 		 WHERE user_id = #{userId}
 		<if test='keyword !=null'>
-		AND keyword = #{keyword}		
+		AND title = #{keyword}		
 		</if> 
 		 ORDER BY created_time DESC 
 		 LIMIT #{pageSize} OFFSET #{offset}
