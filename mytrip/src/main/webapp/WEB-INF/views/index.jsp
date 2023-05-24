@@ -18,14 +18,16 @@
 				<div class="context-row ">
 					<div class="title">인기 있는 관광지</div>
 					<div class="card-grid">
-						<div class="card">
-							<img src="/img/review/1.png">
-							<div class="card-description-container">
-								<div class="card-description">
-									매우매우매우매우매우매우매우매우매우긴이름
+						<c:forEach items="${tourList}" var="item">
+							<div class="card" onclick="window.location.href=''">
+								<img src="/img/review/1.png">
+								<div class="card-description-container">
+									<div class="card-description">
+										${item.title}
+									</div>
 								</div>
 							</div>
-						</div>
+						</c:forEach>
 					</div>
 				</div>
 				<div class="context-row">

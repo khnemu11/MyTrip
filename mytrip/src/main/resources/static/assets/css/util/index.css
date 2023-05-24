@@ -32,8 +32,9 @@
 	opacity:0;
 }
 .card-description-container:hover{
-	opacity:0.7;
-	background-color:#555555;
+	opacity:0.9;
+	background-color:rgba(0,0,0,0.3);
+	cursor:pointer;
 }
 .card{
 	position:relative;

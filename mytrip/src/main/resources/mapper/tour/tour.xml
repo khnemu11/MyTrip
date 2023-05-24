@@ -22,4 +22,10 @@
 		 ON DUPLICATE KEY UPDATE
 		 hits = hits+1;
 	</insert>
+	<select id="selectHotTourList" resultType="TourDto">
+		SELECT *
+		FROM tour
+		ORDER BY hits DESC
+		limit 5;
+	</select>
 </mapper>

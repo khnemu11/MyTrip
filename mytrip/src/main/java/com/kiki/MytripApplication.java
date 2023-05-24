@@ -27,6 +27,6 @@ public class MytripApplication implements WebMvcConfigurer {
 	// 테스트 주석
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("index");
+//		registry.addViewController("/").setViewName("index");
 	}
 }
