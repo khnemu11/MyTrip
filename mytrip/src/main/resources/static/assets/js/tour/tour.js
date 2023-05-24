@@ -156,6 +156,9 @@ async function makeTourList(isNew){
 			if(isNew){
 				list.innerHTML = "";
 			}
+			if(document.querySelector('.loading-spinner')!=null){
+				document.querySelector('.loading-spinner').remove();
+			}
 			
 			for(var idx in locations){
 				var title = locations[idx].title;
@@ -196,9 +199,16 @@ async function makeTourList(isNew){
 		});
 }
 document.addEventListener('scroll',async function(e){
-//	let clientHeight = e.target.scrollingElement;
+	console.log(document.documentElement.scrollHeight+" vs "+document.documentElement.scrollTop+" + "+document.documentElement.clientHeight);
+	console.log(document.body.scrollHeight+" vs "+document.body.scrollTop+" + "+document.body.clientHeight);
 	
-	if(document.body.scrollHeight>=document.body.scrollTop+document.body.clientHeight && !isLoad){
+	if(document.documentElement.scrollHeight<=document.documentElement.scrollTop+document.documentElement.clientHeight+100 && !isLoad){
+		let tourList = document.querySelector('#list-container');
+		let context = `
+					<div class="text-center loading-spinner">
+						<div class="spinner-border" role="status"></div>
+					</div>`;
+		tourList.insertAdjacentHTML('beforeend',context);
 		isLoad=true;
 		await makeTourList(false);
 		isLoad=false;

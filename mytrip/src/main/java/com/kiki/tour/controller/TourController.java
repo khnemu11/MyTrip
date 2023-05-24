@@ -33,7 +33,6 @@ public class TourController {
 		super();
 		this.tourService = tourService;
 	}
-
 	@GetMapping("/detail")
 	public String detail(TourDto tourDto, Model model) {
 		System.out.println("투어 상세 페이지 시작");

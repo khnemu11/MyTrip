@@ -91,6 +91,10 @@ ul{
 #search{
 	border:none;
 }
+#search::placeholder{
+	color:#3F80F8;
+	opacity:0.5;
+}
 #btn-search{
 	border:none;
 	background-color:white;

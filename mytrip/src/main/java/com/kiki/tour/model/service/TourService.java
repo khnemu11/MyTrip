@@ -8,4 +8,6 @@ public interface TourService {
 	public int insertTour(TourDto tourDto) throws Exception;
 
 	public int updateTourHit(TourDto tourDto) throws Exception;
+
+	public TourDto selectTourByTitle(TourDto tourDto) throws Exception;
 }

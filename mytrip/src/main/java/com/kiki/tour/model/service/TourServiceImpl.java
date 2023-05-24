@@ -34,4 +34,10 @@ public class TourServiceImpl implements TourService {
 		System.out.println(tourDto);
 		return tourDao.updateTourHit(tourDto);
 	}
+
+	@Override
+	public TourDto selectTourByTitle(TourDto tourDto) throws Exception {
+		// TODO Auto-generated method stub
+		return tourDao.selectTour(tourDto);
+	}
 }

@@ -39,7 +39,7 @@
 						<div class="description-top">
 							<span class="description-top-left"><span>${tour.title}</span></span>
 							<span class="description-top-right">
-								<div class="circle"><i class="fa-regular fa-heart"></i></div>
+								<div class="circle favorite" onclick="setFavorite('${tour.title}')"></div>
 								<div class="circle"><i class="fa-solid fa-share-nodes"></i></div>
 							</span>
 						</div>

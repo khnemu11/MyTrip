@@ -71,7 +71,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-2 col-sm-2 col-xs-2"></div>
-		<div class="col-md-8 col-sm-8 col-xs-8">
+		<div class="col-md-8 col-sm-8 col-xs-8" id="list-container">
 			<div class="text-center loading-spinner">
 				<div class="spinner-border" role="status">
 				</div>

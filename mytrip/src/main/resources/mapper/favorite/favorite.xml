@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- name space는 UserRepo의 fully qualified name으로 설정한다. -->
+
+<mapper namespace="com.kiki.favorite.model.dao.FavoriteDao">
+	<select id="isFavorite" parameterType="FavoriteDto" resultType="int">
+		SELECT count(*)
+		FROM favorite,tour
+		WHERE
+			favorite.user_id = #{userId} 
+			AND tour.title = #{title}
+			AND favorite.tour_seq = tour.seq
+	</select>
+
+	<update id="registFavorite" parameterType="FavoriteDto">
+		 INSERT INTO favorite 
+		 (user_id,tour_seq)
+		  VALUES (#{userId},#{tourSeq}) 
+	</update>
+
+	<delete id="deleteFavorite" parameterType="FavoriteDto">
+		DELETE 
+		FROM favorite
+		WHERE user_id = #{userId} AND tour_seq = #{tourSeq}
+	</delete>
+</mapper>

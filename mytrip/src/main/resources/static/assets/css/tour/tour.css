@@ -249,3 +249,7 @@ span{
 	padding-left:0px !important;
 	padding-right:0px !important;
 }
+
+.loading-spinner{
+	margin-top:60px;
+}
