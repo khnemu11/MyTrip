@@ -24,7 +24,12 @@
 		<id column="image_name" property="imageName" />
 		<id column="image_code" property="imageCode" />
 	</resultMap>
-
+	
+	<insert id="insertImage" parameterType="ReviewImgDto">
+		INSERT INTO review_image (review_seq,image_name,image_code)
+		VALUES (#{reviewSeq}, #{imageName}, #{imageCode})
+	</insert>
+	
 	<!-- id는 repo클래스의 메소드 이름과 일치시킨다. -->
 	<insert id="writeReview" parameterType="ReviewDto">
 		INSERT INTO review (title, content, user_id, user_name,tour_Title, modified_date, deleted_date)

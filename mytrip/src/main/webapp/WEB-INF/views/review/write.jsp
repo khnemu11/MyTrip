@@ -22,7 +22,7 @@
 					</span>
 				</div>
 			</div>
-			<form action="/review/write" method="POST" >
+			<form action="/review/write" method="POST" enctype="multipart/form-data" >
 				<div class="sub-title">제목</div>
 				<!-- <input type = "hidden" name="tour-title" id="tour-title"/> -->
 				<input type = "hidden" name="tour-address" id="tour-address" value=""/>
@@ -39,6 +39,7 @@
 					
 				<!-- 검색 기능 넣어주세용 -->
 				<div class="sub-title">사진 선택</div>
+				<input type="file" name="file"/>
 				<!-- 여기에 파일업로드 넣어주세용 -->
 				<div class="sub-title">내용</div>
 				<textarea class="form-control" name="content" required></textarea>

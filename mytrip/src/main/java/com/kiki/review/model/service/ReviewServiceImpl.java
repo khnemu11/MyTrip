@@ -63,4 +63,9 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewDao.deleteReview(seq);
 	}
 
+	@Override
+	public int insertImage(ReviewImgDto imgDto) {
+		return reviewDao.insertImage(imgDto);
+	}
+
 }

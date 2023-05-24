@@ -1,12 +1,15 @@
 package com.kiki.review.controller;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kiki.review.model.ReviewDto;
 import com.kiki.review.model.ReviewImgDto;
@@ -28,12 +32,14 @@ import com.kiki.user.model.UserDto;
 public class ReviewController {
 	ReviewService reviewService;
 	TourService tourService;
-
+	ResourceLoader resourceLoader;
+	
 	@Autowired
-	public ReviewController(ReviewService reviewService, TourService tourService) {
+	public ReviewController(ReviewService reviewService, TourService tourService, ResourceLoader resourceLoader) {
 		super();
 		this.reviewService = reviewService;
 		this.tourService = tourService;
+		this.resourceLoader = resourceLoader;
 	}
 
 	@GetMapping("/list")
@@ -62,28 +68,58 @@ public class ReviewController {
 	}
 
 	@PostMapping("/write")
-	public String writeReview(HttpServletRequest request, @RequestParam Map<String, String> paramMap,
-			@ModelAttribute("reviewForm") ReviewDto reviewForm, HttpSession session) {
+	public String writeReview( @RequestParam Map<String, String> paramMap,
+			@ModelAttribute("reviewForm") ReviewDto reviewForm, @RequestParam("file") MultipartFile multipartFile, HttpSession session) {
 		try {
+			//여행 객체 생성
 			TourDto tourDto = new TourDto();
 			tourDto.setAddress(paramMap.get("tour-address"));
 			tourDto.setLongitude(Float.parseFloat(paramMap.get("tour-longitude")));
 			tourDto.setLatitude(Float.parseFloat(paramMap.get("tour-latitude")));
 			tourDto.setTelephone(paramMap.get("tour-telephone"));
 			tourDto.setTitle(paramMap.get("tour-title"));
-			
+				
+			//리뷰 객체 생성
 			String name = ((UserDto) session.getAttribute("userInfo")).getName();
 			String id = ((UserDto) session.getAttribute("userInfo")).getId();
 			reviewForm.setUserName(name);
 			reviewForm.setUserId(id);
 			reviewForm.setTourTitle(tourDto.getTitle());
+			
 			System.out.println(reviewForm);
+			;
+			//리뷰 및 여행 등록
 			int valid = reviewService.writeReview(reviewForm, tourDto);
+			
+			//리뷰 성공
 			if (valid > 0) {
-				System.out.println("리뷰쓰기 성공");
+		    //파일 등록
+			
+			//리뷰 seq	
+			int seq = reviewService.getLastestReview(id);
+			System.out.println("리뷰 seq : "+seq);
+			
+			String originalName = multipartFile.getOriginalFilename();
+			String extend = originalName.substring(originalName.lastIndexOf('.'));
+			UUID uuid = UUID.randomUUID();
+			File newFile = new File(
+					resourceLoader.getResource("classpath:/static/assets/img/upload/").getFile().getAbsolutePath(),
+					uuid.toString() + extend);
+
+			multipartFile.transferTo(newFile);
+			System.out.println("파일 저장 성공!");
+			
+			System.out.println("바뀐 이름 : "+uuid+extend);
+			System.out.println("원래 이름 : "+originalName);
+			
+			ReviewImgDto imgDto = new ReviewImgDto();
+			imgDto.setImageCode(uuid+extend);
+			imgDto.setImageName(originalName);
+			imgDto.setReviewSeq(seq);
+			
+			reviewService.insertImage(imgDto);
+			System.out.println("리뷰쓰기 성공");
 				// 가장 최신 것 중에서 아이디 같은 것
-				int seq = reviewService.getLastestReview(id);
-				System.out.println(seq);
 				return "redirect:detail/" + seq;
 			} else {
 				System.out.println("리뷰쓰기 실패");

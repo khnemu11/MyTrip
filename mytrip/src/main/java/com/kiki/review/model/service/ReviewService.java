@@ -22,4 +22,6 @@ public interface ReviewService {
 	List<ReviewImgDto> getReviewImg(int seq);
 
 	int deleteReview(int seq);
+
+	int insertImage(ReviewImgDto imgDto);
 }
