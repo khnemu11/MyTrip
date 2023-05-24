@@ -20,7 +20,6 @@
 				<button type="button" id="btn-search">
 					<i class="fa-solid fa-magnifying-glass" style="color: #3F80F8;"></i>
 				</button>
-
 			</div>
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-3"></div>

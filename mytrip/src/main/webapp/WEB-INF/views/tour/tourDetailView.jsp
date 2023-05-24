@@ -74,27 +74,6 @@
 					주변 관광지
 					</div>
 					<div class="tour-list">
-	<!-- 				<div class="tour-card row">
-							<div class="col-md-6 col-sm-6 col-xs-6">
-								<img src="/img/tour/no-image.png">
-							</div>
-							<div class="col-md-6 col-sm-6 col-xs-6">
-								<div class="tour-description-wrapper">
-									<div class="tour-description-top">
-										<div class="tour-title">가나 해수욕장</div>
-									</div>
-									<div class="tour-description-bottom">
-										<span>
-											<span><i class="fa-solid fa-location-dot"></i>
-											<span class="tour-address">아주아주아주아주아주아주아주아주아주아주아주아주긴아주아주아주아주아주아주아주아주아주아주아주아주긴아주아주아주아주아주아주아주아주아주아주아주아주긴 주소</span>
-											</span>
-										</span>
-										<span><i class="fa-solid fa-phone"></i><span class="tour-tel">010-9220-0441</span></span>
-										</div>
-								</div>
-								
-							</div>
-						</div> -->
 					</div>
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-2"></div>

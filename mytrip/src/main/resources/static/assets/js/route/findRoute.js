@@ -132,6 +132,7 @@ async function makeCityOption(){
 	});
 }
 document.querySelector('#btn-search').addEventListener('click',function(){
+	console.log(document.querySelector('#search'));
 	keyword = document.querySelector('#search').value;
 	makeTourList(true);
 })
@@ -253,10 +254,11 @@ async function makeTourList(isNew){
 			}
 			
 			let titleHeight = document.querySelector('.title-bar').offsetHeight;
-			let searchHeight = document.querySelector('#search').offsetHeight;
+			let searchHeight = document.querySelector('.search-container').offsetHeight;
 			let mapHeight = document.querySelector('#map').offsetHeight;
-			let height = mapHeight - (searchHeight + titleHeight);
-
+			let height = mapHeight - (searchHeight + titleHeight)-20;
+			console.log(mapHeight +" vs " +searchHeight +" + "+ titleHeight);
+			console.log(height);
 			document.querySelector('#tour-list-wrapper').style.height = height;
 			document.getElementById('tour-list-wrapper').setAttribute("style",`height:${height}px;`);
 		});

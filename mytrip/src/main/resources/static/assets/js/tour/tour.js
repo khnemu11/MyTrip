@@ -11,16 +11,12 @@ document.addEventListener('DOMContentLoaded',function(){
 	init();
 })
 async function init(){
-	
 	await makeCityOption();
 	await makeGunGuOption();
 	await makeTourList(true);
-	document.querySelector('.loading-spinner').style.display='none';
-	
 }
 async function makeGunGuOption(data){
 	console.log('makeGunGuOption 실행');
-	document.querySelector('.loading-spinner').style.display='block';
 	let params = {
 			serviceKey : key,
 			numOfRows : 20,
@@ -55,7 +51,6 @@ async function makeGunGuOption(data){
 
 async function makeCityOption(){
 	console.log('makeCityOption 실행');
-	document.querySelector('.loading-spinner').style.display='block';
 	let params = {
 		serviceKey : key,
 		numOfRows : 30,
@@ -90,11 +85,18 @@ async function makeCityOption(){
 }
 
 document.querySelector('#btn-search').addEventListener('click',function(){
-
-	document.querySelector('.loading-spinner').style.display='block';
+	let tourList = document.querySelector('#location-list');
+	console.log(tourList);
+	let context = `
+				<div class="text-center loading-spinner">
+					<div class="spinner-border" role="status"></div>
+				</div>`;
+	tourList.insertAdjacentHTML('beforebegin',context);
+//	document.querySelector('.loading-spinner').style.display='block';
 	keyword = document.querySelector('#search').value;
+	console.log(keyword);
 	makeTourList(true);
-	document.querySelector('.loading-spinner').style.display='none';
+//	document.querySelector('.loading-spinner').style.display='none';
 })
 
 function onChangeContentTypeId(){
@@ -148,6 +150,9 @@ async function makeTourList(isNew){
 			
 			if(data.response.body.totalCount == 0){
 				document.getElementById("location-list").innerHTML = `<div>해당 조건에 맞는 관광지가 없습니다.</div>`
+				if(document.querySelector('.loading-spinner')!=null){
+					document.querySelector('.loading-spinner').remove();
+				}
 				return 0;
 			}
 			

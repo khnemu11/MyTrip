@@ -1,5 +1,7 @@
 package com.kiki.tour.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,5 +41,11 @@ public class TourServiceImpl implements TourService {
 	public TourDto selectTourByTitle(TourDto tourDto) throws Exception {
 		// TODO Auto-generated method stub
 		return tourDao.selectTour(tourDto);
+	}
+
+	@Override
+	public List<TourDto> selectHotTourList() throws Exception {
+		// TODO Auto-generated method stub
+		return tourDao.selectHotTourList();
 	}
 }

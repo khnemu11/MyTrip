@@ -34,7 +34,7 @@
 			<div class="title-bar primary2">
 				여행지 검색
 			</div>
-			<div class="search-container" id="search">
+			<div class="search-container">
 				<div id="search-bar">
 				<img src="/img/utill/only-logo.png" class="search-logo" />
 				<p class="divider">|</p>
