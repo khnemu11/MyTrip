@@ -38,7 +38,7 @@ public class UserController {
 			if (userDto != null) {
 				session.setAttribute("userInfo", userDto);
 				System.out.println("세션 정보 : "+session.getAttribute("userInfo"));
-				return "index";
+				return "redirect:/";
 			} 
 			model.addAttribute("loginMsg", "아이디 또는 비밀번호가 잘못되었습니다.");				
 			return "user/login";
