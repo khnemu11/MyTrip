@@ -17,9 +17,6 @@
 	<%@ include file="/WEB-INF/views/util/header.jsp"%>
 	<div class="body-wrapper">
 		<div class = "mypage-container row">
-			<div class="col-lg-1 col-md-1 col-sm-1"></div>
-			<div class="col-lg-10 col-md-10 col-sm-10 row">
-				<div class="col-lg-5 col-md-5 col-sm-5">
 					<div class="row sub-title-wrapper">
 						<div class="sub-title-container">
 							<span class="sub-title-left"> <span class="sub-title-label">|</span>
@@ -29,57 +26,174 @@
 							</span>
 						</div>
 					</div>
-					<a href="/mypage/authentication">수정</a>
-					<a href="/mypage/withdrawal">탈퇴</a>
-					<div class="info-row row">	
-						<div class="col-lg-3 col-md-3 col-sm-3 flex">
-							<span>아이디</span>
+					<div class="col-lg-5 col-md-5 col-sm-5">
+<!-- 						<div class="util-container">
+							<span class="sub-title">내정보</span>
+							<span>
+								<a href="/mypage/authentication" class="edit">수정</a>
+								<a href="/mypage/withdrawal" class="delete">탈퇴</a>
+							</span>
+						</div> -->
+					<div class="info-table">
+						<div class="info-row row">
+							<div class="col-lg-3 col-md-3 col-sm-3 flex">
+								<span class="sub-title">내정보</span>
+							</div>
+							<div class="col-lg-9 col-md-9 col-sm-9 util-container">
+								<span class="util-container">
+								<a href="/mypage/authentication" class="edit">수정</a>
+								<a href="/mypage/withdrawal" class="delete">탈퇴</a>
+							</span>
+							</div>
 						</div>
-						<div class="col-lg-9 col-md-9 col-sm-9 flex">
-							<span>${userInfo.id}</span>
+						<div class="info-row row">
+							<div class="col-lg-3 col-md-3 col-sm-3 flex">
+								<span>아이디</span>
+							</div>
+							<div class="col-lg-9 col-md-9 col-sm-9 flex">
+								<span>${userInfo.id}</span>
+							</div>
 						</div>
-						
-						<div class="col-lg-3 col-md-3 col-sm-3 flex">
-							<span>이름</span>
+						<div class="info-row row">
+							<div class="col-lg-3 col-md-3 col-sm-3 flex">
+								<span>이름</span>
+							</div>
+							<div class="col-lg-9 col-md-9 col-sm-9 flex">
+								<span>${userInfo.name}</span>
+							</div>
 						</div>
-						<div class="col-lg-9 col-md-9 col-sm-9 flex">
-							<span>${userInfo.name}</span>
+						<div class="info-row row">
+							<div class="col-lg-3 col-md-3 col-sm-3 flex">
+								<span>이메일</span>
+							</div>
+							<div class="col-lg-9 col-md-9 col-sm-9 flex">
+								<span>${userInfo.email}</span>
+							</div>
 						</div>
-		
-						<div class="col-lg-3 col-md-3 col-sm-3 flex">
-							<span>이메일</span>
+						<div class="info-row row">
+							<div class="col-lg-3 col-md-3 col-sm-3 flex">
+								<span>전화번호</span>
+							</div>
+							<div class="col-lg-9 col-md-9 col-sm-9 flex">
+								<span>${userInfo.phoneNo}</span>
+							</div>
 						</div>
-						<div class="col-lg-9 col-md-9 col-sm-9 flex">
-							<span>${userInfo.email}</span>
+						<div class="info-row row">
+							<div class="col-lg-3 col-md-3 col-sm-3 flex">
+								<span>자기소개</span>
+							</div>
+							<div class="col-lg-9 col-md-9 col-sm-9 flex">
+								<span>${userInfo.intro}</span>
+							</div>
 						</div>
-						
-						<div class="col-lg-3 col-md-3 col-sm-3 flex">
-							<span>전화번호</span>
-						</div>
-						<div class="col-lg-9 col-md-9 col-sm-9 flex">
-							<span>${userInfo.phoneNo}</span>
-						</div>
-		
-						<div class="col-lg-3 col-md-3 col-sm-3 flex">
-							<span>자기소개</span>
-						</div>
-						<div class="col-lg-9 col-md-9 col-sm-9 flex">
-							<span>${userInfo.intro}</span>
-						</div>
-						
-						<div class="col-lg-3 col-md-3 col-sm-3 flex">
-							<span>가입일</span>
-						</div>
-						<div class="col-lg-9 col-md-9 col-sm-9 flex">
-							<span>${userInfo.joinDate}</span>
+						<div class="info-row row">
+							<div class="col-lg-3 col-md-3 col-sm-3 flex">
+								<span>가입일</span>
+							</div>
+							<div class="col-lg-9 col-md-9 col-sm-9 flex">
+								<span>${userInfo.joinDate}</span>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-7 col-md-7 col-sm-7">
-					<!-- 여기에 나의 경로, 나의 후기 넣어주세용 -->
+					<div class="right-row">
+						<div class="right-title-row">
+							<div class="sub-title">나의 여행 계획</div>
+							<i class="fa-solid fa-plus"></i>
+						</div>
+						<div class="right-context-row">
+							<div class="card-grid" id="plan-list">
+								<div class="card">
+									<img src="/img/review/1.png">
+									<div class="card-description-container">
+										<div class="card-description">
+											엄청엄청엄청엄청엄청엄청엄청엄청엄청긴 제목
+										</div>
+									</div>
+								</div>
+									<div class="card">
+									<img src="/img/review/1.png">
+									<div class="card-description-container">
+										<div class="card-description">
+											엄청엄청엄청엄청엄청엄청엄청엄청엄청긴 제목
+										</div>
+									</div>
+								</div>
+									<div class="card">
+									<img src="/img/review/1.png">
+									<div class="card-description-container">
+										<div class="card-description">
+											엄청엄청엄청엄청엄청엄청엄청엄청엄청긴 제목
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="right-row">
+						<div class="right-title-row">
+							<div class="sub-title">나의 후기</div>
+							<i class="fa-solid fa-plus"></i>
+						</div>
+						<div class="right-context-row">
+							<div class="card-grid" id="review-list">
+								<div class="card">
+									<img src="/img/review/1.png">
+									<div class="card-description-container">
+										<div class="card-description">
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<img src="/img/review/1.png">
+									<div class="card-description-container">
+										<div class="card-description">
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<img src="/img/review/1.png">
+									<div class="card-description-container">
+										<div class="card-description">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="right-row">
+						<div class="right-title-row">
+							<div class="sub-title">나의 즐겨찾기</div>
+							<i class="fa-solid fa-plus"></i>
+						</div>
+							<div class="right-context-row">
+							<div class="card-grid" id="favorite-list">
+								<div class="card">
+									<img src="/img/review/1.png">
+									<div class="card-description-container">
+										<div class="card-description">
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<img src="/img/review/1.png">
+									<div class="card-description-container">
+										<div class="card-description">
+										</div>
+									</div>
+								</div>
+								<div class="card">
+									<img src="/img/review/1.png">
+									<div class="card-description-container">
+										<div class="card-description">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1"></div>
 		</div>
 	</div>
 	
