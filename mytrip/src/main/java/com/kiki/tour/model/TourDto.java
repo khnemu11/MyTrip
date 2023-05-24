@@ -85,5 +85,4 @@ public class TourDto {
 				+ ", telephone=" + telephone + ", address=" + address + ", latitude=" + latitude + ", longitude="
 				+ longitude + ", hits=" + hits + ", distance=" + distance + ", time=" + time + "]";
 	}
-	
 }

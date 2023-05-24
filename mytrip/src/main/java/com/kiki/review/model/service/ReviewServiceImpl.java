@@ -4,25 +4,32 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kiki.review.model.ReviewDto;
 import com.kiki.review.model.ReviewImgDto;
 import com.kiki.review.model.dao.ReviewDao;
 import com.kiki.route.model.SearchDto;
+import com.kiki.tour.model.TourDto;
+import com.kiki.tour.model.dao.TourDao;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
 
 	ReviewDao reviewDao;
+	TourDao tourDao;
 	
 	@Autowired
-	public ReviewServiceImpl(ReviewDao reviewDao) {
+	public ReviewServiceImpl(ReviewDao reviewDao,TourDao tourDao) {
 		this.reviewDao = reviewDao;
+		this.tourDao =  tourDao;
 	}
 	
 	@Override
-	public int writeReview(ReviewDto reviewForm) {
+	@Transactional
+	public int writeReview(ReviewDto reviewForm,TourDto tourDto) throws Exception{
 		System.out.println(reviewForm);
+		tourDao.updateTourHit(tourDto);
 		return reviewDao.writeReview(reviewForm);
 	}
 

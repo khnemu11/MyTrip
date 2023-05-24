@@ -27,8 +27,8 @@
 
 	<!-- id는 repo클래스의 메소드 이름과 일치시킨다. -->
 	<insert id="writeReview" parameterType="ReviewDto">
-		INSERT INTO review (title, content, user_id, user_name, modified_date, deleted_date)
-		VALUES (#{title}, #{content}, #{userId}, #{userName}, #{modifiedDate}, #{deletedDate})
+		INSERT INTO review (title, content, user_id, user_name,tour_Title, modified_date, deleted_date)
+		VALUES (#{title}, #{content}, #{userId}, #{userName},#{tourTitle}, #{modifiedDate}, #{deletedDate})
 	</insert>
 	
 	<select id="getLastestReview" resultType="int" parameterType="String">
