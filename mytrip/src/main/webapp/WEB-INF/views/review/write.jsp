@@ -25,10 +25,10 @@
 			<form action="/review/write" method="POST" >
 				<div class="sub-title">제목</div>
 				<!-- <input type = "hidden" name="tour-title" id="tour-title"/> -->
-				<input type = "hidden" name="tour-address" id="tour-address"/>
-				<input type = "hidden" name="tour-longitude" id="tour-longitude"/>
-				<input type = "hidden" name="tour-latitude" id="tour-latitude"/>
-				<input type = "hidden" name="tour-telephone" id="tour-telephone"/>
+				<input type = "hidden" name="tour-address" id="tour-address" value=""/>
+				<input type = "hidden" name="tour-longitude" id="tour-longitude" value="0"/>
+				<input type = "hidden" name="tour-latitude" id="tour-latitude" value="0"/>
+				<input type = "hidden" name="tour-telephone" id="tour-telephone" value="-" />
 				<input type = "text" class= "form-control title-form" id = "title" name = "title" placeholder="제목을 작성해주세요" required/>
 				
 				<div class="sub-title">여행지</div>

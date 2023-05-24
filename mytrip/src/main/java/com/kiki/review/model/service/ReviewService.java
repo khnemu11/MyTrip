@@ -5,10 +5,11 @@ import java.util.List;
 import com.kiki.review.model.ReviewDto;
 import com.kiki.review.model.ReviewImgDto;
 import com.kiki.route.model.SearchDto;
+import com.kiki.tour.model.TourDto;
 
 public interface ReviewService {
 
-	int writeReview(ReviewDto reviewForm);
+	int writeReview(ReviewDto reviewForm,TourDto tourDto) throws Exception;
 
 	int getLastestReview(String id);
 	

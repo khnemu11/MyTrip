@@ -43,8 +43,6 @@ public class TourController {
 			System.out.println("관광지 대상 : " + target);
 
 			model.addAttribute("tour", target);
-//			String encodeTitle = new String(target.getTitle().getBytes(),"UTF-8");
-			
 			URL url = new URL("https://www.googleapis.com/youtube/v3/search?part=snippet&q=" +  URLEncoder.encode(target.getTitle(), "utf-8")
 					+ "&regionCode=kr&order=viewCount&maxResults=5&key=" + youtubeKey);
 			BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
@@ -74,7 +72,6 @@ public class TourController {
 					tourYoutubeDto.setVideoId(videoId);
 					
 					youtubeList.add(tourYoutubeDto);
-					
 				}
 				
 				model.addAttribute("youtubeList",youtubeList);

@@ -136,14 +136,9 @@ info-row{
 .info-table{
 	margin-top:20px;	
 }
-info-row{
-	
-}.flex {
+.flex {
 	display:flex;
 	justify-content:center;
-}
-.sub-title{
-	
 }
 .sub-title-label, .sub-title{
 	font-size:24px;
@@ -208,9 +203,6 @@ info-row{
 	display:flex;
 	justify-content:center;
 }
-.sub-title{
-	
-}
 .sub-title-label, .sub-title{
 	font-size:24px;
 	font-weight:bold;
@@ -271,8 +263,8 @@ info-row{
 	margin-left:10px;
 }
 .info-row{
-		margin-bottom:20px;
-		font-weight:bold
+	margin-bottom:20px;
+	font-weight:bold
 }
 .info-row .sub-title{
 	font-size:20px;
@@ -320,12 +312,11 @@ info-row{
 	justify-content:center;
 	align-items:end;
 	color:white;
-
 	opacity:0;
 }
 .card-description-container:hover{
-	opacity:0.7;
-	background-color:#555555;
+	opacity:1;
+	background-color:rgba(0,0,0,0.3);
 }
 .card{
 	position:relative;

@@ -39,13 +39,11 @@ public class TourServiceImpl implements TourService {
 
 	@Override
 	public TourDto selectTourByTitle(TourDto tourDto) throws Exception {
-		// TODO Auto-generated method stub
 		return tourDao.selectTour(tourDto);
 	}
 
 	@Override
 	public List<TourDto> selectHotTourList() throws Exception {
-		// TODO Auto-generated method stub
 		return tourDao.selectHotTourList();
 	}
 }
