@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded',function(){
 async function setNearLocation(){
 	let params = {
 			serviceKey : key,
-			numOfRows : 4,
+			numOfRows : 100,
 			pageNo : 1,
 			MobileOS : 'win',
 			MobileApp : 'mytrip',
@@ -31,7 +31,7 @@ async function setNearLocation(){
 			listYN:'Y',
 			mapY:latitude,
 			mapX:longitude,
-			radius:5000,
+			radius:1000,
 			arrange:'A',
 		}
 	
@@ -44,31 +44,57 @@ async function setNearLocation(){
 		.then((response)=>response.json()).
 		then(function(data){
 			console.log("주변 관광지 데이터");
-			console.log(data);
-			let items = data.response.body.items;
-			for(let idx =1 ; idx<items.length;idx++){
-				
-			}
+			let items = data.response.body.items.item;
+			let list = document.querySelector('.tour-list');
+			console.log(items);
+			console.log(list);
+			console.log(items.length);
 			
-			var context = `	
-				<form class="tour-card" action="${baseUrl}" method="get" onclick="submit()">
-					<input type="hidden" name="title" value="${title}"/>
-					<input type="hidden" name="address" value="${addr}"/>
-					<input type="hidden" name="longitude" value="${mapx}"/>
-					<input type="hidden" name="latitude" value="${mapy}"/>
-					<input type="hidden" name="telephone" value="${tel}"/>
-					
-					<img src="`+img+`">
-					<div class="tour-info">
-						<div class="tour-info-top">
-							<span class="tour-info-title">
-							`+title+`
-							</span>
-						</div>
-					</div>
-				</form>
-				`	
-list.insertAdjacentHTML('beforeend',context);
+			for(let idx =0; idx<items.length;idx++){
+				let title = items[idx].title;
+				let addr = items[idx].addr1;
+				let mapx = items[idx].mapx;
+				let mapy = items[idx].mapy;
+				let tel = items[idx].tel == "" ? "-" : items[idx].tel;
+				let img = items[idx].firstimage == "" ? "/img/tour/no-image.png" : items[idx].firstimage;
+				
+				params ={
+						title : items[idx].title,
+						address : items[idx].addr1,
+						longitude : items[idx].mapx,
+						latitude : items[idx].mapy,
+						telephone : items[idx].tel,
+					};
+				
+				paramUrl = new URLSearchParams(params);
+				let baseUrl = '/tour/detail?';
+				let url = baseUrl + paramUrl.toString();
+				console.log(url)
+				
+				var context = `	
+					<div class="tour-card row" onclick="window.location.href='${url}'">
+								<div class="col-md-5 col-sm-5 col-xs-5">
+									<img src="${img}">
+								</div>
+								<div class="col-md-7 col-sm-7 col-xs-7">
+									<div class="tour-description-wrapper">
+										<div class="tour-description-top">
+											<div class="tour-title">${title}</div>
+										</div>
+										<div class="tour-description-bottom">
+											<span>
+												<span><i class="fa-solid fa-location-dot"></i>
+												<span class="tour-address">${addr}</span>
+												</span>
+											</span>
+											<span><i class="fa-solid fa-phone"></i><span class="tour-tel">${tel}</span></span>
+											</div>
+									</div>
+								</div>
+							</div>`
+					console.log(context);
+				list.insertAdjacentHTML('beforeend',context);
+			}
 		})
 }
 
