@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kiki.review.model.ReviewDto;
 import com.kiki.review.model.dao.ReviewDao;
+import com.kiki.route.model.SearchDto;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -30,8 +31,8 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public List<ReviewDto> searchReview(String keyword) {
-		return reviewDao.searchReview(keyword);
+	public List<ReviewDto> searchReview(SearchDto search) {
+		return reviewDao.searchReview(search);
 	}
 
 }

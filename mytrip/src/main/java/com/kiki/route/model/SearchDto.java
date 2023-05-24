@@ -14,6 +14,12 @@ public class SearchDto {
 	private int end;
 	private boolean next;
 	
+	public SearchDto(int pageNo, String keyword) {
+		super();
+		this.pageNo = pageNo;
+		this.keyword = keyword;
+	}
+	
 	public boolean isBefore() {
 		return before;
 	}

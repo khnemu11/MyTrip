@@ -3,6 +3,7 @@ package com.kiki.review.model.service;
 import java.util.List;
 
 import com.kiki.review.model.ReviewDto;
+import com.kiki.route.model.SearchDto;
 
 public interface ReviewService {
 
@@ -10,7 +11,7 @@ public interface ReviewService {
 
 	List<ReviewDto> getList();
 
-	List<ReviewDto> searchReview(String keyword);
+	List<ReviewDto> searchReview(SearchDto search);
 
 
 }

@@ -57,6 +57,7 @@
 .review-card{
 	position:relative;
 	width:100%;
+	cursor: pointer;
 }
 .review-title:hover{
 	opacity:0.9;

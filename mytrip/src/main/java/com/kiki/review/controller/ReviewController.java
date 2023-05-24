@@ -62,11 +62,14 @@ public class ReviewController {
 			System.out.println(reviewForm);
 			int valid = reviewService.writeReview(reviewForm);
 			if(valid > 0) {
+				System.out.println("리뷰쓰기 성공");
 				return "review/detail";
 			} else {
+				System.out.println("리뷰쓰기 실패");
 				return "review/write";
 			}
 		} catch(Exception e) {
+			System.out.println("리뷰쓰기 에러");
 			e.printStackTrace();
 			return "error/error";
 		}
