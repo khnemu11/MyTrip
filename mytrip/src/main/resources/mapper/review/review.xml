@@ -71,4 +71,10 @@
 		FROM review_image
 		WHERE review_seq = #{seq}
 	</select>	
+	
+	<delete id="deleteReview" parameterType="int" >
+		DELETE
+		FROM review
+		WHERE seq = #{seq}
+	</delete>
 </mapper>

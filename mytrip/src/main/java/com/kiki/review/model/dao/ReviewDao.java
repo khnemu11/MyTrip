@@ -22,4 +22,6 @@ public interface ReviewDao {
 	public ReviewDto getReviewDetail(int seq);
 
 	public List<ReviewImgDto> getReviewImg(int seq);
+
+	public int deleteReview(int seq);
 }

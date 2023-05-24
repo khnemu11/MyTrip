@@ -58,4 +58,9 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewDao.getReviewImg(seq);
 	}
 
+	@Override
+	public int deleteReview(int seq) {
+		return reviewDao.deleteReview(seq);
+	}
+
 }

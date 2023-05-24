@@ -9,6 +9,11 @@
 	<link rel="stylesheet" href="/css/review/list.css" />
 </head>
 <body>
+<c:if test="${not empty reviewMsg}">
+	<script>
+		alert("${reviewMsg}");
+	</script>
+</c:if>
 	<%@ include file="/WEB-INF/views/util/header.jsp"%>
 	<div class = "list-container row">	
 		<div class="col-lg-2 col-md-2 col-sm-2"></div>

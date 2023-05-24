@@ -96,6 +96,29 @@ public class ReviewController {
 		}
 	}
 
+	@GetMapping("/detail/{seq}")
+	public String detail(@PathVariable("seq") int seq, Model model) {
+		try {
+			System.out.println(model.getAttribute("reviewMsg"));
+			ReviewDto review = reviewService.getReviewDetail(seq);
+			
+			System.out.println("리뷰 스타뚜");
+			System.out.println(review);
+			model.addAttribute("review", review);
+			List<ReviewImgDto> reviewImg = reviewService.getReviewImg(seq);
+			model.addAttribute("reviewImg", reviewImg);
+			System.out.println("리뷰이미지 스타뚜");
+			for (int i = 0; i < reviewImg.size(); i++) {
+				System.out.println(i + " " + reviewImg);
+			}
+			return "review/detail";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error/error";
+		}
+
+	}
+	
 	@GetMapping("/update/{seq}")
 	public String update(@PathVariable("seq") int seq, Model model) {
 		try {
@@ -120,14 +143,20 @@ public class ReviewController {
 			@RequestParam Map<String, String> paramMap, HttpSession session) {
 		try {
 			TourDto tourDto = new TourDto();
+			tourDto.setAddress(paramMap.get("tour-address"));
+			tourDto.setLongitude(Float.parseFloat(paramMap.get("tour-longitude")));
+			tourDto.setLatitude(Float.parseFloat(paramMap.get("tour-latitude")));
+			tourDto.setTelephone(paramMap.get("tour-telephone"));
+			tourDto.setTitle(paramMap.get("tour-title"));
 			String name = ((UserDto) session.getAttribute("userInfo")).getName();
 			String id = ((UserDto) session.getAttribute("userInfo")).getId();
 			reviewForm.setUserName(name);
 			reviewForm.setUserId(id);
+			reviewForm.setTourTitle(tourDto.getTitle());
 			System.out.println(reviewForm);
 			int valid = reviewService.writeReview(reviewForm,tourDto);
 			if (valid > 0) {
-				System.out.println("리뷰쓰기 성공");
+				System.out.println("리뷰수정 성공");
 				// 가장 최신 것 중에서 아이디 같은 것
 				int seq = reviewService.getLastestReview(id);
 				System.out.println(seq);
@@ -142,26 +171,26 @@ public class ReviewController {
 			return "error/error";
 		}
 	}
-
-	@GetMapping("/detail/{seq}")
-	public String detail(@PathVariable("seq") int seq, Model model) {
+	
+	@GetMapping("/delete/{seq}")
+	public String delete(@PathVariable("seq") int seq, Model model) {
 		try {
-			ReviewDto review = reviewService.getReviewDetail(seq);
-			
-			System.out.println("리뷰 스타뚜");
-			System.out.println(review);
-			model.addAttribute("review", review);
-			List<ReviewImgDto> reviewImg = reviewService.getReviewImg(seq);
-			model.addAttribute("reviewImg", reviewImg);
-			System.out.println("리뷰이미지 스타뚜");
-			for (int i = 0; i < reviewImg.size(); i++) {
-				System.out.println(i + " " + reviewImg);
+			System.out.println("삭제 시작!");
+			int valid = reviewService.deleteReview(seq);
+			if (valid > 0) {
+				System.out.println("삭제 성공");
+				model.addAttribute("reviewMsg", "삭제 성공!");
+				return "review/list";
+			} else {
+				System.out.println("삭제 실패");
+				model.addAttribute("reviewMsg", "삭제 실패하였습니다.");
+				return "redirect:review/detail/"+seq;
 			}
-			return "review/detail";
 		} catch (Exception e) {
+			System.out.println("삭제 에러");
 			e.printStackTrace();
 			return "error/error";
 		}
-
 	}
+	
 }
