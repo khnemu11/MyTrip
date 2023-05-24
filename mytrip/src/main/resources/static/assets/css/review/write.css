@@ -2,6 +2,7 @@
 	padding-left:5px;
 	font-size: 18px;	
 	font-weight:bold;
+	margin-bottom:20px;
 }
 .sub-title-label{
 	font-size:28px;
@@ -154,5 +155,26 @@
 	margin-top:20px;
 }
 .btn{
-	margin-top:10px;
+}
+input[name = file]{
+	margin-bottom:30px;
+}
+.form-control{
+	margin-bottom:30px;
+}
+.btn-container{
+	display:flex;
+	justify-content:end;
+}
+#tour-title{
+	width:40%;
+	min-width:200px;
+}
+.flex{
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+}
+#selected{
+	margin-top:20px;
 }

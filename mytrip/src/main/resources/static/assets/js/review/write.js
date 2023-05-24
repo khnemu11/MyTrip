@@ -70,7 +70,15 @@ async function makeTourList(isNew){
 			
 			let list = document.getElementById("location-list");
 			let resultDiv = document.querySelector('#search-result');
-			resultDiv.innerText = `검색 결과 : ${data.response.body.totalCount} 건`;
+			let selected = '';
+			if(document.getElementById("selected")!=null){
+				selected = document.getElementById("selected").innerText;
+				
+			}
+			let resultContext = `검색 결과 : ${data.response.body.totalCount} 건<div id="selected"> ${selected}</div>`;
+			
+			resultDiv.innerHTML = resultContext;
+
 			if(data.response.body.totalCount == 0){
 				list.innerHTML = `<div>해당 조건에 맞는 관광지가 없습니다.</div>`
 				if(document.querySelector('.loading-spinner')!=null){
@@ -144,7 +152,9 @@ function pickTour(title,address,longitude,latitude,telephone){
 	document.querySelector('#tour-longitude').value = longitude;
 	document.querySelector('#tour-latitude').value = latitude;
 	document.querySelector('#tour-telephone').value = telephone;
-//	
+	
+	document.querySelector('#selected').innerText = "선택한 관광지 : "+title;
+	console.log(document.querySelector('#selected'));
 //	let modal =new bootstrap.Modal('#exampleModal')
 //	console.log(modal);
 //	modal.hide();
