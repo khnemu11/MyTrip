@@ -179,7 +179,10 @@ p{
 	grid-column-gap:20px;
 }
 .tour-list{
+	height:360px;
 	padding-left:10px;
+	overflow-y:scroll;
+	overflow-x:hidden;
 }
 #tour-img{
 	max-height:250px;
@@ -191,5 +194,8 @@ p{
 	color:#3F80F8;
 }
 .favorite:hover{
+	cursor:pointer;
+}
+.tour-card:hover{
 	cursor:pointer;
 }

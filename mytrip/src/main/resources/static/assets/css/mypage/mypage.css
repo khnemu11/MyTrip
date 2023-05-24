@@ -35,3 +35,9 @@
 .sub-title-right:hover{
 	cursor:pointer;
 }
+.body-wrapper{
+	width:100%;
+	max-width:1440px;
+	display:flex;
+	justify-content:center;
+}
