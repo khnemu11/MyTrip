@@ -28,9 +28,18 @@
 				</div>
 			</div>
 			<div class="detail-container">
-				<div>작성자 : {name}</div>
-				<div>{title}</div>
-				<div>● 장소: {} </div>
+				<div>수정</div>
+				<div>삭제</div>
+				<div>${review.createdDate}</div>
+				<div>작성자 : ${review.userName}</div>
+				<div>제목 : ${review.title}</div>
+				<c:if test="${not empty review.tourTitle}">
+				<div>● 장소: ${review.tourTitle}</div> <!-- 장소 누르면 상세페이지로 이동 -->
+				</c:if>
+				<c:forEach var="img" items="${reviewImg}">
+					<img src="/img/review/${img.imageCode}.png">
+				</c:forEach>
+				<div>${review.content}</div>
 			</div>
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-3"></div>
