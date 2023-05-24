@@ -41,9 +41,9 @@
 							</div>
 							<div class="col-lg-9 col-md-9 col-sm-9 util-container">
 								<span class="util-container">
-								<a href="/mypage/authentication" class="edit">수정</a>
-								<a href="/mypage/withdrawal" class="delete">탈퇴</a>
-							</span>
+									<a href="/mypage/authentication" class="edit">수정</a>
+									<a href="/mypage/withdrawal" class="delete">탈퇴</a>
+								</span>
 							</div>
 						</div>
 						<div class="info-row row">
@@ -91,7 +91,7 @@
 								<span>가입일</span>
 							</div>
 							<div class="col-lg-9 col-md-9 col-sm-9 flex">
-								<span>${userInfo.joinDate}</span>
+								<span>${userInfo.joinDateStr}</span>
 							</div>
 						</div>
 					</div>

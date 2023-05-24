@@ -42,9 +42,11 @@
 					</div>
 				</div>
 				
-				<div class="btn-wrapper">
-					<button type="button" class="btn" onclick="window.location.href='/review/write';">후기 작성</button>
-				</div>
+				<c:if test="${not empty userInfo}">
+					<div class="btn-wrapper">
+						<button type="button" class="btn" onclick="window.location.href='/review/write';">후기 작성</button>
+					</div>
+				</c:if>
 			</div>
 			
 			<div class="review-wrapper">

@@ -12,6 +12,8 @@ import com.kiki.route.model.SearchDto;
 public interface ReviewDao {
 
 	public int writeReview(ReviewDto reivewForm);
+	
+	public int getLastestReview(String id);
 
 	public List<ReviewDto> getList();
 

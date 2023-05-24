@@ -59,12 +59,51 @@ public class ReviewController {
 	public String writeReview(@ModelAttribute("reviewForm") ReviewDto reviewForm, HttpSession session) {
 		try {
 			String name = ((UserDto)session.getAttribute("userInfo")).getName();
+			String id = ((UserDto)session.getAttribute("userInfo")).getId();
 			reviewForm.setUserName(name);
+			reviewForm.setUserId(id);
 			System.out.println(reviewForm);
 			int valid = reviewService.writeReview(reviewForm);
 			if(valid > 0) {
 				System.out.println("리뷰쓰기 성공");
-				return "review/detail";
+				// 가장 최신 것 중에서 아이디 같은 것
+				int seq = reviewService.getLastestReview(id);
+				System.out.println(seq);
+				return "redirect:detail/" + seq;
+			} else {
+				System.out.println("리뷰쓰기 실패");
+				return "review/write";
+			}
+		} catch(Exception e) {
+			System.out.println("리뷰쓰기 에러");
+			e.printStackTrace();
+			return "error/error";
+		}
+	}
+	
+	@GetMapping("/write/{seq}")
+	public String update() {
+		// seq로 리뷰 데이터 가져오기
+		// 모델에 담아
+		// jsp에 뿌리기
+		return "review/write";
+	}
+	
+	@PostMapping("/write/{seq}")
+	public String updateReview(@ModelAttribute("reviewForm") ReviewDto reviewForm, HttpSession session) {
+		try {
+			String name = ((UserDto) session.getAttribute("userInfo")).getName();
+			String id = ((UserDto) session.getAttribute("userInfo")).getId();
+			reviewForm.setUserName(name);
+			reviewForm.setUserId(id);
+			System.out.println(reviewForm);
+			int valid = reviewService.writeReview(reviewForm);
+			if(valid > 0) {
+				System.out.println("리뷰쓰기 성공");
+				// 가장 최신 것 중에서 아이디 같은 것
+				int seq = reviewService.getLastestReview(id);
+				System.out.println(seq);
+				return "redirect:detail/" + seq;
 			} else {
 				System.out.println("리뷰쓰기 실패");
 				return "review/write";
@@ -79,7 +118,6 @@ public class ReviewController {
 	@GetMapping("/detail/{seq}")
 	public String detail(@PathVariable("seq") int seq, Model model) {
 		try {
-			// 장소 처리도 해야해용
 			ReviewDto review = reviewService.getReviewDetail(seq);
 			System.out.println("리뷰 스타뚜");
 			System.out.println(review);

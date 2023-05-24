@@ -10,6 +10,8 @@ public interface ReviewService {
 
 	int writeReview(ReviewDto reviewForm);
 
+	int getLastestReview(String id);
+	
 	List<ReviewDto> getList();
 
 	List<ReviewDto> searchReview(SearchDto search);
@@ -17,6 +19,4 @@ public interface ReviewService {
 	ReviewDto getReviewDetail(int seq);
 
 	List<ReviewImgDto> getReviewImg(int seq);
-
-
 }

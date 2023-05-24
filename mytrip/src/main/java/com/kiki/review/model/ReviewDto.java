@@ -8,6 +8,7 @@ public class ReviewDto {
 	private int seq;
 	private String title;
 	private String content;
+	private String userId;
 	private String userName;
 	private String createdDate;
 	private String modifiedDate;
@@ -32,6 +33,12 @@ public class ReviewDto {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public String getUserName() {
 		return userName;
@@ -77,9 +84,9 @@ public class ReviewDto {
 	}
 	@Override
 	public String toString() {
-		return "ReviewDto [seq=" + seq + ", title=" + title + ", content=" + content + ", userName=" + userName
-				+ ", createdDate=" + createdDate + ", modifiedDate=" + modifiedDate + ", deletedDate=" + deletedDate
-				+ ", imageCode=" + imageCode + ", tourTitle=" + tourTitle + "]";
+		return "ReviewDto [seq=" + seq + ", title=" + title + ", content=" + content + ", userId=" + userId
+				+ ", userName=" + userName + ", createdDate=" + createdDate + ", modifiedDate=" + modifiedDate
+				+ ", deletedDate=" + deletedDate + ", imageCode=" + imageCode + ", tourTitle=" + tourTitle + "]";
 	}
 
 

@@ -28,8 +28,13 @@
 				</div>
 			</div>
 			<div class="detail-container">
-				<div>수정</div>
-				<div>삭제</div>
+				<c:if test="${review.userId == userInfo.id}">
+					<span class="util-container">
+						<a class="btn" href="/review/update/${review.seq}" class="edit">수정</a>
+						<span class="btn delete-btn" class="delete">삭제</span>
+					</span>
+				</c:if>
+				<div data-seq="${review.seq}" id="seq"></div>
 				<div>${review.createdDate}</div>
 				<div>작성자 : ${review.userName}</div>
 				<div>제목 : ${review.title}</div>

@@ -27,6 +27,11 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
+	public int getLastestReview(String id) {
+		return reviewDao.getLastestReview(id);
+	}
+	
+	@Override
 	public List<ReviewDto> getList() {
 		return reviewDao.getList();
 	}

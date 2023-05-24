@@ -9,6 +9,7 @@
 		<id column="seq" property="seq" />
 		<id column="title" property="title" />
 		<id column="content" property="content" />
+		<id column="user_id" property="userId"/>
 		<id column="user_name" property="userName" />
 		<id column="created_date" property="createdDate" />
 		<id column="modified_date" property="modifiedDate" />
@@ -26,9 +27,17 @@
 
 	<!-- id는 repo클래스의 메소드 이름과 일치시킨다. -->
 	<insert id="writeReview" parameterType="ReviewDto">
-		INSERT INTO review (title, content, user_name, modified_date, deleted_date)
-		VALUES (#{title}, #{content}, #{userName}, #{modifiedDate}, #{deletedDate})
+		INSERT INTO review (title, content, user_id, user_name, modified_date, deleted_date)
+		VALUES (#{title}, #{content}, #{userId}, #{userName}, #{modifiedDate}, #{deletedDate})
 	</insert>
+	
+	<select id="getLastestReview" resultType="int" parameterType="String">
+		SELECT seq
+		FROM review
+		WHERE user_id = #{userId}
+		ORDER BY created_date DESC 
+		LIMIT 1
+	</select>
 	
 	<select id="getList" resultMap="reviewList">
 		SELECT r.seq, r.title, i.image_code
