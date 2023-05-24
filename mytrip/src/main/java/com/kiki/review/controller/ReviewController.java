@@ -57,6 +57,7 @@ public class ReviewController {
 	
 	@PostMapping("/write")
 	public String writeReview(@ModelAttribute("reviewForm") ReviewDto reviewForm, HttpSession session) {
+		System.out.println();
 		try {
 			String name = ((UserDto)session.getAttribute("userInfo")).getName();
 			reviewForm.setUserName(name);

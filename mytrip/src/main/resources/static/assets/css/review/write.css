@@ -52,4 +52,107 @@
 	padding-right:30px;
 	color:white;
 }
+#search-bar{
+	display:flex;
+	width:100%;
+	align-items:center;
+	border:2px solid #3F80F8;
+	border-radius:15px;
+	box-shadow:2px 2px 10px #d3d3d3;
+	justify-content:space-around;
+}
+#btn-search{
+	background-color:white;
+	border:none;
+}
+#btn-search i {
+	font-size:20px;
+}
+.search-logo{
+	width:32px;
+	height:32px;
+}
+.divider{
+	font-size:30px;
+	margin-bottom:5px;	
+	color:#3F80F8;;
+}
+.form-search{
+	width:70%;
+	border:none;
+	color:#3F80F8;
+}
+.form-search::placeholder{
+	color:#808080;
+	font-size:17px;
+	opacity:40%;
+}
+#btn-search-{
+	background-color:transparent;
+	border:none;
+	font-size:26px;
+	padding-left:0px;
+	padding-right:0px;
+}
+.search-container{
+	padding-top:10px;
+}
+.card-address{
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+}
+.card-right{
+	display:flex;
+	flex-direction:column;
+	width:80%;
+	
+}
+.card-title{
+	font-weight:bold;
+	font-size:18px;
+}
+.card-address-container{
+	display:flex;
+}
+.tour-container{
+	overflow-y:scroll;
+	overflow-x:hidden;
+	height:60vh;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	margin-top:20px;
+}
+.card-description div i{
+	margin-right:7px;
+}
+.card{
+	width:90%;
+	margin-top:10px;
+	margin-bottom:10px;
+	padding:10px;
+}
+.card:hover{
+	cursor:pointer;
+}
+.tour-container::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #d3d3d3; 
+  border-radius:20px;
+}
 
+.tour-container::-webkit-scrollbar-thumb {
+  background: #808080;
+  border-radius:20px;
+}
+#search-result{
+	font-weight:bold;
+	font-size:20px;
+	margin-left:10px;
+	margin-top:20px;
+}
+.btn{
+	margin-top:10px;
+}
