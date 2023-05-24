@@ -32,7 +32,7 @@
 		ORDER BY r.seq
 	</select>
 	
-	<select id="searchReview" resultMap="reviewList" parameterType="String">
+	<select id="searchReview" resultMap="reviewList" parameterType="SearchDto">
 		SELECT r.seq, r.title, i.image_code
 		FROM review AS r
 		LEFT JOIN review_image AS i
@@ -40,5 +40,7 @@
 		WHERE title LIKE CONCAT( '%',#{keyword},'%')
 		GROUP BY r.seq
 		ORDER BY r.seq
+		LIMIT #{pageSize}
+		OFFSET #{offset}
 	</select>	
 </mapper>

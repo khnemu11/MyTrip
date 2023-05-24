@@ -1,21 +1,27 @@
 let pageNo = 1;
+let isLoad = false;
 
-document.addEventListener('DOMContentLoaded',function(){
-	
-})
+document.addEventListener("DOMContentLoaded", () => {
+	getReviewList(true);
+});
 
-const getList = () => {
-	isNew = true;
-	let body = {
-			keyword : document.querySelector("#search").value
+const getReviewList = (isNew) => {
+	if (isNew) {
+		pageNo = 1;
+	} else {
+		pageNo = pageNo + 1;
 	}
-	fetch('/reviews/search', {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(body)
-	})
+	
+	let params = {
+			pageNo : pageNo,
+			keyword : document.querySelector("#search").value,
+	}
+	
+	let paramUrl = new URLSearchParams(params);
+	
+	console.log("/reviews/search?" + paramUrl.toString(params));
+	
+	fetch('/reviews/search?' + paramUrl.toString(params))
 	.then(response => response.json())
 	.then((reviewList) => {
 		let list = document.querySelector(".review-container");
@@ -24,20 +30,13 @@ const getList = () => {
 			list.innerHTML = "";
 		}
 		
-		if(reviewList.length != 0) {
-			document.querySelector(".no-match").style.display = "none";
-		} else {
-			document.querySelector(".no-match").style.display = "block";
-			return 0;
-		}
+		console.log("히히히히"+ reviewList.length);
+		
 
 		for (let idx in reviewList){
 			let seq = reviewList[idx].seq;
 			let title = reviewList[idx].title;
 			let imageCode = reviewList[idx].imageCode;
-			
-			console.log(imageCode);
-			
 			
 			if (imageCode == null) {
 				imageCode = "no-image";
@@ -57,10 +56,29 @@ const getList = () => {
 				`;
 			list.insertAdjacentHTML('beforeend', context);
 		}		
+		if(list.childNodes.length != 0) {
+			document.querySelector(".no-match").style.display = "none";
+		} else {
+			document.querySelector(".no-match").style.display = "block";
+			return 0;
+		}
+
 	})
 	.catch(error => {
 		console.log(error);
-	})
-}
+	})	
+};
 
-document.querySelector("#btn-search").addEventListener("click", () => getList());
+document.querySelector("#btn-search").addEventListener("click", () => getReviewList(true));
+
+
+document.addEventListener('scroll', function(e){
+	
+	console.log(document.documentElement.scrollHeight+" , "+ document.documentElement.scrollTop+" ,"+ document.documentElement.clientHeight);
+	
+	if(document.documentElement.scrollHeight <= document.documentElement.scrollTop + document.documentElement.clientHeight+100 && !isLoad){
+		isLoad=true;
+		getReviewList(false);
+		isLoad=false;
+	}
+});
