@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kiki.review.model.ReviewDto;
+import com.kiki.review.model.ReviewImgDto;
 import com.kiki.review.model.dao.ReviewDao;
 import com.kiki.route.model.SearchDto;
 
@@ -33,6 +34,16 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public List<ReviewDto> searchReview(SearchDto search) {
 		return reviewDao.searchReview(search);
+	}
+
+	@Override
+	public ReviewDto getReviewDetail(int seq) {
+		return reviewDao.getReviewDetail(seq);
+	}
+
+	@Override
+	public List<ReviewImgDto> getReviewImg(int seq) {
+		return reviewDao.getReviewImg(seq);
 	}
 
 }

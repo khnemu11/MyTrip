@@ -1,6 +1,8 @@
 package com.kiki.review.model;
 
-import java.util.List;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ReviewDto {
 	private int seq;
@@ -10,7 +12,9 @@ public class ReviewDto {
 	private String createdDate;
 	private String modifiedDate;
 	private String deletedDate;
-	private String imageCode;
+	private String imageCode; // 대표 이미지 하나
+	private String tourTitle;
+	
 	public int getSeq() {
 		return seq;
 	}
@@ -38,14 +42,20 @@ public class ReviewDto {
 	public String getCreatedDate() {
 		return createdDate;
 	}
-	public void setCreatedDate(String createdDate) {
-		this.createdDate = createdDate;
+	public void setCreatedDate(Timestamp createdDate) {
+		LocalDateTime dateTime = createdDate.toLocalDateTime();
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		// 만약 오늘이면 시간나오게 처리
+		this.createdDate = dateTime.format(format);
 	}
 	public String getModifiedDate() {
 		return modifiedDate;
 	}
-	public void setModifiedDate(String modifiedDate) {
-		this.modifiedDate = modifiedDate;
+	public void setModifiedDate(Timestamp modifiedDate) {
+		LocalDateTime dateTime = modifiedDate.toLocalDateTime();
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		// 만약 오늘이면 시간나오게 처리
+		this.modifiedDate = dateTime.format(format);
 	}
 	public String getDeletedDate() {
 		return deletedDate;
@@ -53,18 +63,24 @@ public class ReviewDto {
 	public void setDeletedDate(String deletedDate) {
 		this.deletedDate = deletedDate;
 	}
-
 	public String getImageCode() {
 		return imageCode;
 	}
 	public void setImageCode(String imageCode) {
 		this.imageCode = imageCode;
 	}
+	public String getTourTitle() {
+		return tourTitle;
+	}
+	public void setTourTitle(String tourTitle) {
+		this.tourTitle = tourTitle;
+	}
 	@Override
 	public String toString() {
 		return "ReviewDto [seq=" + seq + ", title=" + title + ", content=" + content + ", userName=" + userName
 				+ ", createdDate=" + createdDate + ", modifiedDate=" + modifiedDate + ", deletedDate=" + deletedDate
-				+ ", imageCode=" + imageCode + "]";
+				+ ", imageCode=" + imageCode + ", tourTitle=" + tourTitle + "]";
 	}
+
 
 }

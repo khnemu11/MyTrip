@@ -14,8 +14,15 @@
 		<id column="modified_date" property="modifiedDate" />
 		<id column="deleted_date" property="deletedDate" />
 		<id column="image_code" property="imageCode" />
+		<id column="tour_title" property="tourTitle"/>
 	</resultMap>
-
+	
+	<resultMap type="ReviewImgDto" id="reviewImg">
+		<id column="seq" property="seq" />
+		<id column="review_seq" property="reviewSeq" />
+		<id column="image_name" property="imageName" />
+		<id column="image_code" property="imageCode" />
+	</resultMap>
 
 	<!-- id는 repo클래스의 메소드 이름과 일치시킨다. -->
 	<insert id="writeReview" parameterType="ReviewDto">
@@ -43,4 +50,16 @@
 		LIMIT #{pageSize}
 		OFFSET #{offset}
 	</select>	
+	
+	<select id="getReviewDetail" resultMap="reviewList" parameterType="int">
+		SELECT *
+		FROM review
+		WHERE seq = #{seq}
+	</select>
+	
+	<select id="getReviewImg" resultMap="reviewImg" parameterType="int">
+		SELECT *
+		FROM review_image
+		WHERE review_seq = #{seq}
+	</select>
 </mapper>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kiki.review.model.ReviewDto;
+import com.kiki.review.model.ReviewImgDto;
 import com.kiki.review.model.service.ReviewService;
 import com.kiki.user.model.UserDto;
 
@@ -76,8 +77,24 @@ public class ReviewController {
 	}
 	
 	@GetMapping("/detail/{seq}")
-	public String detail(@PathVariable("seq") int seq) {
-		// 내가 혼자 할게
-		return "review/detail";
+	public String detail(@PathVariable("seq") int seq, Model model) {
+		try {
+			// 장소 처리도 해야해용
+			ReviewDto review = reviewService.getReviewDetail(seq);
+			System.out.println("리뷰 스타뚜");
+			System.out.println(review);
+			model.addAttribute("review", review);
+			List<ReviewImgDto> reviewImg = reviewService.getReviewImg(seq);
+			model.addAttribute("reviewImg", reviewImg);
+			System.out.println("리뷰이미지 스타뚜");
+			for(int i=0; i<reviewImg.size(); i++) {
+				System.out.println(i + " " + reviewImg);
+			}
+			return "review/detail";
+		} catch(Exception e) {
+			e.printStackTrace();
+			return "error/error";
+		}
+		
 	}
 }

@@ -1,5 +1,8 @@
 package com.kiki.mypage.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -26,7 +28,18 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/mypage")
-	public String mypage() {
+	public String mypage(HttpSession session) {
+		try {
+			UserDto sessionUser = (UserDto) session.getAttribute("userInfo");
+			LocalDateTime dateTime = sessionUser.getJoinDate().toLocalDateTime();
+			DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			sessionUser.setJoinDateStr( dateTime.format(format));
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "error/error";
+		}
+
+		
 		return "mypage/mypage";
 	}
 	
@@ -70,7 +83,7 @@ public class MyPageController {
 			if (valid > 0) {
 				model.addAttribute("mypageMsg", "수정 성공했습니다.");
 				session.setAttribute("userInfo", updateForm);
-				return "mypage/mypage";
+				return "redirect:mypage/mypage";
 			} else {
 				model.addAttribute("mypageMsg", "수정 실패하였습니다.");
 				return "mypage/update";
