@@ -41,4 +41,9 @@ public class MainController {
 		}
 		return "index";
 	}
+	@GetMapping("/errorPage")
+	public String error(Model model) {
+
+		return "error/error";
+	}
 }
