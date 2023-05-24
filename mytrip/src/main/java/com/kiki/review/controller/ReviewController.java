@@ -20,17 +20,20 @@ import com.kiki.review.model.ReviewDto;
 import com.kiki.review.model.ReviewImgDto;
 import com.kiki.review.model.service.ReviewService;
 import com.kiki.tour.model.TourDto;
+import com.kiki.tour.model.service.TourService;
 import com.kiki.user.model.UserDto;
 
 @Controller
 @RequestMapping("review")
 public class ReviewController {
 	ReviewService reviewService;
+	TourService tourService;
 
 	@Autowired
-	public ReviewController(ReviewService reviewService) {
+	public ReviewController(ReviewService reviewService, TourService tourService) {
 		super();
 		this.reviewService = reviewService;
+		this.tourService = tourService;
 	}
 
 	@GetMapping("/list")
@@ -93,15 +96,26 @@ public class ReviewController {
 		}
 	}
 
-	@GetMapping("/write/{seq}")
-	public String update() {
-		// seq로 리뷰 데이터 가져오기
-		// 모델에 담아
-		// jsp에 뿌리기
-		return "review/write";
+	@GetMapping("/update/{seq}")
+	public String update(@PathVariable("seq") int seq, Model model) {
+		try {
+			ReviewDto review = reviewService.getReviewDetail(seq);
+			model.addAttribute("review", review);
+			List<ReviewImgDto> reviewImg = reviewService.getReviewImg(seq);
+			model.addAttribute("reviewImg", reviewImg);
+			
+			TourDto searchTourDto = new TourDto();
+			searchTourDto.setTitle(review.getTourTitle());
+			TourDto tourDto = tourService.selectTourByTitle(searchTourDto);
+			model.addAttribute("tour", tourDto);
+			
+			return "review/update";
+		} catch(Exception e) {
+			return "error/error";
+		}
 	}
-
-	@PostMapping("/write/{seq}")
+	
+	@PostMapping("/update")
 	public String updateReview(@ModelAttribute("reviewForm") ReviewDto reviewForm,
 			@RequestParam Map<String, String> paramMap, HttpSession session) {
 		try {
@@ -133,6 +147,7 @@ public class ReviewController {
 	public String detail(@PathVariable("seq") int seq, Model model) {
 		try {
 			ReviewDto review = reviewService.getReviewDetail(seq);
+			
 			System.out.println("리뷰 스타뚜");
 			System.out.println(review);
 			model.addAttribute("review", review);

@@ -70,5 +70,5 @@
 		SELECT *
 		FROM review_image
 		WHERE review_seq = #{seq}
-	</select>
+	</select>	
 </mapper>
