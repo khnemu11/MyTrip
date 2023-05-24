@@ -200,7 +200,6 @@ async function makeTourList(isNew){
 				console.log(list.childNodes);
 				list.removeChild(list.childNodes[list.childNodes.length-1]);
 			}
-			
 			for(var idx in locations){
 				var title = locations[idx].title.replace(/\s/g,'');
 				var addr = locations[idx].addr1;

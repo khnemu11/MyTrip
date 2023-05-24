@@ -6,9 +6,13 @@
 <html>
 <head>
 	<%@ include file="/WEB-INF/views/util/head.jsp"%>
+	<link rel="stylesheet" href="/css/util/error.css"/>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/util/header.jsp"%>
-	error페이지
+	<div class="main-container">
+		<img src="/img/utill/error.png"/>
+		<div class="msg">서비스 이용에 불편을 드려서 죄송합니다.</div>
+	</div>
 </body>
 </html>

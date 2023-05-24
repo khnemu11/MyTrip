@@ -298,3 +298,7 @@ p{
 }
 .tour-delete:hover{
 	cursor:pointer;
+}
+.card {
+	cursor:pointer;
+}
