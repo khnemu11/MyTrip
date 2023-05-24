@@ -44,7 +44,7 @@ body{
 }
 .sub-title{
     font-weight:bold;
-    font-size:18px;
+    font-size:20px;
     margin-bottom:5px;
 }
 .form-control{
@@ -95,7 +95,7 @@ body{
 .tour-title{
 	margin-left:20px;
 	font-weight:bold;
-	width:100%;
+	width:60%;
 }
 .tour-left{
 	width:50px;
@@ -122,7 +122,7 @@ p{
 	margin:0px;
 }
 .tour-right{
-	width:100%;
+	width:90%;
 	display:flex;
 	justify-content:space-between;
 }
@@ -136,10 +136,11 @@ span .circle{
 }
 .duration{
 	margin-left:5px;
+	
 }
 
 #predict-time{
-	margin-top:15px;
+	margin-top:1px;
 }
 .sub-sub-title{
 	font-size:20px;
@@ -148,7 +149,15 @@ span .circle{
 	
 }
 .sub-context{
-	font-size:16px;
-	color:#777777;
+	font-size:18px;
+	color:#2222222;
 }
 
+
+.select-tour{
+	display:flex;
+	margin-bottom:15px;	
+}
+.sub-container{
+	margin-bottom:30px;
+}

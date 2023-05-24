@@ -55,13 +55,9 @@
 									</c:otherwise>
 								</c:choose>
 								</span>
-								<span class="tour-right row">
-									<div class="col-md-7 col-sm-7 col-xs-7">
-										<span class="tour-title">${item.tourDto.title}</span>
-									</div>
-									<div class="col-md-5 col-sm-5 col-xs-5">
-										<span class="data-container"><p class="distance"></p><p class="duration"></p></span>
-									</div>
+								<span class="tour-right">
+									<span class="tour-title">${item.tourDto.title}</span>
+									<span class="data-container"><p class="distance"></p><p class="duration"></p></span>
 								</span>
 							</span>
 						</c:forEach>
