@@ -13,4 +13,5 @@ public interface PlanService{
 	public Integer countPlanList(SearchDto searchDto);
 	public PlanDto selectPlan(int seq);
 	public List<PlanOrderDto> selectPlanOrderList(int seq);
+	public void deletePlan(int seq);
 }

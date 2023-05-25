@@ -37,14 +37,14 @@ import com.kiki.user.model.UserDto;
 
 @Controller
 @RequestMapping("route")
-public class RouteController {
+public class PlanController {
 	PlanService planService;
 
 	@Value("${youtube.key}")
 	private String youtubeKey;
 
 	@Autowired
-	public RouteController(PlanService planService) {
+	public PlanController(PlanService planService) {
 		super();
 		this.planService = planService;
 	}
@@ -215,7 +215,7 @@ public class RouteController {
 				infoObject = new JSONObject();
 				infoObject.put("x", longitudeArr[i]);
 				infoObject.put("y", latitudeArr[i]);
-				infoObject.put("name", "a");
+				infoObject.put("name", titleArr[i]);
 				if (i == 0) {
 					jsonData.put("origin", infoObject);
 				} else if (i == titleArr.length - 1) {
@@ -280,5 +280,17 @@ public class RouteController {
 	public String search() {
 		System.out.println("투어 검색 뷰 시작");
 		return "tour/tourSearchView";
+	}
+	@GetMapping("/delete")
+	public String delete(@RequestParam("seq") int seq,Model model) {
+		System.out.println("경로 삭제");
+		System.out.println("Seq : "+seq);
+		try {
+			planService.deletePlan(seq);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "error/error";
+		}
+		return "redirect:/route/listPlan";
 	}
 }

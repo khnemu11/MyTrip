@@ -47,6 +47,10 @@
 		 SELECT * FROM plan 
 		 WHERE seq = ${seq}
 	</select>
+	<select id="deletePlan" parameterType="int">
+		 DELETE FROM plan 
+		 WHERE seq = ${seq}
+	</select>
 	<select id="selectPlanOrderList" parameterType="int" resultMap="planOrder">
 		SELECT plan_order.seq ,`order`,distance,`time`,title,telephone,address,latitude,longitude
 		FROM plan_order,tour
@@ -56,7 +60,7 @@
 	<select id="countPlanList" parameterType="SearchDto" resultType="int">
 		 SELECT count(*) FROM plan 
 		 WHERE user_id = #{userId}
-		<if test="keyword !=null or keyword != ''">
+		<if test="keyword !=null or keyword !=''">
 		AND title = #{keyword}		
 		</if> 
 		 ORDER BY created_time DESC 

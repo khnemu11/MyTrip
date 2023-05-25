@@ -29,7 +29,10 @@
 				</div>
 				<div class="col-md-5 col-sm-5 col-xs-5">
 					<div class="sub-container">
-						<div class="sub-title">제목</div>
+						<div class="sub-title delete-row">
+							<span>제목</span>
+							<button type="button" onclick="deletePlan(${plan.seq})" class="btn btn-danger">삭제</button>
+						</div>
 						<div class="sub-context">${plan.title}</div>
 					</div>
 					<div class="sub-container">

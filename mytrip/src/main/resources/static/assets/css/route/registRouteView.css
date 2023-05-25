@@ -95,12 +95,15 @@ body{
 .tour-title{
 	margin-left:20px;
 	font-weight:bold;
-	width:60%;
+	width:80%;
+	display:flex;
+	align-items:center;
 }
 .tour-left{
 	width:50px;
 	display:flex;
 	align-items:center;
+	justify-content:center;
 }
 .data-container{
 	font-size:12px;
@@ -109,6 +112,7 @@ body{
 	margin-bottom:0px;
 	display:flex;
 	justify-content:flex-end;
+	width:150px;
 	
 }
 .distance-container{
@@ -160,4 +164,9 @@ span .circle{
 }
 .sub-container{
 	margin-bottom:30px;
+}
+.delete-row{
+	display:flex;
+	justify-content:space-between;
+	align-content:center;
 }
