@@ -1,5 +1,6 @@
 var areaCode=1;
 var sigunguCode=1;
+
 var contentTypeId="";
 let userinfo;
 let key ='opoKoaa3kaeINxgVEi1q+SrTFEFt/U8TOSyDXPcdAt6Ca5hjzRNGZZjSKUndxKSDlk/A164nPmQkpVk8c5f0NQ==';
