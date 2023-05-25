@@ -74,6 +74,7 @@
 				<div class="spinner-border" role="status">
 				</div>
 			</div>
+			 <div id="no-result">해당 조건에 맞는 관광지가 없습니다.</div>
 			<div class="grid-3 tour-container" id="location-list">
 			</div>
 		</div>

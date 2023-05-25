@@ -156,15 +156,19 @@ async function makeTourList(isNew){
 		.then((response)=>response.json()).
 		then(function(data){
 			var locations = data.response.body.items.item;
-			
+			console.log(document.getElementById('no-result'));
+			document.getElementById('no-result').setAttribute('style',"display:none;")
 			if(data.response.body.totalCount == 0){
-				document.getElementById("location-list").innerHTML = `<div>해당 조건에 맞는 관광지가 없습니다.</div>`
+				document.getElementById("location-list").innerHTML = '';
 				if(document.querySelector('.loading-spinner')!=null){
 					document.querySelector('.loading-spinner').remove();
 				}
+				
+				document.getElementById('no-result').setAttribute('style',"display:block;")
+				
+				
 				return 0;
 			}
-			
 			let list = document.getElementById("location-list");
 			
 			if(isNew){

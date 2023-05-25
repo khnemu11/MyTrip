@@ -11,7 +11,7 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/util/header.jsp"%>
-	<img src="/img/utill/006.jpg" class="main-background">
+	<img src="/img/utill/main-background.png" class="main-background">
 	<div class="main-wrapper">
 		<div class="main-container row">
 			<div class="col-md-1 col-sm-1 col-xs-1"></div>
@@ -29,7 +29,7 @@
 									<div class="card-hits">
 										<span>
 										<i class="fa-regular fa-eye"></i>
-										${item.hits}	
+										${item.hits}
 										</span>
 									</div>	
 								</div>
@@ -69,24 +69,24 @@
 					<div class="card-grid">
 						<c:forEach items="${reviewList}" var="item">
 							<div class="card" onclick="window.location.href='/review/detail/${item.seq}'">
-								<c:if test="${not empty item.imageCode}">
-									<c:choose>
-										<c:when test="${item.imageCode.length() lt 5}">
-											<img src="/img/review/${item.imageCode}.png">
-										</c:when>
-										<c:otherwise>
-											<img src="/img/upload/${item.imageCode}">
-										</c:otherwise>
-									</c:choose>
-								</c:if>					
-								<c:if test="${empty item.imageCode}">
-										<img class="review-img" src="/img/review/no-image.png">
-								</c:if>	
-								<div class="card-description-container">
-									<div class="card-description">
-										<p class="card-title">${item.title}</p>
-									</div>
+							<c:if test="${not empty item.imageCode}">
+								<c:choose>
+									<c:when test="${item.imageCode.length() lt 5}">
+										<img src="/img/review/${item.imageCode}.png">
+									</c:when>
+									<c:otherwise>
+										<img src="/img/upload/${item.imageCode}">
+									</c:otherwise>
+								</c:choose>
+							</c:if>					
+							<c:if test="${empty item.imageCode}">
+								<img class="review-img" src="/img/review/no-image.png">
+							</c:if>	
+							<div class="card-description-container">
+								<div class="card-description">
+									<p class="card-title">${item.title}</p>
 								</div>
+							</div>
 							</div>
 						</c:forEach>
 						
