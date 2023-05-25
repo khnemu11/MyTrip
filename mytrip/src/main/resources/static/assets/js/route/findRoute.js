@@ -3,8 +3,8 @@ let longitude = 126.570667;
 let title = '';
 let map;
 let key ='opoKoaa3kaeINxgVEi1q+SrTFEFt/U8TOSyDXPcdAt6Ca5hjzRNGZZjSKUndxKSDlk/A164nPmQkpVk8c5f0NQ==';
-var areaCode=1;
-var sigunguCode=1;
+var areaCode="";
+var sigunguCode="";
 var contentTypeId="";
 let userinfo;
 let keyword = '';
@@ -75,9 +75,9 @@ async function makeGunGuOption(data){
 		.then((response)=>response.json()).
 		then(function(data){
 			var select = document.getElementById("select-gun");
-			var options = "";
+			var options = "<option value = ''>전체</option>";
 			var sigungus = data.response.body.items.item;
-			sigunguCode = sigungus[0].code;
+			sigunguCode = '';
 			for(var idx in sigungus){
 				var sigungu = sigungus[idx].code;
 				var name = sigungus[idx].name;
@@ -117,7 +117,7 @@ async function makeCityOption(){
 	.then(function(data){
 		console.log(data);
 		var select = document.getElementById("select-city");
-		var options = "";
+		var options = "<option value = ''>전체</option>";
 		var cities = data.response.body.items.item;
 		
 		for(var idx in cities){
@@ -149,6 +149,7 @@ function onChangeGunGu(){
 
 async function onChangeCity(){
 	areaCode =  document.getElementById("select-city").value;
+	sigunguCode="";
 	await makeGunGuOption();
 	await makeTourList(true);		
 }
