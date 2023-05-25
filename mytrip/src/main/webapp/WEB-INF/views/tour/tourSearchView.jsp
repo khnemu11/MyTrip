@@ -56,8 +56,7 @@
 		<div class="col-md-8 col-sm-8 col-xs-8">
 			<div class="row sub-title-wrapper">
 				<div class="sub-title-container">
-					<span class="sub-title-label">|</span> <span class="sub-title">인기있는
-						여행지</span>
+					<span class="sub-title-label">|</span> <span class="sub-title">여행지 목록</span>
 				</div>
 				<div class="sort-container">
 					<input type="radio" id="view" class="form-check-input" name="sort"
