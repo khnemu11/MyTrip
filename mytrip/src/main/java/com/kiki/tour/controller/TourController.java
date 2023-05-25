@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -17,6 +17,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kiki.review.model.ReviewDto;
+import com.kiki.review.model.service.ReviewService;
+import com.kiki.route.model.SearchDto;
 import com.kiki.tour.model.TourDto;
 import com.kiki.tour.model.TourYoutubeDto;
 import com.kiki.tour.model.service.TourService;
@@ -25,14 +28,18 @@ import com.kiki.tour.model.service.TourService;
 @RequestMapping("tour")
 public class TourController {
 	TourService tourService;
+	ReviewService reviewService;
+	
 	@Value("${youtube.key}")
 	private String youtubeKey;
-	
+
 	@Autowired
-	public TourController(TourService tourService) {
+	public TourController(TourService tourService, ReviewService reviewService) {
 		super();
 		this.tourService = tourService;
+		this.reviewService = reviewService;
 	}
+
 	@GetMapping("/detail")
 	public String detail(TourDto tourDto, Model model) {
 		System.out.println("투어 상세 페이지 시작");
@@ -76,13 +83,23 @@ public class TourController {
 				
 				model.addAttribute("youtubeList",youtubeList);
 			}
+			
+			
+			SearchDto searchDto = new SearchDto();
+			searchDto.setKeyword(target.getTitle());
+			searchDto.setPageNo(1);
+			searchDto.setPageSize(5);
+			
+			List<ReviewDto> reviewList = reviewService.searchReview(searchDto);
+			model.addAttribute("reviewList",reviewList);
+			
+			System.out.println(reviewList);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error/error";
 
 		}
-
 		return "tour/tourDetailView";
 	}
 

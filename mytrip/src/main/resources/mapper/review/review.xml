@@ -58,7 +58,7 @@
 		FROM review AS r
 		LEFT JOIN review_image AS i
 		ON r.seq = i.review_seq
-		WHERE title LIKE CONCAT( '%',#{keyword},'%')
+		WHERE title LIKE CONCAT( '%',#{keyword},'%') or tour_title LIKE CONCAT( '%',#{keyword},'%')
 		GROUP BY r.seq
 		ORDER BY r.seq desc
 		LIMIT #{pageSize}
