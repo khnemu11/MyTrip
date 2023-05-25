@@ -13,6 +13,7 @@
 	<!-- 공공데이터 관광지 출력 -->
 	<div class="body-wrapper">
 		<div class="row main-container">
+<!-- Your share button code -->
 			<div class="col-md-2 col-sm-2 col-xs-2"></div>
 			<div class="col-md-8 col-sm-8 col-xs-8">
 				<div class="row sub-title-wrapper">
@@ -40,7 +41,7 @@
 							<span class="description-top-left"><span>${tour.title}</span></span>
 							<span class="description-top-right">
 								<div class="circle favorite" onclick="setFavorite('${tour.title}')"></div>
-								<div class="circle"><i class="fa-solid fa-share-nodes"></i></div>
+								<div class="circle share" onclick="shareFaceBook()" ><i class="fa-solid fa-share-nodes"></i></div>
 							</span>
 						</div>
 						<div class="description-mid">

@@ -64,7 +64,7 @@ async function setNearLocation(){
 						longitude : items[idx].mapx,
 						latitude : items[idx].mapy,
 						telephone : items[idx].tel,
-					};
+				};
 				
 				paramUrl = new URLSearchParams(params);
 				let baseUrl = '/tour/detail?';
@@ -168,5 +168,14 @@ function setFavorite(title){
 				favorite.innerHTML = `<i class="fa-regular fa-heart"></i>`;
 			}
 		})
+}
+function shareFaceBook(){
+	let url = 'www.mytrip.or.kr';
+	console.log('url');
+	console.log(url);
+	
+	window.open('https://www.facebook.com/sharer/sharer.php?u=' + url,
+		        'facebook-share-dialog',
+		        'width=800,height=600');
 }
 

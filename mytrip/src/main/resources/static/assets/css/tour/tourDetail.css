@@ -199,3 +199,6 @@ p{
 .tour-card:hover{
 	cursor:pointer;
 }
+.share:hover{
+	cursor:pointer !important;
+}
