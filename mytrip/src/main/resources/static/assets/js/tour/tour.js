@@ -17,6 +17,12 @@ async function init(){
 }
 async function makeGunGuOption(data){
 	console.log('makeGunGuOption 실행');
+	if(areaCode == ''){
+		var select = document.getElementById("select-gun");
+		options ="<option value = ''>전체</option>";
+		select.innerHTML = options;
+		return true;
+	}
 	let params = {
 			serviceKey : key,
 			numOfRows : 20,
@@ -33,7 +39,7 @@ async function makeGunGuOption(data){
 		.then((response)=>response.json()).
 		then(function(data){
 			var select = document.getElementById("select-gun");
-			var options = "";
+			var options ="<option value = ''>전체</option>";
 			var sigungus = data.response.body.items.item;
 			sigunguCode = sigungus[0].code;
 			for(var idx in sigungus){
@@ -45,7 +51,6 @@ async function makeGunGuOption(data){
 			select.innerHTML = options;
 			console.log("시/군/구 코드 옵션 생성 끝");
 		})
-		document.querySelector('.loading-spinner').style.display='none';
 }
 
 
@@ -68,7 +73,7 @@ async function makeCityOption(){
 	.then(function(data){
 		console.log(data);
 		var select = document.getElementById("select-city");
-		var options = "";
+		var options = "<option value = ''>전체</option>";
 		var cities = data.response.body.items.item;
 		
 		for(var idx in cities){
@@ -81,7 +86,6 @@ async function makeCityOption(){
 		select.innerHTML = options;
 		console.log("도시 코드 옵션 생성 끝");
 	});
-	document.querySelector('.loading-spinner').style.display='none';
 }
 
 document.querySelector('#btn-search').addEventListener('click',function(){
@@ -110,12 +114,16 @@ function onChangeGunGu(){
 }
 
 async function onChangeCity(){
+	
+	console.log("도시 변경");
+	sigunguCode='';
 	areaCode =  document.getElementById("select-city").value;
 	await makeGunGuOption();
 	await makeTourList(true);		
 }
 
 async function makeTourList(isNew){
+	console.log("리스트 출력");
 		if(isNew){
 			pageNo = 1;
 		}else{
