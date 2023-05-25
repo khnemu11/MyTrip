@@ -328,3 +328,6 @@ info-row{
 .right-row{
 	margin-bottom:50px;
 }
+.right-title-row a i{
+	color:black;
+}

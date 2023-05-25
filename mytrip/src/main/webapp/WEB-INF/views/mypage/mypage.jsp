@@ -27,13 +27,6 @@
 						</div>
 					</div>
 					<div class="col-lg-5 col-md-5 col-sm-5">
-<!-- 						<div class="util-container">
-							<span class="sub-title">내정보</span>
-							<span>
-								<a href="/mypage/authentication" class="edit">수정</a>
-								<a href="/mypage/withdrawal" class="delete">탈퇴</a>
-							</span>
-						</div> -->
 					<div class="info-table">
 						<div class="info-row row">
 							<div class="col-lg-3 col-md-3 col-sm-3 flex">
@@ -100,7 +93,7 @@
 					<div class="right-row">
 						<div class="right-title-row">
 							<div class="sub-title">나의 여행 계획</div>
-							<i class="fa-solid fa-plus"></i>
+							<a href="/route/listPlan"><i class="fa-solid fa-plus"></i></a>
 						</div>
 						<div class="right-context-row">
 							<div class="card-grid" id="plan-list">
@@ -134,7 +127,7 @@
 					<div class="right-row">
 						<div class="right-title-row">
 							<div class="sub-title">나의 후기</div>
-							<i class="fa-solid fa-plus"></i>
+								<a href="/review/listReview"><i class="fa-solid fa-plus"></i></a>
 						</div>
 						<div class="right-context-row">
 							<div class="card-grid" id="review-list">
@@ -165,7 +158,7 @@
 					<div class="right-row">
 						<div class="right-title-row">
 							<div class="sub-title">나의 즐겨찾기</div>
-							<i class="fa-solid fa-plus"></i>
+							<a href="/favorite/favoriteList"><i class="fa-solid fa-plus"></i></a>
 						</div>
 							<div class="right-context-row">
 							<div class="card-grid" id="favorite-list">
