@@ -82,4 +82,23 @@
 		FROM review
 		WHERE seq = #{seq}
 	</delete>
+	
+	<select id="selectReviewList" parameterType="SearchDto" resultMap="reviewList">
+		 SELECT * FROM review 
+		 WHERE user_id = #{userId}
+		<if test='keyword !=null'>
+		AND title like CONCAT('%',#{keyword},'%')		
+		</if> 
+		 ORDER BY created_date DESC 
+		 LIMIT #{pageSize} OFFSET #{offset}
+	</select>
+		<select id="countReviewList" parameterType="SearchDto" resultType="int">
+		SELECT count(*) FROM review 
+		 WHERE user_id = #{userId}
+		<if test="keyword !=null or keyword != ''">
+		AND title = #{keyword}		
+		</if> 
+		 ORDER BY created_date DESC 
+		 LIMIT #{pageSize} OFFSET #{offset}
+	</select>
 </mapper>
