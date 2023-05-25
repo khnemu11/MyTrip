@@ -12,6 +12,7 @@ import com.kiki.favorite.model.FavoriteDto;
 import com.kiki.favorite.model.service.FavoriteService;
 import com.kiki.tour.model.TourDto;
 import com.kiki.tour.model.service.TourService;
+import com.kiki.user.model.UserDto;
 
 @RequestMapping("favorites")
 @RestController
@@ -32,8 +33,8 @@ public class FavoriteRestController {
 		try {
 			FavoriteDto favoriteDto = new FavoriteDto();
 
-//			favoriteDto.setUserId(((UserDto) session.getAttribute("userInfo")).getId());
-			favoriteDto.setUserId("test");
+			favoriteDto.setUserId(((UserDto) session.getAttribute("userInfo")).getId());
+//			favoriteDto.setUserId("test");
 			favoriteDto.setTitle(title);
 
 			int isFavorite = favoriteService.isFavorite(favoriteDto);
