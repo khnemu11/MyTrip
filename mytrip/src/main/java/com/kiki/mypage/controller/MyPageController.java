@@ -64,6 +64,8 @@ public class MyPageController {
 			model.addAttribute("favoriteList", favoriteList);
 			model.addAttribute("reviewList", reviewList);
 			model.addAttribute("planList", planList);
+		 	
+			System.out.println("plan "+ planList);
 		}catch(Exception e) {
 			e.printStackTrace();
 			return "error/error";
