@@ -8,6 +8,9 @@
 .sub-title-wrapper{
 	padding-top:80px;
 	justify-content:space-between;
+	padding-right:0px;
+	padding-left:0px;
+	width:100%;
 }
 .sub-title-container{
 	width:100%;
@@ -32,4 +35,12 @@
 }
 .btn {
 	cursor: pointer;
+}
+.flex-betweem{
+	width:100%;
+	display:flex;
+	justify-content:space-between;
+}
+.row{
+	margin:0px !important;
 }

@@ -35,11 +35,15 @@
 					</span>
 				</c:if>
 				<div data-seq="${review.seq}" id="seq"></div>
-				<div>${review.createdDate}</div>
-				<div>작성자 : ${review.userName}</div>
+				
+				<div class="flex-betweem">
+					<div class="userName">작성자 : ${review.userName}</div>
+					<div class="createdDate">${review.createdDate}</div>
+				</div>
+				
 				<div>제목 : ${review.title}</div>
 				<c:if test="${not empty review.tourTitle}">
-				<div>● 장소: ${review.tourTitle}</div> <!-- 장소 누르면 상세페이지로 이동 -->
+					<div>● 장소: ${review.tourTitle}</div> <!-- 장소 누르면 상세페이지로 이동 -->
 				</c:if>
 				<c:forEach var="img" items="${reviewImg}">
 					<c:choose>

@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kiki.review.model.ReviewDto;
 import com.kiki.review.model.ReviewImgDto;
 import com.kiki.review.model.service.ReviewService;
-import com.kiki.route.model.SearchDto;
+import com.kiki.route.model.SearchDto;	
 import com.kiki.tour.model.TourDto;
 import com.kiki.tour.model.service.TourService;
 import com.kiki.user.model.UserDto;
