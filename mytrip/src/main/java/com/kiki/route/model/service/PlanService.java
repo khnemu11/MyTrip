@@ -10,7 +10,7 @@ import com.kiki.tour.model.TourDto;
 public interface PlanService{
 	public int insertRoute(PlanDto planDto,List<TourDto>tourList);
 	public List<PlanDto> selectPlanList(SearchDto searchDto);
-	public int countPlanList(SearchDto searchDto);
+	public Integer countPlanList(SearchDto searchDto);
 	public PlanDto selectPlan(int seq);
 	public List<PlanOrderDto> selectPlanOrderList(int seq);
 }

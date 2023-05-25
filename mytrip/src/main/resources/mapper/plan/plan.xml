@@ -56,7 +56,7 @@
 	<select id="countPlanList" parameterType="SearchDto" resultType="int">
 		 SELECT count(*) FROM plan 
 		 WHERE user_id = #{userId}
-		<if test='keyword !=null'>
+		<if test="keyword !=null or keyword != ''">
 		AND title = #{keyword}		
 		</if> 
 		 ORDER BY created_time DESC 
