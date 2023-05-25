@@ -111,7 +111,7 @@ public class MyPageController {
 			if (valid > 0) {
 				model.addAttribute("mypageMsg", "수정 성공했습니다.");
 				session.setAttribute("userInfo", updateForm);
-				return "redirect:mypage/mypage";
+				return "redirect:/mypage/mypage";
 			} else {
 				model.addAttribute("mypageMsg", "수정 실패하였습니다.");
 				return "mypage/update";

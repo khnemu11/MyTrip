@@ -75,8 +75,12 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public Integer countReviewList(SearchDto searchDto) {
-		// TODO Auto-generated method stub
 		return reviewDao.countReviewList(searchDto);
+	}
+
+	@Override
+	public int updateReview(ReviewDto reviewForm) {
+		return reviewDao.updateReview(reviewForm);
 	}
 
 }

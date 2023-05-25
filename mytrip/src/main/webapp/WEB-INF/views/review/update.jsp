@@ -22,7 +22,7 @@
 					</span>
 				</div>
 			</div>
-			<form action="/review/update" method="POST" >
+			<form action="/review/update/${review.seq}" method="POST" >
 				<div class="sub-title">제목</div>
 				<!-- <input type = "hidden" name="tour-title" id="tour-title"/> -->
 				<input type = "text" class= "form-control title-form" id = "title" name = "title" placeholder="제목을 작성해주세요" value="${review.title}" required/>

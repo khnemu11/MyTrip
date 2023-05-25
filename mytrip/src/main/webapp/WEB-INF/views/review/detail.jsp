@@ -29,10 +29,10 @@
 			</div>
 			<div class="detail-container">
 				<c:if test="${review.userId == userInfo.id}">
-					<span class="util-container">
-						<a class="btn" href="/review/update/${review.seq}" class="edit">수정</a>
-						<span class="btn delete-btn" class="delete">삭제</span>
-					</span>
+					<div class="util-container">
+						<a class="btn edit" href="/review/update/${review.seq}">수정</a>
+						<span class="btn delete-btn delete" >삭제</span>
+					</div>
 				</c:if>
 				<div data-seq="${review.seq}" id="seq"></div>
 				

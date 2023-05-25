@@ -28,4 +28,6 @@ public interface ReviewService {
 	List<ReviewDto> selectReviewList(SearchDto searchDto);
 	
 	Integer countReviewList(SearchDto searchDto);
+
+	int updateReview(ReviewDto reviewForm);
 }

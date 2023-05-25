@@ -36,6 +36,12 @@
 		VALUES (#{title}, #{content}, #{userId}, #{userName},#{tourTitle}, #{modifiedDate}, #{deletedDate})
 	</insert>
 	
+	<update id="updateReview" parameterType="ReviewDto">
+		UPDATE review
+		SET title = #{title}, content = #{content}, tour_title = #{tourTitle}
+		WHERE seq = #{seq}
+	</update>
+	
 	<select id="getLastestReview" resultType="int" parameterType="String">
 		SELECT seq
 		FROM review
@@ -60,7 +66,7 @@
 		ON r.seq = i.review_seq
 		WHERE title LIKE CONCAT( '%',#{keyword},'%') or tour_title LIKE CONCAT( '%',#{keyword},'%')
 		GROUP BY r.seq
-		ORDER BY r.seq desc
+		ORDER BY r.seq DESC
 		LIMIT #{pageSize}
 		OFFSET #{offset}
 	</select>	

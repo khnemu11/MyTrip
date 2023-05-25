@@ -171,7 +171,9 @@ public class ReviewController {
 				imgDto.setImageName(originalName);
 				imgDto.setReviewSeq(seq);
 				
-				reviewService.insertImage(imgDto);
+				int validImg = reviewService.insertImage(imgDto);
+				System.out.println("요기에용옹!!" + validImg);
+				
 				System.out.println("리뷰쓰기 성공");
 				// 가장 최신 것 중에서 아이디 같은 것
 				return "redirect:detail/" + seq;
@@ -197,6 +199,7 @@ public class ReviewController {
 			model.addAttribute("review", review);
 			List<ReviewImgDto> reviewImg = reviewService.getReviewImg(seq);
 			model.addAttribute("reviewImg", reviewImg);
+			System.out.println("요기요기요ㅣ교이교ㅣ교이ㅛㄹ니료이" +reviewImg.size());
 			System.out.println("리뷰이미지 스타뚜");
 			for (int i = 0; i < reviewImg.size(); i++) {
 				String tmp = reviewImg.get(i).getImageCode();
@@ -221,6 +224,7 @@ public class ReviewController {
 			searchTourDto.setTitle(review.getTourTitle());
 			TourDto tourDto = tourService.selectTourByTitle(searchTourDto);
 			model.addAttribute("tour", tourDto);
+			model.addAttribute("seq", seq);
 			
 			return "review/update";
 		} catch(Exception e) {
@@ -228,9 +232,10 @@ public class ReviewController {
 		}
 	}
 	
-	@PostMapping("/update")
+	@PostMapping("/update/{seq}")
 	public String updateReview(@ModelAttribute("reviewForm") ReviewDto reviewForm,
-			@RequestParam Map<String, String> paramMap, HttpSession session, Model model) {
+			@RequestParam Map<String, String> paramMap, HttpSession session, Model model, @PathVariable("seq") int seq) {
+			System.out.println(" 놀어ㅏㅣㅁ노렁ㄴ모론뢰ㅓ " + seq);
 		try {
 			TourDto tourDto = new TourDto();
 			tourDto.setAddress(paramMap.get("tour-address"));
@@ -244,15 +249,14 @@ public class ReviewController {
 			reviewForm.setUserId(id);
 			reviewForm.setTourTitle(tourDto.getTitle());
 			System.out.println(reviewForm);
-			int valid = reviewService.writeReview(reviewForm,tourDto);
+			int valid = reviewService.updateReview(reviewForm);
 			if (valid > 0) {
 				System.out.println("리뷰수정 성공");
-				// 가장 최신 것 중에서 아이디 같은 것
-				int seq = reviewService.getLastestReview(id);
 				List<ReviewImgDto> reviewImg = reviewService.getReviewImg(seq);
+				ReviewDto review = reviewService.getReviewDetail(seq);
+				model.addAttribute("review", review);
 				model.addAttribute("reviewImg", reviewImg);
-				System.out.println(seq);
-				return "redirect:detail/" + seq;
+				return "redirect:/review/detail/"+seq;
 			} else {
 				System.out.println("리뷰쓰기 실패");
 				return "review/write";
