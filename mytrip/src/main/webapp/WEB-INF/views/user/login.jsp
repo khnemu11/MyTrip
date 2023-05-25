@@ -16,8 +16,8 @@
 </c:if>
 	<%@ include file="/WEB-INF/views/util/header.jsp"%>
 	<div class = "login-container row">
-	<div class="col-lg-1 col-md-1 col-sm-1"></div>
-	<div class="col-lg-10 col-md-10 col-sm-10 row">
+	<div class="col-lg-3 col-md-3 col-sm-3"></div>
+	<div class="col-lg-6 col-md-6 col-sm-6 row">
         <div class="col-lg-5 col-md-5 col-sm-5">
 			<div class="row sub-title-wrapper">
 				<div class="sub-title-container">
@@ -44,9 +44,11 @@
 			</form>
 		</div>
 		<div class="col-lg-2 col-md-2 col-sm-2"></div>
-		<div class="col-lg-5 col-md-5 col-sm-5"></div> <!-- 요기에 사진 넣어주세용 -->
+		<div class="col-lg-5 col-md-5 col-sm-5">
+			<img class="right-img" src="/img/utill/travel.jpg">
+		</div> <!-- 요기에 사진 넣어주세용 -->
 	</div>
-	<div class="col-lg-1 col-md-1 col-sm-1"></div>
+	<div class="col-lg-3 col-md-3 col-sm-3"></div>
 	</div>
 	<%@ include file="/WEB-INF/views/util/footer.jsp"%>
 </body>

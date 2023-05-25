@@ -21,7 +21,7 @@
 					<div class="card-grid">
 						<c:forEach items="${tourList}" var="item">
 							<div class="card tour-card" onclick="window.location.href='/tour/detail?title=${item.title}&latitude=${item.latitude}&longitude=${item.longitude}&telephone=${item.telephone}&address=${item.address}'">
-								<img src="/img/utill/loading.png">
+								<img src="/img/utill/loading.png" style="object-fit:fill;">
 								<div class="card-description-container">
 									<div class="card-description">
 										<p class="card-title">${item.title}</p>
