@@ -32,10 +32,15 @@
 	opacity:0.9;
 	background-color:rgba(0,0,0,0.3);
 	cursor:pointer;
+	border-radius:20px;
 }
 .card{
 	position:relative;
 	display:flex;
+	border:none;
+}
+.card img{
+		border-radius:20px;
 }
 .main-wrapper{
 	display:flex;

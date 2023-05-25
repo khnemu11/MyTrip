@@ -16,22 +16,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kiki.favorite.model.service.FavoriteService;
+import com.kiki.review.model.ReviewDto;
+import com.kiki.review.model.service.ReviewService;
+import com.kiki.route.model.SearchDto;
 import com.kiki.tour.model.TourDto;
 import com.kiki.tour.model.service.TourService;
 
 @RequestMapping("/")
 @Controller
 public class MainController {
-	FavoriteService favoriteService;
-	TourService tourService;
-
+	private FavoriteService favoriteService;
+	private TourService tourService;
+	private ReviewService reviewService;
 	private ResourceLoader resourceLoader;
-
+	
 	@Autowired
-	public MainController(FavoriteService favoriteService, TourService tourService, ResourceLoader resourceLoader) {
+	public MainController(FavoriteService favoriteService, TourService tourService, ReviewService reviewService,
+			ResourceLoader resourceLoader) {
 		super();
 		this.favoriteService = favoriteService;
 		this.tourService = tourService;
+		this.reviewService = reviewService;
 		this.resourceLoader = resourceLoader;
 	}
 
@@ -44,7 +49,16 @@ public class MainController {
 
 			List<TourDto> favoriteList = favoriteService.selectMostFavorite();
 			model.addAttribute("favoriteList", favoriteList);
-			System.out.println(favoriteList);
+			
+			SearchDto searchDto = new SearchDto();
+			searchDto.setPageSize(5);
+			searchDto.setKeyword("");
+			searchDto.setPageNo(1);
+			
+			List<ReviewDto> reviewList = reviewService.searchReview(searchDto);
+			System.out.println(reviewList);
+			
+			model.addAttribute("reviewList", reviewList);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error/error";

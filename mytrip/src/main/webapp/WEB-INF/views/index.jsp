@@ -21,7 +21,7 @@
 					<div class="card-grid">
 						<c:forEach items="${tourList}" var="item">
 							<div class="card tour-card" onclick="window.location.href='/tour/detail?title=${item.title}&latitude=${item.latitude}&longitude=${item.longitude}&telephone=${item.telephone}&address=${item.address}'">
-								<img src="/img/review/1.png">
+								<img src="/img/utill/loading.png">
 								<div class="card-description-container">
 									<div class="card-description">
 										<p class="card-title">${item.title}</p>
@@ -45,7 +45,7 @@
 					<div class="card-grid">
 						<c:forEach items="${favoriteList}" var="item">
 							<div class="card favorite-card" onclick="window.location.href='/tour/detail?title=${item.title}&latitude=${item.latitude}&longitude=${item.longitude}&telephone=${item.telephone}&address=${item.address}'">
-								<img src="/img/review/1.png">
+								<img src="/img/utill/loading.png">
 								<div class="card-description-container">
 									<div class="card-description">
 										<p class="card-title">${item.title}</p>
@@ -67,14 +67,29 @@
 				<div class="context-row">
 					<div class="title">최근 등록된 후기</div>
 					<div class="card-grid">
-						<div class="card">
-							<img src="/img/review/1.png">
+						<c:forEach items="${reviewList}" var="item">
+							<div class="card">
+							<c:if test="${not empty item.imageCode}">
+								<c:choose>
+									<c:when test="${item.imageCode.length() lt 5}">
+										<img src="/img/review/${item.imageCode}.png">
+									</c:when>
+									<c:otherwise>
+										<img src="/img/upload/${item.imageCode}">
+									</c:otherwise>
+								</c:choose>
+							</c:if>					
+							<c:if test="${empty item.imageCode}">
+								<img class="review-img" src="/img/review/no-image.png">
+							</c:if>	
 							<div class="card-description-container">
 								<div class="card-description">
-									매우매우매우매우매우매우매우매우매우긴이름
+									<p class="card-title">${item.title}</p>
 								</div>
 							</div>
-						</div>
+							</div>
+						</c:forEach>
+						
 					</div>
 				</div>
 			</div>	
