@@ -49,10 +49,13 @@
 				</button>
 			</div>
 				<div class="sort-container">
-					<input type="radio" id="view" class="form-check-input" name="sort"
-						value="view" checked> <label for="view">검색 순</label> <input
-						type="radio" id="name" class="form-check-input" name="sort"
-						value="view"> <label for="name">즐겨찾기 순</label>
+						<input type="radio" id="view" class="form-check-input" name="sort" value="view" checked> 
+						<label for="view">검색 순</label> 
+<%-- 
+						<c:if test="${not empty userInfo}">
+							<input type="radio" id="name" class="form-check-input" name="sort" value="view"> 
+							<label for="name">즐겨찾기 순</label>
+						</c:if> --%>
 				</div>
 			<select class="form-select select-box" id="select-city"
 				onChange="onChangeCity();">

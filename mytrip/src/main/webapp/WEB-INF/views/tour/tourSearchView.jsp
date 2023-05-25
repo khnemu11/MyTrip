@@ -59,8 +59,8 @@
 					<span class="sub-title-label">|</span> <span class="sub-title">여행지 목록</span>
 				</div>
 				<div class="sort-container">
-					<input type="radio" id="view" class="form-check-input" name="sort"
-						value="view"> <label for="view">인기 순</label> <input
+<!-- 					<input type="radio" id="view" class="form-check-input" name="sort"
+						value="view"> <label for="view">인기 순</label> --> <input
 						type="radio" id="name" class="form-check-input" name="sort"
 						value="view" checked> <label for="name">이름 순</label>
 				</div>
