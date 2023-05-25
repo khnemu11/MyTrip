@@ -68,7 +68,7 @@
 					<div class="title">최근 등록된 후기</div>
 					<div class="card-grid">
 						<c:forEach items="${reviewList}" var="item">
-							<div class="card">
+							<div class="card" onclick="window.location.href='/review/detail/${item.seq}'">
 							<c:if test="${not empty item.imageCode}">
 								<c:choose>
 									<c:when test="${item.imageCode.length() lt 5}">
