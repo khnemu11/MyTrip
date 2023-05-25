@@ -6,7 +6,7 @@
 <head>
 	<%@ include file="/WEB-INF/views/util/head.jsp"%>
 	<script src="/js/mypage/update.js" defer></script>
-	<link rel="stylesheet" href="/css/mypage/edits.css"/>
+	<link rel="stylesheet" href="/css/mypage/edit.css"/>
 </head>
 <body>
 <c:if test="${not empty mypageMsg}">
