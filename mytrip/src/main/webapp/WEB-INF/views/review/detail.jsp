@@ -36,26 +36,100 @@
 				</c:if>
 				<div data-seq="${review.seq}" id="seq"></div>
 				
-				<div class="flex-betweem">
+				<div class="flex-between">
 					<div class="userName">작성자 : ${review.userName}</div>
 					<div class="createdDate">${review.createdDate}</div>
 				</div>
 				
-				<div>제목 : ${review.title}</div>
+				<div class="title">${review.title}</div>
 				<c:if test="${not empty review.tourTitle}">
-					<div>● 장소: ${review.tourTitle}</div> <!-- 장소 누르면 상세페이지로 이동 -->
+					<div class="place">● 장소: ${review.tourTitle}</div> <!-- 장소 누르면 상세페이지로 이동 -->
 				</c:if>
-				<c:forEach var="img" items="${reviewImg}">
-					<c:choose>
-						<c:when test="${img.imageCode.length() lt 5}">
-							<img src="/img/review/${img.imageCode}.png">
-						</c:when>
-						<c:otherwise>
-							<img src="/img/upload/${img.imageCode}">
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-				<div>${review.content}</div>
+
+
+<!-- <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/img/review/1.png" class="d-block" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="/img/review/2.png" class="d-block" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div> -->
+					
+
+				<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+				  <div class="carousel-indicators">
+				  	 <c:forEach var="img" items="${reviewImg}" varStatus="status">
+				  	 	<c:choose>
+					  	 	<c:when test="${status.index == 0}">
+					  	 	  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+					  	 	</c:when>
+					  	 	<c:otherwise>
+					  	 	   <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${status.index}" aria-label="Slide 2"></button>
+					  	 	</c:otherwise>
+				  	 	</c:choose>
+				    </c:forEach>
+				  </div>
+				  <div class="carousel-inner">
+				    <c:forEach var="img" items="${reviewImg}" varStatus="status">
+					  	 <c:choose>
+					  	 	<c:when test="${status.index == 0}">
+		    				    <c:choose>
+									<c:when test="${img.imageCode.length() lt 5}">
+										<div class="carousel-item active">
+											<img class="d-block" src="/img/review/${img.imageCode}.png">	
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="carousel-item active">
+											<img class="d-block" src="/img/upload/${img.imageCode}">
+										</div>
+									</c:otherwise>
+								</c:choose>
+					    	</c:when>
+							<c:otherwise>
+								<c:choose>
+									<c:when test="${img.imageCode.length() lt 5}">
+										<div class="carousel-item">
+											<img class="d-block" src="/img/review/${img.imageCode}.png">	
+									   </div>
+									</c:when>
+									<c:otherwise>
+										<div class="carousel-item">
+											<img class="d-block" src="/img/upload/${img.imageCode}">
+										</div>
+									</c:otherwise>
+								</c:choose>
+							</c:otherwise>
+						</c:choose>
+				    </c:forEach>
+			   	  </div>
+			   	   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				    <span class="visually-hidden">Previous</span>
+				  </button>
+				  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				    <span class="visually-hidden">Next</span>
+				  </button>
+				  </div>
+				</div>
+				
+				<div class="content">${review.content}</div>
 			</div>
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-3"></div>
