@@ -11,7 +11,7 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/util/header.jsp"%>
-	<img src="/img/utill/main-background.png" class="main-background">
+	<img src="/img/utill/007.jpg" class="main-background">
 	<div class="main-wrapper">
 		<div class="main-container row">
 			<div class="col-md-1 col-sm-1 col-xs-1"></div>
