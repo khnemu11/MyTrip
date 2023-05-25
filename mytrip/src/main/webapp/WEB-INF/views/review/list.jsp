@@ -60,7 +60,14 @@
 					<c:forEach var="review" items="${reviewList}">	
 						<form class="review-card" action="/review/detail/${review.seq}" method="get" onclick="submit()">		
 							<c:if test="${not empty review.imageCode}">
-								<img class="review-img" src="/img/review/${review.imageCode}.png">
+								<c:choose>
+									<c:when test="${review.imageCode.length() lt 5}">
+										<img class="review-img" src="/img/review/${review.imageCode}.png">
+									</c:when>
+									<c:otherwise>
+										<img class="review-img" src="/img/upload/${review.imageCode}">
+									</c:otherwise>
+								</c:choose>
 							</c:if>					
 							<c:if test="${empty review.imageCode}">
 								<img class="review-img" src="/img/review/no-image.png">

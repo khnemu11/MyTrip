@@ -38,12 +38,18 @@
 					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">여행지 검색</button>
 				</div>
 					
-				<!-- 검색 기능 넣어주세용 -->
 				<div class="sub-title">사진 선택</div>
+				<c:forEach var="img" items="${reviewImg}">
+					<c:choose>
+						<c:when test="${img.imageCode.length() lt 5}">
+							<img src="/img/review/${img.imageCode}.png">
+						</c:when>
+						<c:otherwise>
+							<img src="/img/upload/${img.imageCode}">
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
 				
-				
-				
-				<!-- 여기에 파일업로드 넣어주세용 -->
 				<div class="sub-title">내용</div>
 				<textarea class="form-control" name="content" required>${review.content}</textarea>
 				<div class="btn-container">

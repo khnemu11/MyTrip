@@ -42,7 +42,14 @@
 				<div>● 장소: ${review.tourTitle}</div> <!-- 장소 누르면 상세페이지로 이동 -->
 				</c:if>
 				<c:forEach var="img" items="${reviewImg}">
-					<img src="/img/upload/${img.imageCode}">
+					<c:choose>
+						<c:when test="${img.imageCode.length() lt 5}">
+							<img src="/img/review/${img.imageCode}.png">
+						</c:when>
+						<c:otherwise>
+							<img src="/img/upload/${img.imageCode}">
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
 				<div>${review.content}</div>
 			</div>

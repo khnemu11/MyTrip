@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,32 +92,32 @@ public class ReviewController {
 			
 			//리뷰 성공
 			if (valid > 0) {
-		    //파일 등록
-			
-			//리뷰 seq	
-			int seq = reviewService.getLastestReview(id);
-			System.out.println("리뷰 seq : "+seq);
-			
-			String originalName = multipartFile.getOriginalFilename();
-			String extend = originalName.substring(originalName.lastIndexOf('.'));
-			UUID uuid = UUID.randomUUID();
-			File newFile = new File(
-					resourceLoader.getResource("classpath:/static/assets/img/upload/").getFile().getAbsolutePath(),
-					uuid.toString() + extend);
-
-			multipartFile.transferTo(newFile);
-			System.out.println("파일 저장 성공!");
-			
-			System.out.println("바뀐 이름 : "+uuid+extend);
-			System.out.println("원래 이름 : "+originalName);
-			
-			ReviewImgDto imgDto = new ReviewImgDto();
-			imgDto.setImageCode(uuid+extend);
-			imgDto.setImageName(originalName);
-			imgDto.setReviewSeq(seq);
-			
-			reviewService.insertImage(imgDto);
-			System.out.println("리뷰쓰기 성공");
+			    //파일 등록
+				
+				//리뷰 seq	
+				int seq = reviewService.getLastestReview(id);
+				System.out.println("리뷰 seq : "+seq);
+				
+				String originalName = multipartFile.getOriginalFilename();
+				String extend = originalName.substring(originalName.lastIndexOf('.'));
+				UUID uuid = UUID.randomUUID();
+				File newFile = new File(
+						resourceLoader.getResource("classpath:/static/assets/img/upload/").getFile().getAbsolutePath(),
+						uuid.toString() + extend);
+	
+				multipartFile.transferTo(newFile);
+				System.out.println("파일 저장 성공!");
+				
+				System.out.println("바뀐 이름 : "+uuid+extend);
+				System.out.println("원래 이름 : "+originalName);
+				
+				ReviewImgDto imgDto = new ReviewImgDto();
+				imgDto.setImageCode(uuid+extend);
+				imgDto.setImageName(originalName);
+				imgDto.setReviewSeq(seq);
+				
+				reviewService.insertImage(imgDto);
+				System.out.println("리뷰쓰기 성공");
 				// 가장 최신 것 중에서 아이디 같은 것
 				return "redirect:detail/" + seq;
 			} else {
@@ -145,7 +144,8 @@ public class ReviewController {
 			model.addAttribute("reviewImg", reviewImg);
 			System.out.println("리뷰이미지 스타뚜");
 			for (int i = 0; i < reviewImg.size(); i++) {
-				System.out.println(i + " " + reviewImg);
+				String tmp = reviewImg.get(i).getImageCode();
+				System.out.println(reviewImg.get(i).getImageCode()+"   길이 : "+tmp.length());
 			}
 			return "review/detail";
 		} catch (Exception e) {
@@ -162,7 +162,6 @@ public class ReviewController {
 			model.addAttribute("review", review);
 			List<ReviewImgDto> reviewImg = reviewService.getReviewImg(seq);
 			model.addAttribute("reviewImg", reviewImg);
-			
 			TourDto searchTourDto = new TourDto();
 			searchTourDto.setTitle(review.getTourTitle());
 			TourDto tourDto = tourService.selectTourByTitle(searchTourDto);
@@ -176,7 +175,7 @@ public class ReviewController {
 	
 	@PostMapping("/update")
 	public String updateReview(@ModelAttribute("reviewForm") ReviewDto reviewForm,
-			@RequestParam Map<String, String> paramMap, HttpSession session) {
+			@RequestParam Map<String, String> paramMap, HttpSession session, Model model) {
 		try {
 			TourDto tourDto = new TourDto();
 			tourDto.setAddress(paramMap.get("tour-address"));
@@ -195,6 +194,8 @@ public class ReviewController {
 				System.out.println("리뷰수정 성공");
 				// 가장 최신 것 중에서 아이디 같은 것
 				int seq = reviewService.getLastestReview(id);
+				List<ReviewImgDto> reviewImg = reviewService.getReviewImg(seq);
+				model.addAttribute("reviewImg", reviewImg);
 				System.out.println(seq);
 				return "redirect:detail/" + seq;
 			} else {
