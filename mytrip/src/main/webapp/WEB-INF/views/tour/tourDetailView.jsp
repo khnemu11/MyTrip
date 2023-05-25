@@ -108,23 +108,39 @@
 			<div class="col-md-2 col-sm-2 col-xs-2"></div>
 			<div class="col-md-8 col-sm-8 col-xs-8 ">	
 				<div class="subsub-title">후기</div>
-				<div class="grid-5">
-					<div class="card-thumbnail">
-						<img src="/img/tour/no-image.png">
+				<c:if test="${empty reviewList}">
+					<div class="non-div">
+						작성된 후기가 없습니다.
 					</div>
-					<div class="card-thumbnail">
-						<img src="/img/tour/no-image.png">
+				</c:if>
+				<c:if test="${not empty reviewList}">
+					<div class="grid-5">
+						<c:forEach items="${reviewList}" var="item">
+						<div class="card" onclick="window.location.href='/review/detail/${item.seq}'">
+							<c:if test="${not empty item.imageCode}">
+								<c:choose>
+									<c:when test="${item.imageCode.length() lt 5}">
+										<img src="/img/review/${item.imageCode}.png">
+									</c:when>
+									<c:otherwise>
+										<img src="/img/upload/${item.imageCode}">
+									</c:otherwise>
+								</c:choose>
+							</c:if>					
+							<c:if test="${empty item.imageCode}">
+								<img class="review-img" src="/img/review/no-image.png">
+							</c:if>	
+							<div class="card-description-container">
+								<div class="card-description">
+									<p class="card-title">${item.title}</p>
+								</div>
+								</div>
+							</div>
+						</c:forEach>
 					</div>
-					<div class="card-thumbnail">
-						<img src="/img/tour/no-image.png">
-					</div>
-					<div class="card-thumbnail">
-						<img src="/img/tour/no-image.png">
-					</div>
-					<div class="card-thumbnail">
-						<img src="/img/tour/no-image.png">
-					</div>
-				</div>
+				</c:if>
+				
+
 			</div>
 			<div class="col-md-2 col-sm-2 col-xs-2"></div>
 		</div>
