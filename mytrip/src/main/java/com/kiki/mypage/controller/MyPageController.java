@@ -2,6 +2,7 @@ package com.kiki.mypage.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,7 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kiki.favorite.model.service.FavoriteService;
 import com.kiki.mypage.model.service.MyPageService;
+import com.kiki.review.model.ReviewDto;
+import com.kiki.review.model.service.ReviewService;
+import com.kiki.route.model.PlanDto;
+import com.kiki.route.model.SearchDto;
+import com.kiki.route.model.service.PlanService;
+import com.kiki.tour.model.TourDto;
 import com.kiki.user.model.UserDto;
 
 @Controller
@@ -21,25 +29,45 @@ import com.kiki.user.model.UserDto;
 public class MyPageController {
 	
 	MyPageService myPageService;
+	FavoriteService favoriteService;
+	PlanService planService;
+	ReviewService reviewService;
+	
+
 	@Autowired
-	public MyPageController(MyPageService myPageService) {
+	public MyPageController(MyPageService myPageService, FavoriteService favoriteService, PlanService planService,
+			ReviewService reviewService) {
 		super();
 		this.myPageService = myPageService;
+		this.favoriteService = favoriteService;
+		this.planService = planService;
+		this.reviewService = reviewService;
 	}
-	
+
 	@GetMapping("/mypage")
-	public String mypage(HttpSession session) {
+	public String mypage(HttpSession session,Model model) {
 		try {
 			UserDto sessionUser = (UserDto) session.getAttribute("userInfo");
 			LocalDateTime dateTime = sessionUser.getJoinDate().toLocalDateTime();
 			DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			sessionUser.setJoinDateStr( dateTime.format(format));
+			
+			SearchDto searchDto = new SearchDto();
+			searchDto.setPageNo(1);
+			searchDto.setPageSize(3);
+			searchDto.setUserId(sessionUser.getId());
+			List<TourDto> favoriteList= favoriteService.selectFavoriteList(searchDto);
+			List<ReviewDto> reviewList= reviewService.selectReviewList(searchDto);
+			List<PlanDto> planList= planService.selectPlanList(searchDto);
+			
+			
+			model.addAttribute("favoriteList", favoriteList);
+			model.addAttribute("reviewList", reviewList);
+			model.addAttribute("planList", planList);
 		}catch(Exception e) {
 			e.printStackTrace();
 			return "error/error";
 		}
-
-		
 		return "mypage/mypage";
 	}
 	

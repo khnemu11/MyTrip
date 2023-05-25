@@ -22,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kiki.review.model.ReviewDto;
 import com.kiki.review.model.ReviewImgDto;
 import com.kiki.review.model.service.ReviewService;
+import com.kiki.route.model.PlanDto;
+import com.kiki.route.model.SearchDto;
 import com.kiki.tour.model.TourDto;
 import com.kiki.tour.model.service.TourService;
 import com.kiki.user.model.UserDto;
@@ -40,7 +42,60 @@ public class ReviewController {
 		this.tourService = tourService;
 		this.resourceLoader = resourceLoader;
 	}
+	@GetMapping("/listReview")
+	public String listPlan(HttpServletRequest request, HttpSession session, Model model, SearchDto searchDto) {
+		System.out.println("후기 리스트 시작");
+		searchDto.setPageSize(10);
+		if (searchDto.getPageNo() == 0) {
+			System.out.println("비어있음!");
+			searchDto.setPageNo(1);
+		}
+		searchDto.setOffset((searchDto.getPageNo() - 1) * searchDto.getPageSize());
+		searchDto.setUserId(((UserDto) session.getAttribute("userInfo")).getId());
+		System.out.println("검색 dto");
+		System.out.println((UserDto) session.getAttribute("userInfo"));
+		System.out.println(searchDto);
 
+		List<ReviewDto> list = reviewService.selectReviewList(searchDto);
+
+		if (list == null) {
+			System.out.println("허용되지 않는 범위");
+			return "redirect:/route/listPan?pageNo=1";
+		}
+
+		System.out.println(list);
+		Integer totalCount = reviewService.countReviewList(searchDto);
+		if (totalCount == null) {
+			totalCount = 0;
+		}
+		System.out.println(totalCount);
+		searchDto.setTotalCount(totalCount);
+
+		if (searchDto.getPageNo() != 1) {
+			searchDto.setBefore(true);
+		}
+
+		searchDto.setStart(searchDto.getPageNo());
+		searchDto.setEnd(searchDto.getPageNo());
+
+		for (int i = 1; i < 5; i++) {
+			if (searchDto.getOffset() + searchDto.getPageSize() * i > totalCount) {
+				break;
+			}
+			searchDto.setEnd(searchDto.getEnd() + 1);
+		}
+
+		if (searchDto.getTotalCount() > searchDto.getPageSize() * searchDto.getEnd()) {
+			searchDto.setNext(true);
+		}
+
+		System.out.println(searchDto);
+
+		model.addAttribute("list", list);
+		model.addAttribute("pagination", searchDto);
+
+		return "review/myReviewListView";
+	}
 	@GetMapping("/list")
 	public String list(Model model) {
 		try {

@@ -26,4 +26,9 @@ public interface ReviewDao {
 	public int deleteReview(int seq);
 	
 	public int insertImage(ReviewImgDto imgDto);
+	
+	public List<ReviewDto> selectReviewList(SearchDto searchDto);
+	
+	public Integer countReviewList(SearchDto searchDto);
+	
 }

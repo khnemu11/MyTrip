@@ -5,25 +5,20 @@ import org.springframework.beans.factory.annotation.Value;
 public class SearchDto {
 	private String keyword;
 	private int totalCount;
+	@Value("1")
 	private int pageNo;
 	private String userId;
-	private int pageSize = 10;
+	@Value("10")
+	private int pageSize;
 	private int offset;
 	private boolean before;
 	private int start;
 	private int end;
 	private boolean next;
-	
-	public SearchDto(int pageNo, String keyword) {
-		super();
-		this.pageNo = pageNo;
-		this.keyword = keyword;
-	}
-	
+
 	public boolean isBefore() {
 		return before;
 	}
-
 	public void setBefore(boolean before) {
 		this.before = before;
 	}
@@ -99,6 +94,12 @@ public class SearchDto {
 	public void setEnd(int end) {
 		this.end = end;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "SearchDto [keyword=" + keyword + ", totalCount=" + totalCount + ", pageNo=" + pageNo + ", userId="
+				+ userId + ", pageSize=" + pageSize + ", offset=" + offset + ", before=" + before + ", start=" + start
+				+ ", end=" + end + ", next=" + next + "]";
+	}
+
 }

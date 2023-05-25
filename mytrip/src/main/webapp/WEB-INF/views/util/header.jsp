@@ -6,6 +6,8 @@
 <!-- 상단 header 시작 -->
 <header>
     <nav class="navbar navbar-expand-lg bg-info bg-opacity-75" data-bs-theme="dark">
+    	<input type="hidden" name="pageNo" value="1">
+    	
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
                 <img src="/img/utill/logo.png" class ="logo"/>

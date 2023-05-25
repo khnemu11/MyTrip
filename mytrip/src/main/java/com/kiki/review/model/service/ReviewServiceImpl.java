@@ -68,4 +68,15 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewDao.insertImage(imgDto);
 	}
 
+	@Override
+	public List<ReviewDto> selectReviewList(SearchDto searchDto) {
+		return reviewDao.selectReviewList(searchDto);
+	}
+
+	@Override
+	public Integer countReviewList(SearchDto searchDto) {
+		// TODO Auto-generated method stub
+		return reviewDao.countReviewList(searchDto);
+	}
+
 }

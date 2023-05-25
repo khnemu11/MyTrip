@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.kiki.favorite.model.FavoriteDto;
 import com.kiki.favorite.model.dao.FavoriteDao;
+import com.kiki.route.model.SearchDto;
 import com.kiki.tour.model.TourDto;
-import com.kiki.tour.model.dao.TourDao;
 
 @Service
 public class FavoriteServiceImpl implements FavoriteService{
@@ -41,6 +41,16 @@ public class FavoriteServiceImpl implements FavoriteService{
 	public List<TourDto> selectMostFavorite() {
 		return favoriteDao.selectMostFavorite();
 	}
-	
-	
+
+
+	@Override
+	public List<TourDto> selectFavoriteList(SearchDto searchDto) {
+		return favoriteDao.selectFavoriteList(searchDto);
+	}
+
+
+	@Override
+	public Integer countFavoriteList(SearchDto searchDto) {
+		return favoriteDao.countFavoriteList(searchDto);
+	}
 }

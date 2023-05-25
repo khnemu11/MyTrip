@@ -27,13 +27,6 @@
 						</div>
 					</div>
 					<div class="col-lg-5 col-md-5 col-sm-5">
-<!-- 						<div class="util-container">
-							<span class="sub-title">내정보</span>
-							<span>
-								<a href="/mypage/authentication" class="edit">수정</a>
-								<a href="/mypage/withdrawal" class="delete">탈퇴</a>
-							</span>
-						</div> -->
 					<div class="info-table">
 						<div class="info-row row">
 							<div class="col-lg-3 col-md-3 col-sm-3 flex">
@@ -100,10 +93,10 @@
 					<div class="right-row">
 						<div class="right-title-row">
 							<div class="sub-title">나의 여행 계획</div>
-							<i class="fa-solid fa-plus"></i>
+							<a href="/route/listPlan"><i class="fa-solid fa-plus"></i></a>
 						</div>
 						<div class="right-context-row">
-							<div class="card-grid" id="plan-list">
+<!-- 							<div class="card-grid" id="plan-list">
 								<div class="card">
 									<img src="/img/review/1.png">
 									<div class="card-description-container">
@@ -128,69 +121,75 @@
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> -->
+							<table class="table">
+							  <thead>
+							    <tr>
+							      <th class="no">번호</th>
+							      <th class="title">계획 이름</th>
+							      <th class="create">등록일</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							  <c:forEach items="${planList}" var="item" varStatus="idx" begin="0" >
+								  	<tr>
+							  	 		<td class="no">${idx.count}</td>
+									    <td class="title"><a href="/route/planDetail?seq=${item.seq}">${item.title}</a></td>
+									    <td class="create">${item.createdTime}</td>
+							    	</tr>
+							  </c:forEach>
+							  </tbody>
+							</table>
 						</div>
 					</div>
 					<div class="right-row">
 						<div class="right-title-row">
 							<div class="sub-title">나의 후기</div>
-							<i class="fa-solid fa-plus"></i>
+								<a href="/review/listReview"><i class="fa-solid fa-plus"></i></a>
 						</div>
 						<div class="right-context-row">
-							<div class="card-grid" id="review-list">
-								<div class="card">
-									<img src="/img/review/1.png">
-									<div class="card-description-container">
-										<div class="card-description">
-										</div>
-									</div>
-								</div>
-								<div class="card">
-									<img src="/img/review/1.png">
-									<div class="card-description-container">
-										<div class="card-description">
-										</div>
-									</div>
-								</div>
-								<div class="card">
-									<img src="/img/review/1.png">
-									<div class="card-description-container">
-										<div class="card-description">
-										</div>
-									</div>
-								</div>
-							</div>
+							<table class="table">
+								  <thead>
+								    <tr>
+								      <th class="no">번호</th>
+								      <th class="title">후기 제목</th>
+								      <th class="create">등록일</th>
+								    </tr>
+								  </thead>
+								  <tbody>
+								  <c:forEach items="${reviewList}" var="item" varStatus="idx" begin="0" >
+									  	<tr>
+								  	 		<td class="no">${idx.count}</td>
+										    <td class="title"><a href="/review/detail/${item.seq}">${item.title}</a></td>
+										    <td class="create">${item.createdDate}</td>
+								    	</tr>
+								  </c:forEach>
+								  </tbody>
+							</table>
 						</div>
 					</div>
 					<div class="right-row">
 						<div class="right-title-row">
 							<div class="sub-title">나의 즐겨찾기</div>
-							<i class="fa-solid fa-plus"></i>
+							<a href="/favorite/favoriteList"><i class="fa-solid fa-plus"></i></a>
 						</div>
 							<div class="right-context-row">
-							<div class="card-grid" id="favorite-list">
-								<div class="card">
-									<img src="/img/review/1.png">
-									<div class="card-description-container">
-										<div class="card-description">
-										</div>
-									</div>
-								</div>
-								<div class="card">
-									<img src="/img/review/1.png">
-									<div class="card-description-container">
-										<div class="card-description">
-										</div>
-									</div>
-								</div>
-								<div class="card">
-									<img src="/img/review/1.png">
-									<div class="card-description-container">
-										<div class="card-description">
-										</div>
-									</div>
-								</div>
-							</div>
+							<table class="table">
+								<thead>
+									<tr>
+								    	<th class="no">번호</th>
+								    	<th class="title">관광지 명</th>
+								    </tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${favoriteList}" var="item" varStatus="idx" begin="0" >
+								  		<tr>
+						  	 				<td class="no">${idx.count}</td>
+									    	<td class="title"><a href="/tour/detail?title=${item.title}&address=${item.address}&longitude=${item.longitude}&latitude=${item.latitude}&telephone=${item.latitude}">${item.title}</a></td>
+								    	</tr>
+									 </c:forEach>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>

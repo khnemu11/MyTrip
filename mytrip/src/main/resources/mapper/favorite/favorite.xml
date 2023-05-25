@@ -42,4 +42,26 @@
 		ORDER BY count desc
 		LIMIT 5;
 	</select>
+	<select id="selectFavoriteList" parameterType="SearchDto" resultMap="tour">
+		SELECT tour.seq seq, tour.title title,tour.telephone telephone,tour.address address, tour.longitude longitude,
+		tour.latitude latitude
+		FROM favorite, tour
+		WHERE favorite.user_id = #{userId} 
+			AND favorite.tour_seq = tour.seq
+		<if test='keyword !=null'>
+			AND title like CONCAT('%',#{keyword},'%')		
+		</if> 
+		 ORDER BY tour.title 
+		 LIMIT #{pageSize} OFFSET #{offset}
+	</select>
+	<select id="countFavoriteList" parameterType="SearchDto" resultType="int">
+		SELECT count(*) FROM favorite, tour 
+		WHERE favorite.user_id = #{userId} 
+			AND favorite.tour_seq = tour.seq
+		<if test="keyword !=null or keyword != ''">
+		AND title = #{keyword}		
+		</if> 
+		 ORDER BY tour.title 
+		 LIMIT #{pageSize} OFFSET #{offset}
+	</select>
 </mapper>

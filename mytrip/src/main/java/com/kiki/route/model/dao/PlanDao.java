@@ -14,7 +14,7 @@ public interface PlanDao{
 	public int selectPlanSeq(PlanDto planDto);
 	public int insertPlanOrder(PlanOrderDto planOrderDto);
 	public List<PlanDto> selectPlanList(SearchDto searchDto);
-	public int countPlanList(SearchDto searchDto);
+	public Integer countPlanList(SearchDto searchDto);
 	PlanDto selectPlan(int seq);
 	public List<PlanOrderDto> selectPlanOrderList(int seq);
 }

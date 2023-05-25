@@ -29,7 +29,9 @@ public class ReviewRestController {
 	@GetMapping("/search")
 	public ResponseEntity<?> searchReview(@RequestParam("pageNo") int pageNo, @RequestParam("keyword") String keyword) {
 		try {
-			SearchDto search = new SearchDto(pageNo, keyword);
+			SearchDto search = new SearchDto();
+			search.setKeyword(keyword);
+			search.setPageNo(pageNo);
 			System.out.println(search.getPageNo() + " " + search.getKeyword());
 			search.setPageSize(20);
 			search.setOffset((search.getPageNo()-1)*search.getPageSize());

@@ -67,49 +67,57 @@ public class RouteController {
 	@GetMapping("/listPlan")
 	public String listPlan(HttpServletRequest request, HttpSession session, Model model, SearchDto searchDto) {
 		System.out.println("경로 리스트 시작");
-
+		searchDto.setPageSize(10);
 		if (searchDto.getPageNo() == 0) {
 			System.out.println("비어있음!");
 			searchDto.setPageNo(1);
 		}
-		searchDto.setOffset((searchDto.getPageNo()-1)*searchDto.getPageSize());
-		System.out.println(searchDto);
+
+		searchDto.setOffset((searchDto.getPageNo() - 1) * searchDto.getPageSize());
 		searchDto.setUserId(((UserDto) session.getAttribute("userInfo")).getId());
+
+		System.out.println("검색 dto");
+		System.out.println((UserDto) session.getAttribute("userInfo"));
+		System.out.println(searchDto);
+
 		List<PlanDto> list = planService.selectPlanList(searchDto);
-		
-		if(list==null) {
+
+		if (list == null) {
 			System.out.println("허용되지 않는 범위");
-			return "redirect:/route/listPan";
+			return "redirect:/route/listPan?pageNo=1";
 		}
-		
+
 		System.out.println(list);
-		
-		int totalCount = planService.countPlanList(searchDto);
+		Integer totalCount = planService.countPlanList(searchDto);
+		if (totalCount == null) {
+			totalCount = 0;
+		}
 		System.out.println(totalCount);
 		searchDto.setTotalCount(totalCount);
 
-		if(searchDto.getPageNo()!=1) {
+		if (searchDto.getPageNo() != 1) {
 			searchDto.setBefore(true);
 		}
+
 		searchDto.setStart(searchDto.getPageNo());
 		searchDto.setEnd(searchDto.getPageNo());
-		
+
 		for (int i = 1; i < 5; i++) {
-			if(searchDto.getOffset() + searchDto.getPageSize()* i >totalCount) {
+			if (searchDto.getOffset() + searchDto.getPageSize() * i > totalCount) {
 				break;
 			}
-			searchDto.setEnd(searchDto.getEnd()+1);
+			searchDto.setEnd(searchDto.getEnd() + 1);
 		}
 
 		if (searchDto.getTotalCount() > searchDto.getPageSize() * searchDto.getEnd()) {
 			searchDto.setNext(true);
 		}
-		
+
 		System.out.println(searchDto);
-		
+
 		model.addAttribute("list", list);
 		model.addAttribute("pagination", searchDto);
-		
+
 		return "route/listPlanView";
 	}
 
@@ -123,9 +131,9 @@ public class RouteController {
 	public String registRoute(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("경로 등록 시작");
 		String msg = "";
-		try{
+		try {
 			Map<String, String[]> parameterMap = request.getParameterMap();
-			
+
 			PlanDto planDto = new PlanDto();
 			planDto.setContent(parameterMap.get("content")[0]);
 			planDto.setTitle(parameterMap.get("title")[0]);
@@ -150,13 +158,13 @@ public class RouteController {
 				tourList.add(tourDto);
 			}
 			planService.insertRoute(planDto, tourList);
-			msg="여행 계획 등록을 성공했습니다.";
-		}catch(Exception e) {
+			msg = "여행 계획 등록을 성공했습니다.";
+		} catch (Exception e) {
 			e.printStackTrace();
-			msg="여행 계획 등록을 실패했습니다.";
+			msg = "여행 계획 등록을 실패했습니다.";
 		}
-		model.addAttribute("msg",msg);
-		
+		model.addAttribute("msg", msg);
+
 		return "route/findRouteView";
 	}
 

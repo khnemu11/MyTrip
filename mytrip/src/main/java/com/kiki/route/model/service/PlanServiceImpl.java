@@ -64,7 +64,7 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public int countPlanList(SearchDto searchDto) {
+	public Integer countPlanList(SearchDto searchDto) {
 		return planDao.countPlanList(searchDto);
 	}
 
