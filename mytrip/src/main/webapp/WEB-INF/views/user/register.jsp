@@ -51,7 +51,7 @@
 					<div class="mb-3">
 							<div class="input-group">
 								<input type="email" class="form-control" id="email"
-									name="email" placeholder="이메일" />
+									name="email" placeholder="이메일" required/>
 							</div>
 					</div>
 					<div class="col-auto text-center">

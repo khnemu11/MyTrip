@@ -6,7 +6,7 @@
 <head>
 	<%@ include file="/WEB-INF/views/util/head.jsp"%>
 	<script src="/js/mypage/update.js" defer></script>
-	<link rel="stylesheet" href="/css/mypage/mypage.css"/>
+	<link rel="stylesheet" href="/css/mypage/edits.css"/>
 </head>
 <body>
 <c:if test="${not empty mypageMsg}">
@@ -29,52 +29,60 @@
 				</div>
 			</div>
 			<form action="/mypage/update" method="POST" id="update-form">
-				<div class="info-row row">						
-					<div class="col-lg-3 col-md-3 col-sm-3 flex">
-						<span>이름</span>
+					<div class="row info-row">
+						<div class="col-lg-3 col-md-3 col-sm-3 flex">
+							<span class="row-title">이름</span>
+						</div>
+						<div class="col-lg-9 col-md-9 col-sm-9 flex">
+							<input type ="text" id="name" class="form-control" name ="name" value="${userInfo.name}" />
+						</div>
 					</div>
-					<div class="col-lg-9 col-md-9 col-sm-9 flex">
-						<input type ="text" id="name" name ="name" value="${userInfo.name}" />
+					<div class="row info-row">
+						<div class="col-lg-3 col-md-3 col-sm-3 flex">
+							<span class="row-title">이메일</span>
+						</div>
+						<div class="col-lg-9 col-md-9 col-sm-9 flex">
+							<input type ="text" id="email" class="form-control" name ="email" value="${userInfo.email}" />
+						</div>
 					</div>
-					
-					<div class="col-lg-3 col-md-3 col-sm-3 flex">
-						<span>이메일</span>
+					<div class="row info-row">
+						<div class="col-lg-3 col-md-3 col-sm-3 flex">
+							<span class="row-title"> 새 비밀번호</span>
+						</div>
+						<div class="col-lg-9 col-md-9 col-sm-9 flex">
+							<input type ="password" class="form-control" id="password" name ="password"/>
+						</div>
 					</div>
-					<div class="col-lg-9 col-md-9 col-sm-9 flex">
-						<input type ="text" id="email" name ="email" value="${userInfo.email}" />
+					<div class="row info-row">
+						<div class="col-lg-3 col-md-3 col-sm-3 flex" >
+							<span class="row-title">비밀번호 확인</span>
+						</div>
+						<div class="col-lg-9 col-md-9 col-sm-9 flex">
+							<input type ="password" class="form-control" id="confirm-password" name ="confirmPassword"/>
+						</div>
 					</div>
-					
-					<div class="col-lg-3 col-md-3 col-sm-3 flex">
-						<span>새 비밀번호</span>
-					</div>
-					<div class="col-lg-9 col-md-9 col-sm-9 flex">
-						<input type ="password" id="password" name ="password"/>
-					</div>
-					
-					<div class="col-lg-3 col-md-3 col-sm-3 flex" >
-						<span>새 비밀번호 확인</span>
-					</div>
-					<div class="col-lg-9 col-md-9 col-sm-9 flex">
-						<input type ="password" id="confirm-password" name ="confirmPassword"/>
-					</div>
-					
+						<div class="row info-row">
 					<div id="confirm-password-result"></div>
-					
-					<div class="col-lg-3 col-md-3 col-sm-3 flex">
-						<span>전화번호</span>
 					</div>
-					<div class="col-lg-9 col-md-9 col-sm-9 flex">
-						<input type ="text" id="phoneNo" name ="phoneNo" value="${userInfo.phoneNo}" />
+						<div class="row info-row">
+						<div class="col-lg-3 col-md-3 col-sm-3 flex">
+							<span class="row-title">전화번호</span>
+						</div>
+						<div class="col-lg-9 col-md-9 col-sm-9 flex">
+							<input type ="text" id="phoneNo" class="form-control" name ="phoneNo" value="${userInfo.phoneNo}" />
+						</div>
 					</div>
-	
-					<div class="col-lg-3 col-md-3 col-sm-3 flex">
-						<span>자기소개</span>
+					<div class="row info-row">
+						<div class="col-lg-3 col-md-3 col-sm-3 flex">
+							<span class="row-title">자기소개</span>
+						</div>
+						<div class="col-lg-9 col-md-9 col-sm-9 flex">
+							<input type ="text" id="intro" class="form-control" name ="intro" value="${userInfo.intro}" />
+						</div>
 					</div>
-					<div class="col-lg-9 col-md-9 col-sm-9 flex">
-						<input type ="text" id="intro" name ="intro" value="${userInfo.intro}" />
+					<div class="button-container">
+						<button type="submit" class="btn primary-btn">수정하기</button>
 					</div>
-				</div>
-				<button type="submit">수정하기</button>
 			</form>
 		</div>
 		<div class="col-md-4 col-sm-4 col-xs-4"></div>
