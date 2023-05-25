@@ -40,7 +40,7 @@
 						<div class="description-top">
 							<span class="description-top-left"><span>${tour.title}</span></span>
 							<span class="description-top-right">
-								<div class="circle favorite" onclick="setFavorite('${tour.title}')"></div>
+								<div class="circle favorite" onclick="setFavorite('${tour.title}',true)"></div>
 								<div class="circle share" onclick="shareFaceBook()" ><i class="fa-solid fa-share-nodes"></i></div>
 							</span>
 						</div>

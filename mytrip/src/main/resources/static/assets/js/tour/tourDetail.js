@@ -11,15 +11,22 @@ let options = {
 };
 
 document.addEventListener('DOMContentLoaded',function(){
+	init();
+})
+async function init(){
 	latitude = container.getAttribute('data-lat');
 	longitude = container.getAttribute('data-lng');
 	title = container.getAttribute('data-title');
 	
-	makeMap(latitude,longitude);
-	getTour();
-	setFavorite(title);
-	setNearLocation();
-})
+	await makeMap(latitude,longitude);
+	await getTour();
+	favorite = document.querySelector('.favorite');
+	
+	await setFavorite(title,false);
+	await setFavorite(title,true);
+	await setNearLocation();
+	
+}
 async function setNearLocation(){
 	let params = {
 			serviceKey : key,
@@ -151,7 +158,7 @@ async function getTour(){
 		})
 }
 
-function setFavorite(title){
+async function setFavorite(title,isShow){
 	console.log(title);
 	let baseUrl = '/favorites/';
 		fetch(baseUrl + title)
@@ -160,10 +167,10 @@ function setFavorite(title){
 			console.log("요청 결과"+data);
 			let favorite = document.querySelector('.favorite');
 			console.log(favorite);
-			if(data == 'regist'){
+			if(data == 'regist' && isShow){
 				console.log("등록 아이콘 설정");
 				favorite.innerHTML = `<i class="fa-solid fa-heart"></i>`;
-			}else if(data == 'delete'){
+			}else if(data == 'delete' && isShow){
 				console.log("삭제 아이콘 설정");
 				favorite.innerHTML = `<i class="fa-regular fa-heart"></i>`;
 			}
