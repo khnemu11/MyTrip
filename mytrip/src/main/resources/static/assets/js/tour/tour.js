@@ -1,5 +1,5 @@
-var areaCode=1;
-var sigunguCode=1;
+var areaCode="";
+var sigunguCode="";
 
 var contentTypeId="";
 let userinfo;
