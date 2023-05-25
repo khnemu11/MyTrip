@@ -77,4 +77,9 @@ public class PlanServiceImpl implements PlanService {
 	public List<PlanOrderDto> selectPlanOrderList(int seq) {
 		return planDao.selectPlanOrderList(seq);
 	}
+
+	@Override
+	public void deletePlan(int seq) {
+		planDao.deletePlan(seq);
+	}
 }

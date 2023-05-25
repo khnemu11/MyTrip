@@ -151,7 +151,7 @@ function makeMap(data){
 		    content: content   
 		});
 		// 커스텀 오버레이를 지도에 표시합니다
-		customOverlay.setMap(map);
+//		customOverlay.setMap(map);
 		bounds.extend(linePath[i]);
 	}
 ////	
@@ -183,12 +183,16 @@ function makeMap(data){
 	}
 	console.log(positions);
 	
-	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
 
 	console.log(bounds);
 	for (var i = 0; i < positions.length; i ++) {
 	    // 마커 이미지의 이미지 크기 입니다
-	    var imageSize = new kakao.maps.Size(24, 35); 
+	    var imageSrc = "/img/tour/maps-and-flags.png"; 
+	    
+	    if(i==0 || i == 1){
+	    	imageSrc = "/img/tour/marker-green.png";
+	    }
+	    var imageSize = new kakao.maps.Size(35, 35); 
 	    // 마커 이미지를 생성합니다    
 	    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 	    // 마커를 생성합니다
@@ -204,3 +208,11 @@ function makeMap(data){
 	
 	map.setBounds(bounds);
 }	
+function deletePlan(seq){
+	console.log(seq);
+	if(confirm("정말 삭제하겠습니까??")){
+		let deleteUrl ='/route/delete?seq='+seq;
+		console.log(deleteUrl);
+		window.location.href=deleteUrl;
+	}
+}
