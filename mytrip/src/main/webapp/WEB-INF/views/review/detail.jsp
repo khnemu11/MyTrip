@@ -46,31 +46,6 @@
 					<div class="place">● 장소: ${review.tourTitle}</div> <!-- 장소 누르면 상세페이지로 이동 -->
 				</c:if>
 
-
-<!-- <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="/img/review/1.png" class="d-block" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="/img/review/2.png" class="d-block" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div> -->
-					
-
 				<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
 				  <div class="carousel-indicators">
 				  	 <c:forEach var="img" items="${reviewImg}" varStatus="status">
@@ -130,7 +105,35 @@
 				</div>
 				
 				<div class="content">${review.content}</div>
+				<div id="reply-container">
+					<div class="row">
+							<span class="reply-title">댓글</span><span class="reply-count">12</span>
+					</div>
+					<div class="reply">
+						<div class="reply-left">
+							<div class="reply-profile"><i class="fa-solid fa-user" style="color: #000000;"></i></div>
+						</div>
+						<div class="reply-right">
+							<div class="reply-right-top">
+								<div class="reply-right-top-left">
+									<span>김수현</span>
+									<span>2023-06-10 12:22</span>
+								</div>
+								<div class="reply-right-top-right">
+									<i class="fa-solid fa-pen" style="color: #000000;"></i>
+									<i class="fa-solid fa-trash" style="color: #000000;"></i>
+								</div>
+							</div>
+							<div class="reply-right-bottom">
+								안녕하세요
+								~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~``
+							</div>
+						</div>
+					</div>
+				</div>
+				<div>
 			</div>
+
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-3"></div>
 	</div>

@@ -115,3 +115,67 @@ img{
 .btn {
 	padding: 0px;
 }
+#reply-container{
+	margin-top:30px;
+	padding-left:0px;
+	display:grid;
+	grid-template-rows:30px;
+	grid-template-columns:100%;	
+	grid-auto-rows:auto;
+	row-gap:30px;
+}
+#reply-container .row{
+	padding-left:0px;
+}
+.reply-title,.reply-count{
+	padding-left:0px;
+	width:fit-content;
+	font-weight:bold;
+	font-size:24px;
+}
+.reply-count{
+	font-size:20px;
+	display:flex;
+	align-items:center;
+}
+.reply{
+	display:grid;
+	grid-template-columns:50px 1fr;	
+	grid-column-gap:10px;
+}
+.reply-right-bottom{
+	word-break:break-all;	
+}
+.reply-profile{
+	border:1px solid black;
+	border-radius:25px;
+	width:45px;
+	height:45px;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+.reply-profile i{
+	font-size:24px;
+}
+.reply-right{
+	display:flex;
+	flex-direction:column;
+}
+.reply-right-top{
+	display:flex;
+	justify-content:space-between;
+	margin-bottom:10px;
+}
+.reply-right-top-right{
+	width:60px;
+	display:flex;
+	justify-content:flex-end;
+}
+.reply-right-top-right i{
+	margin-left:10px;
+}
+.reply-right-top-left span:first-child{
+	font-weight:bold;
+	font-size:20px;
+}
