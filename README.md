@@ -1,4 +1,8 @@
 # MyTrip
+
+## 시연 영상
+https://youtu.be/fJuHsWZR8M0
+## 프로젝트 소개
 ![image](https://github.com/khnemu11/MyTrip/assets/80014833/5b02f059-52fb-4864-ac67-73ff8a7542d3)
 
 ![image](https://github.com/khnemu11/MyTrip/assets/80014833/969c12b6-fb56-41cc-a693-46a92c233748)
