@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kiki.favorite.model.service.FavoriteService;
+import com.kiki.review.controller.ReviewController;
 import com.kiki.review.model.ReviewDto;
 import com.kiki.review.model.service.ReviewService;
 import com.kiki.route.model.SearchDto;
@@ -29,7 +32,7 @@ public class MainController {
 	private TourService tourService;
 	private ReviewService reviewService;
 	private ResourceLoader resourceLoader;
-	
+	private static final Logger logger = LoggerFactory.getLogger(MainController.class);	
 	@Autowired
 	public MainController(FavoriteService favoriteService, TourService tourService, ReviewService reviewService,
 			ResourceLoader resourceLoader) {
@@ -42,6 +45,7 @@ public class MainController {
 
 	@GetMapping("/")
 	public String index(Model model) {
+		logger.warn("logger test");
 		try {
 			List<TourDto> tourList = tourService.selectHotTourList();
 			model.addAttribute("tourList", tourList);

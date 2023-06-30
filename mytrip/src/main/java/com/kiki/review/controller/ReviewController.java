@@ -8,6 +8,8 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
@@ -38,6 +40,8 @@ public class ReviewController {
 	ResourceLoader resourceLoader;
 	ReplyService replyService;
 	
+	private static final Logger logger = LoggerFactory.getLogger(ReviewController.class);	
+	
 	@Autowired
 	public ReviewController(ReviewService reviewService, TourService tourService, ResourceLoader resourceLoader, ReplyService replyService) {
 		super();
@@ -48,22 +52,22 @@ public class ReviewController {
 	}
 	@GetMapping("/listReview")
 	public String listPlan(HttpServletRequest request, HttpSession session, Model model, SearchDto searchDto) {
-		System.out.println("후기 리스트 시작");
+		logger.info("후기 리스트 시작");
 		searchDto.setPageSize(10);
 		if (searchDto.getPageNo() == 0) {
-			System.out.println("비어있음!");
+			logger.debug("비어있음");
 			searchDto.setPageNo(1);
 		}
 		searchDto.setOffset((searchDto.getPageNo() - 1) * searchDto.getPageSize());
 		searchDto.setUserId(((UserDto) session.getAttribute("userInfo")).getId());
-		System.out.println("검색 dto");
+		logger.debug("검색 dto");
 		System.out.println((UserDto) session.getAttribute("userInfo"));
 		System.out.println(searchDto);
 
 		List<ReviewDto> list = reviewService.selectReviewList(searchDto);
 
 		if (list == null) {
-			System.out.println("허용되지 않는 범위");
+			logger.debug("허용되지 않는 범위");
 			return "redirect:/route/listPan?pageNo=1";
 		}
 
@@ -104,7 +108,7 @@ public class ReviewController {
 	public String list(Model model) {
 		try {
 			List<ReviewDto> list = reviewService.getList();
-			System.out.println("controller 성공");
+			logger.debug("controller 성공");
 			for (int i = 0; i < list.size(); i++) {
 				System.out.println(list.get(i));
 			}
@@ -114,7 +118,7 @@ public class ReviewController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("controller 에러났어요");
+			logger.debug("controller 에러났어요");
 			return "error/error";
 		}
 
@@ -155,7 +159,7 @@ public class ReviewController {
 				
 				//리뷰 seq	
 				int seq = reviewService.getLastestReview(id);
-				System.out.println("리뷰 seq : "+seq);
+				logger.debug("리뷰 seq : "+seq);
 				
 				String originalName = multipartFile.getOriginalFilename();
 				String extend = originalName.substring(originalName.lastIndexOf('.'));
@@ -165,10 +169,10 @@ public class ReviewController {
 						uuid.toString() + extend);
 	
 				multipartFile.transferTo(newFile);
-				System.out.println("파일 저장 성공!");
+				logger.debug("파일 저장 성공!");
 				
-				System.out.println("바뀐 이름 : "+uuid+extend);
-				System.out.println("원래 이름 : "+originalName);
+				logger.debug("바뀐 이름 : "+uuid+extend);
+				logger.debug("원래 이름 : "+originalName);
 				
 				ReviewImgDto imgDto = new ReviewImgDto();
 				imgDto.setImageCode(uuid+extend);
@@ -176,17 +180,17 @@ public class ReviewController {
 				imgDto.setReviewSeq(seq);
 				
 				int validImg = reviewService.insertImage(imgDto);
-				System.out.println("요기에용옹!!" + validImg);
+				logger.debug("요기에용옹!!" + validImg);
 				
-				System.out.println("리뷰쓰기 성공");
+				logger.debug("리뷰쓰기 성공");
 				// 가장 최신 것 중에서 아이디 같은 것
 				return "redirect:detail/" + seq;
 			} else {
-				System.out.println("리뷰쓰기 실패");
+				logger.debug("리뷰쓰기 실패");
 				return "review/write";
 			}
 		} catch (Exception e) {
-			System.out.println("리뷰쓰기 에러");
+			logger.debug("리뷰쓰기 에러");
 			e.printStackTrace();
 			return "error/error";
 		}
@@ -199,16 +203,16 @@ public class ReviewController {
 			System.out.println(model.getAttribute("reviewMsg"));
 			ReviewDto review = reviewService.getReviewDetail(seq);
 			
-			System.out.println("리뷰 스타뚜");
+			logger.debug("리뷰 스타뚜");
 			System.out.println(review);
 			model.addAttribute("review", review);
 			List<ReviewImgDto> reviewImg = reviewService.getReviewImg(seq);
 			model.addAttribute("reviewImg", reviewImg);
-			System.out.println("요기요기요ㅣ교이교ㅣ교이ㅛㄹ니료이" +reviewImg.size());
-			System.out.println("리뷰이미지 스타뚜");
+			logger.debug("요기요기요ㅣ교이교ㅣ교이ㅛㄹ니료이" +reviewImg.size());
+			logger.debug("리뷰이미지 스타뚜");
 			for (int i = 0; i < reviewImg.size(); i++) {
 				String tmp = reviewImg.get(i).getImageCode();
-				System.out.println(reviewImg.get(i).getImageCode()+"   길이 : "+tmp.length());
+				logger.debug(reviewImg.get(i).getImageCode()+"   길이 : "+tmp.length());
 			}
 			
 			List<ReplyDto> replyList = replyService.getReplyList(seq);
@@ -246,7 +250,7 @@ public class ReviewController {
 	@PostMapping("/update/{seq}")
 	public String updateReview(@ModelAttribute("reviewForm") ReviewDto reviewForm,
 			@RequestParam Map<String, String> paramMap, HttpSession session, Model model, @PathVariable("seq") int seq) {
-			System.out.println(" 놀어ㅏㅣㅁ노렁ㄴ모론뢰ㅓ " + seq);
+			logger.debug(" 놀어ㅏㅣㅁ노렁ㄴ모론뢰ㅓ " + seq);
 		try {
 			TourDto tourDto = new TourDto();
 			tourDto.setAddress(paramMap.get("tour-address"));
@@ -262,18 +266,18 @@ public class ReviewController {
 			System.out.println(reviewForm);
 			int valid = reviewService.updateReview(reviewForm);
 			if (valid > 0) {
-				System.out.println("리뷰수정 성공");
+				logger.debug("리뷰수정 성공");
 				List<ReviewImgDto> reviewImg = reviewService.getReviewImg(seq);
 				ReviewDto review = reviewService.getReviewDetail(seq);
 				model.addAttribute("review", review);
 				model.addAttribute("reviewImg", reviewImg);
 				return "redirect:/review/detail/"+seq;
 			} else {
-				System.out.println("리뷰쓰기 실패");
+				logger.debug("리뷰쓰기 실패");
 				return "review/write";
 			}
 		} catch (Exception e) {
-			System.out.println("리뷰쓰기 에러");
+			logger.debug("리뷰쓰기 에러");
 			e.printStackTrace();
 			return "error/error";
 		}
@@ -282,19 +286,19 @@ public class ReviewController {
 	@GetMapping("/delete/{seq}")
 	public String delete(@PathVariable("seq") int seq, Model model) {
 		try {
-			System.out.println("삭제 시작!");
+			logger.debug("삭제 시작!");
 			int valid = reviewService.deleteReview(seq);
 			if (valid > 0) {
-				System.out.println("삭제 성공");
+				logger.debug("삭제 성공");
 				model.addAttribute("reviewMsg", "삭제 성공!");
 				return "review/list";
 			} else {
-				System.out.println("삭제 실패");
+				logger.debug("삭제 실패");
 				model.addAttribute("reviewMsg", "삭제 실패하였습니다.");
 				return "redirect:review/detail/"+seq;
 			}
 		} catch (Exception e) {
-			System.out.println("삭제 에러");
+			logger.debug("삭제 에러");
 			e.printStackTrace();
 			return "error/error";
 		}
