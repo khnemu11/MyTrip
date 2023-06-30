@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- name space는 UserRepo의 fully qualified name으로 설정한다. -->
+
+<mapper namespace="com.kiki.review.model.dao.ReplyDao">
+	<resultMap type="ReplyDto" id="replyList">
+		<id column="seq" property="seq" />
+		<id column="ctime" property="ctime" />
+		<id column="utime" property="utime" />
+		<id column="context" property="context" />
+		<id column="parent_seq" property="parentSeq" />
+		<id column="writer" property="writer" />
+	</resultMap>
+	<insert id="insertReply" parameterType="ReplyDto">
+		INSERT INTO review_reply (context,parent_seq,writer)
+		VALUES (#{context}, #{parentSeq}, #{writer})
+	</insert>
+	<update id="updateReply" parameterType="ReplyDto">
+		UPDATE review_reply
+		SET context = #{context},
+			utime = #{utime}
+		WHERE seq = #{seq}
+	</update>
+	<delete id="deleteReply" parameterType="ReplyDto">
+		DELETE FROM review_reply
+		WHERE seq = #{seq}
+	</delete>
+	<select id="selectReplyList" parameterType="int" resultMap="replyList">
+		SELECT seq, ctime, utime, context, parent_seq, writer
+		FROM review_reply
+		WHERE parent_seq = #{reviewNo}
+	</select>
+</mapper>

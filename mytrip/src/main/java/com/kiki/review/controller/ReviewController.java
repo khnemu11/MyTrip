@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kiki.review.model.ReplyDto;
 import com.kiki.review.model.ReviewDto;
 import com.kiki.review.model.ReviewImgDto;
+import com.kiki.review.model.service.ReplyService;
 import com.kiki.review.model.service.ReviewService;
-import com.kiki.route.model.SearchDto;	
+import com.kiki.route.model.SearchDto;
 import com.kiki.tour.model.TourDto;
 import com.kiki.tour.model.service.TourService;
 import com.kiki.user.model.UserDto;
@@ -34,13 +36,15 @@ public class ReviewController {
 	ReviewService reviewService;
 	TourService tourService;
 	ResourceLoader resourceLoader;
+	ReplyService replyService;
 	
 	@Autowired
-	public ReviewController(ReviewService reviewService, TourService tourService, ResourceLoader resourceLoader) {
+	public ReviewController(ReviewService reviewService, TourService tourService, ResourceLoader resourceLoader, ReplyService replyService) {
 		super();
 		this.reviewService = reviewService;
 		this.tourService = tourService;
 		this.resourceLoader = resourceLoader;
+		this.replyService = replyService;
 	}
 	@GetMapping("/listReview")
 	public String listPlan(HttpServletRequest request, HttpSession session, Model model, SearchDto searchDto) {
@@ -191,6 +195,7 @@ public class ReviewController {
 	@GetMapping("/detail/{seq}")
 	public String detail(@PathVariable("seq") int seq, Model model) {
 		try {
+			
 			System.out.println(model.getAttribute("reviewMsg"));
 			ReviewDto review = reviewService.getReviewDetail(seq);
 			
@@ -205,6 +210,12 @@ public class ReviewController {
 				String tmp = reviewImg.get(i).getImageCode();
 				System.out.println(reviewImg.get(i).getImageCode()+"   길이 : "+tmp.length());
 			}
+			
+			List<ReplyDto> replyList = replyService.getReplyList(seq);
+			System.out.println(replyList);
+			model.addAttribute("replyList", replyList);
+			model.addAttribute("replyCnt",replyList.size());
+			
 			return "review/detail";
 		} catch (Exception e) {
 			e.printStackTrace();
