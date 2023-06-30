@@ -149,7 +149,6 @@ public class ReviewController {
 			reviewForm.setTourTitle(tourDto.getTitle());
 			
 			System.out.println(reviewForm);
-			;
 			//리뷰 및 여행 등록
 			int valid = reviewService.writeReview(reviewForm, tourDto);
 			
@@ -219,7 +218,6 @@ public class ReviewController {
 			System.out.println(replyList);
 			model.addAttribute("replyList", replyList);
 			model.addAttribute("replyCnt",replyList.size());
-			
 			return "review/detail";
 		} catch (Exception e) {
 			e.printStackTrace();

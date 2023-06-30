@@ -171,6 +171,7 @@ img{
 	width:60px;
 	display:flex;
 	justify-content:flex-end;
+	align-items:center;
 }
 .reply-right-top-right i{
 	margin-left:10px;
@@ -178,4 +179,28 @@ img{
 .reply-right-top-left span:first-child{
 	font-weight:bold;
 	font-size:20px;
+}
+
+.input-reply-container{
+	display:flex;
+	justify-content:space-around;
+	align-items:center;
+	margin-bottom:20px;
+}
+.reply-context{
+	padding:0px;
+	width:75%;
+	height:100%;
+	border-radius:15px;
+	padding-left:10px;
+	padding-top:10px;
+}
+.reply-context{
+	border:2px solid black;	
+}
+.reply-context:empty:before{
+	content:attr(placeholder);
+}
+.delete-reply-button:hover,.regist-reply:hover{
+	cursor:pointer;
 }

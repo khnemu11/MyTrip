@@ -107,29 +107,39 @@
 				<div class="content">${review.content}</div>
 				<div id="reply-container">
 					<div class="row">
-							<span class="reply-title">댓글</span><span class="reply-count">12</span>
+							<span class="reply-title">댓글</span><span class="reply-count">${replyCnt}</span>
 					</div>
-					<div class="reply">
-						<div class="reply-left">
-							<div class="reply-profile"><i class="fa-solid fa-user" style="color: #000000;"></i></div>
-						</div>
-						<div class="reply-right">
-							<div class="reply-right-top">
-								<div class="reply-right-top-left">
-									<span>김수현</span>
-									<span>2023-06-10 12:22</span>
+					
+					<div class="input-reply-container">
+						<div class="reply-profile"><i class="fa-solid fa-user" style="color: #000000;"></i></div>
+						<div class="reply-context" contenteditable="true" placeholder="내용을 입력해주세요."></div>
+						<i class="fa-regular fa-paper-plane regist-reply" style="color: #000000;"></i>
+					</div>
+					
+					<c:forEach var="item" items="${replyList}">
+						<div class="reply">
+							<div class="reply-left">
+								<div class="reply-profile"><i class="fa-solid fa-user" style="color: #000000;"></i></div>
+							</div>
+							<div class="reply-right">
+								<div class="reply-right-top">
+									<div class="reply-right-top-left">
+										<span>${item.writer}</span>
+										<span>${item.ctime}</span>
+									</div>
+									<div class="reply-right-top-right">
+										<i class="fa-solid fa-pen" style="color: #000000;"></i>
+										<div class="delete-reply-button" data-seq="${item.seq}" data-writer="${item.writer}">
+											<i class="fa-solid fa-trash" style="color: #000000;"></i>
+										</div>
+									</div>
 								</div>
-								<div class="reply-right-top-right">
-									<i class="fa-solid fa-pen" style="color: #000000;"></i>
-									<i class="fa-solid fa-trash" style="color: #000000;"></i>
+								<div class="reply-right-bottom">
+									${item.context}
 								</div>
 							</div>
-							<div class="reply-right-bottom">
-								안녕하세요
-								~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~``
-							</div>
 						</div>
-					</div>
+					</c:forEach>
 				</div>
 				<div>
 			</div>

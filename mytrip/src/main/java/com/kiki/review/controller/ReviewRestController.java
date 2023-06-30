@@ -75,6 +75,17 @@ public class ReviewRestController {
 	public ResponseEntity<?> deleteReply(ReplyDto replyDto,HttpSession session) {
 		System.out.println("deleteReply 시작");
 		try {
+			
+		if(session.getAttribute("userInfo") == null) {
+			return new ResponseEntity<String>("로그인 후 이용 가능합니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		UserDto userInfo = (UserDto) session.getAttribute("userInfo") ;
+		
+		if(!userInfo.getName().equals(replyDto.getWriter())) {
+			return new ResponseEntity<String>("등록한 이용자만 삭제할 수 있습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+			replyService.deleteReply(replyDto);
+		
 			return new ResponseEntity<String>("true", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
