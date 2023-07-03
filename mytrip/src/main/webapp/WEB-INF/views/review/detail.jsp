@@ -115,31 +115,7 @@
 						<div class="reply-context" contenteditable="true" placeholder="내용을 입력해주세요."></div>
 						<i class="fa-regular fa-paper-plane regist-reply" style="color: #000000;"></i>
 					</div>
-					
-					<c:forEach var="item" items="${replyList}">
-						<div class="reply">
-							<div class="reply-left">
-								<div class="reply-profile"><i class="fa-solid fa-user" style="color: #000000;"></i></div>
-							</div>
-							<div class="reply-right">
-								<div class="reply-right-top">
-									<div class="reply-right-top-left">
-										<span>${item.writer}</span>
-										<span>${item.ctime}</span>
-									</div>
-									<div class="reply-right-top-right">
-										<i class="fa-solid fa-pen" style="color: #000000;"></i>
-										<div class="delete-reply-button" data-seq="${item.seq}" data-writer="${item.writer}">
-											<i class="fa-solid fa-trash" style="color: #000000;"></i>
-										</div>
-									</div>
-								</div>
-								<div class="reply-right-bottom">
-									${item.context}
-								</div>
-							</div>
-						</div>
-					</c:forEach>
+					<div id="reply-list-container"></div>
 				</div>
 				<div>
 			</div>

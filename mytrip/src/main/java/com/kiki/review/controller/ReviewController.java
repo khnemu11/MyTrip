@@ -215,8 +215,7 @@ public class ReviewController {
 			}
 			
 			List<ReplyDto> replyList = replyService.getReplyList(seq);
-			System.out.println(replyList);
-			model.addAttribute("replyList", replyList);
+
 			model.addAttribute("replyCnt",replyList.size());
 			return "review/detail";
 		} catch (Exception e) {

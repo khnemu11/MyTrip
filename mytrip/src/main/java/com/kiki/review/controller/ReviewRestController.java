@@ -68,7 +68,7 @@ public class ReviewRestController {
 		} catch (Exception e) {
 			System.out.println("restController 에러낫어용!");
 			e.printStackTrace();
-			return new ResponseEntity<String>("덧글 작성 중 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<String>("댓글 작성 중 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	@GetMapping("/deleteReply")
@@ -86,10 +86,21 @@ public class ReviewRestController {
 		}
 			replyService.deleteReply(replyDto);
 		
-			return new ResponseEntity<String>("true", HttpStatus.OK);
+			return new ResponseEntity<String>("댓글이 성공적으로 삭제되었습니다.", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>("덧글 삭제 중 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<String>("댓글 삭제 중 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	@GetMapping("/listReply")
+	public ResponseEntity<?> listReply(@RequestParam("reviewNo") int reviewNo,HttpSession session) {
+		System.out.println("listReply 시작");
+		try {
+			List<ReplyDto> replyList = replyService.getReplyList(reviewNo);
+			return new ResponseEntity<List<ReplyDto>>(replyList, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>("댓글 로딩 중 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }

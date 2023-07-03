@@ -204,3 +204,12 @@ img{
 .delete-reply-button:hover,.regist-reply:hover{
 	cursor:pointer;
 }
+.input-reply-container i{
+	font-size:24px;
+}
+.input-reply-container{
+	margin-bottom:30px;
+}
+.reply{
+	margin-bottom:20px;
+}
