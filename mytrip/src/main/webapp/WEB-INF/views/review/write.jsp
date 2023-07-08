@@ -39,7 +39,11 @@
 					
 				<!-- 검색 기능 넣어주세용 -->
 				<div class="sub-title">사진 선택</div>
-				<input type="file" name="file"/>
+				<input type="file" id="select-file" name="file"/>
+				<br>
+				
+				<img id="preview" />
+				
 				<!-- 여기에 파일업로드 넣어주세용 -->
 				<div class="sub-title">내용</div>
 				<textarea class="form-control" name="content" required></textarea>

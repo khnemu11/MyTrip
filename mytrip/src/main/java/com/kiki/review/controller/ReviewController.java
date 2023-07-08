@@ -288,13 +288,17 @@ public class ReviewController {
 			tourDto.setLatitude(Float.parseFloat(paramMap.get("tour-latitude")));
 			tourDto.setTelephone(paramMap.get("tour-telephone"));
 			tourDto.setTitle(paramMap.get("tour-title"));
+			
 			String name = ((UserDto) session.getAttribute("userInfo")).getName();
 			String id = ((UserDto) session.getAttribute("userInfo")).getId();
+			
 			reviewForm.setUserName(name);
 			reviewForm.setUserId(id);
 			reviewForm.setTourTitle(tourDto.getTitle());
+			
 			System.out.println(reviewForm);
 			int valid = reviewService.updateReview(reviewForm);
+			
 			if (valid > 0) {
 				logger.debug("리뷰수정 성공");
 				List<ReviewImgDto> reviewImg = reviewService.getReviewImg(seq);

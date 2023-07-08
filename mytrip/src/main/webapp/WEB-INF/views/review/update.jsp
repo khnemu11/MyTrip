@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +39,7 @@
 					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">여행지 검색</button>
 				</div>
 					
-				<div class="sub-title">사진 선택</div>
+<%-- 				<div class="sub-title">사진 선택</div>
 				<c:forEach var="img" items="${reviewImg}">
 					<c:choose>
 						<c:when test="${img.imageCode.length() lt 5}">
@@ -48,7 +49,13 @@
 							<img src="/img/upload/${img.imageCode}">
 						</c:otherwise>
 					</c:choose>
-				</c:forEach>
+				</c:forEach> --%>
+				
+				<div class="sub-title">사진 선택</div>
+				<input type="file" id="select-file" name="file"/>
+				<br>
+				
+				<img id="preview" src = '<spring:message code="img.url"/>${reviewImg[0].imageCode}'/>
 				
 				<div class="sub-title">내용</div>
 				<textarea class="form-control" name="content" required>${review.content}</textarea>

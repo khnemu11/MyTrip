@@ -8,6 +8,15 @@ let keyword = '';
 let isLoad=false;
 let pageNo= 1;
 
+document.addEventListener("DOMContentLoaded", () => {
+	let preview = document.querySelector("#preview")
+	let url = preview.dataset.url
+	
+	document.querySelector("#preview").style.backgroundImage = "url('" + url+"')"
+	console.log(preview.style);
+	console.log(url)
+});
+
 if (exampleModal) {
   exampleModal.addEventListener('show.bs.modal', event => {
     const button = event.relatedTarget
@@ -161,3 +170,20 @@ function pickTour(title,address,longitude,latitude,telephone){
 	
 //	document.getElementById('exampleModal').hide();
 }
+
+
+// 파일 미리보기
+document.querySelector("#select-file").addEventListener('change', (e)=>{ 
+    let files = e.target.files;
+    if(files && files[0]){
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          console.log(e.target);
+          document.querySelector('#preview').src = e.target.result;
+        };
+        reader.readAsDataURL(files[0]);
+        e.target.src = files[0].name;
+    }else{
+        document.querySelector('#preview').src = ''
+    }
+});
