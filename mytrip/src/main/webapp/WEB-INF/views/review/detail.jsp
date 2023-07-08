@@ -66,12 +66,12 @@
 		    				    <c:choose>
 									<c:when test="${img.imageCode.length() lt 5}">
 										<div class="carousel-item active">
-											<img class="d-block" src="/img/review/${img.imageCode}.png">	
+											<img class="d-block" src="https://dwv4yecgxdd1b.cloudfront.net/upload/${img.imageCode}">	
 										</div>
 									</c:when>
 									<c:otherwise>
 										<div class="carousel-item active">
-											<img class="d-block" src="/img/upload/${img.imageCode}">
+											<img class="d-block" src="https://dwv4yecgxdd1b.cloudfront.net/upload/${img.imageCode}">
 										</div>
 									</c:otherwise>
 								</c:choose>
@@ -80,12 +80,12 @@
 								<c:choose>
 									<c:when test="${img.imageCode.length() lt 5}">
 										<div class="carousel-item">
-											<img class="d-block" src="/img/review/${img.imageCode}.png">	
+											<img class="d-block" src="https://dwv4yecgxdd1b.cloudfront.net/upload/${img.imageName}">	
 									   </div>
 									</c:when>
 									<c:otherwise>
 										<div class="carousel-item">
-											<img class="d-block" src="/img/upload/${img.imageCode}">
+											<img class="d-block" src="https://dwv4yecgxdd1b.cloudfront.net/upload/${img.imageName}">
 										</div>
 									</c:otherwise>
 								</c:choose>
