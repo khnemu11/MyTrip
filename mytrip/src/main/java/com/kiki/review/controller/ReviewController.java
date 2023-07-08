@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.services.s3.AmazonS3;
 import com.kiki.review.model.ReplyDto;
 import com.kiki.review.model.ReviewDto;
 import com.kiki.review.model.ReviewImgDto;
@@ -39,16 +41,21 @@ public class ReviewController {
 	TourService tourService;
 	ResourceLoader resourceLoader;
 	ReplyService replyService;
+	AmazonS3 s3client;
 	
+	@Value(value="${cloud.aws.s3.bucket}")
+	String bucketName;
 	private static final Logger logger = LoggerFactory.getLogger(ReviewController.class);	
 	
 	@Autowired
-	public ReviewController(ReviewService reviewService, TourService tourService, ResourceLoader resourceLoader, ReplyService replyService) {
+	public ReviewController(ReviewService reviewService, TourService tourService, ResourceLoader resourceLoader, 
+			ReplyService replyService,AmazonS3 s3client) {
 		super();
 		this.reviewService = reviewService;
 		this.tourService = tourService;
 		this.resourceLoader = resourceLoader;
 		this.replyService = replyService;
+		this.s3client = s3client;
 	}
 	@GetMapping("/listReview")
 	public String listPlan(HttpServletRequest request, HttpSession session, Model model, SearchDto searchDto) {
@@ -154,25 +161,46 @@ public class ReviewController {
 			
 			//리뷰 성공
 			if (valid > 0) {
-			    //파일 등록
-				
-				//리뷰 seq	
-				int seq = reviewService.getLastestReview(id);
-				logger.debug("리뷰 seq : "+seq);
-				
+				// #1 - 버킷 생성
+				if (!s3client.doesBucketExist(bucketName)) {
+			         s3client.createBucket(bucketName);
+			      }
+			    // #2 - 파일 업로드
 				String originalName = multipartFile.getOriginalFilename();
+				System.out.println("오리지너네임:" + originalName);
 				String extend = originalName.substring(originalName.lastIndexOf('.'));
 				UUID uuid = UUID.randomUUID();
-				File newFile = new File(
-						resourceLoader.getResource("classpath:/static/assets/img/upload/").getFile().getAbsolutePath(),
-						uuid.toString() + extend);
-	
-				multipartFile.transferTo(newFile);
-				logger.debug("파일 저장 성공!");
+				File newFile = new File(resourceLoader.getResource("classpath:/static/assets/img/upload/").getFile().getAbsolutePath(),uuid.toString()+ extend);
+//				File newFile = new File(uuid.toString()+ extend);
 				
+				multipartFile.transferTo(newFile);
+				
+//				System.out.println(newFile.getAbsolutePath());
+//				System.out.println(newFile.getName());
+//				System.out.println(newFile.exists());
+				
+				
+				s3client.putObject(bucketName, "upload/"+uuid.toString()+extend, newFile);
+				
+				if(newFile.delete()) {
+					System.out.print("파일 삭제 성공");
+				}else {
+					System.out.print("파일 삭제 실패");
+				}
+				
+//				String originalName = multipartFile.getOriginalFilename();
+//				String extend = originalName.substring(originalName.lastIndexOf('.'));
+//				UUID uuid = UUID.randomUUID();
+//				File newFile = new File(
+//						resourceLoader.getResource("classpath:/static/assets/img/upload/").getFile().getAbsolutePath(),
+//						uuid.toString() + extend);
+//				multipartFile.transferTo(newFile);
+				logger.debug("파일 저장 성공!");
 				logger.debug("바뀐 이름 : "+uuid+extend);
 				logger.debug("원래 이름 : "+originalName);
 				
+				int seq = reviewService.getLastestReview(id); // 리뷰 seq	
+				logger.debug("리뷰 seq : "+seq);
 				ReviewImgDto imgDto = new ReviewImgDto();
 				imgDto.setImageCode(uuid+extend);
 				imgDto.setImageName(originalName);
@@ -206,10 +234,15 @@ public class ReviewController {
 			System.out.println(review);
 			model.addAttribute("review", review);
 			List<ReviewImgDto> reviewImg = reviewService.getReviewImg(seq);
+			System.out.println(reviewImg);
+			
+			
 			model.addAttribute("reviewImg", reviewImg);
+			
 			logger.debug("요기요기요ㅣ교이교ㅣ교이ㅛㄹ니료이" +reviewImg.size());
 			logger.debug("리뷰이미지 스타뚜");
 			for (int i = 0; i < reviewImg.size(); i++) {
+				logger.debug("리뷰이미지네임 : " + reviewImg.get(i).getImageName());
 				String tmp = reviewImg.get(i).getImageCode();
 				logger.debug(reviewImg.get(i).getImageCode()+"   길이 : "+tmp.length());
 			}
