@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,12 +67,13 @@
 		    				    <c:choose>
 									<c:when test="${img.imageCode.length() lt 5}">
 										<div class="carousel-item active">
-											<img class="d-block" src="https://dwv4yecgxdd1b.cloudfront.net/upload/${img.imageCode}">	
+											<spring:message code="img.url"/>
+											<img class="d-block" src="<spring:message code="img.url"/>${img.imageCode}">	
 										</div>
 									</c:when>
 									<c:otherwise>
 										<div class="carousel-item active">
-											<img class="d-block" src="https://dwv4yecgxdd1b.cloudfront.net/upload/${img.imageCode}">
+											<img class="d-block" src="<spring:message code="img.url"/>${img.imageCode}">
 										</div>
 									</c:otherwise>
 								</c:choose>
@@ -80,12 +82,12 @@
 								<c:choose>
 									<c:when test="${img.imageCode.length() lt 5}">
 										<div class="carousel-item">
-											<img class="d-block" src="https://dwv4yecgxdd1b.cloudfront.net/upload/${img.imageName}">	
+											<img class="d-block" src="<spring:message code="img.url"/>${img.imageCode}">	
 									   </div>
 									</c:when>
 									<c:otherwise>
 										<div class="carousel-item">
-											<img class="d-block" src="https://dwv4yecgxdd1b.cloudfront.net/upload/${img.imageName}">
+											<img class="d-block" src="<spring:message code="img.url"/>${img.imageCode}">
 										</div>
 									</c:otherwise>
 								</c:choose>

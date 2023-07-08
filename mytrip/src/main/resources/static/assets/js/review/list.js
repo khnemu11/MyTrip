@@ -38,21 +38,16 @@ const getReviewList = (isNew) => {
 			let title = reviewList[idx].title;
 			let imageCode = reviewList[idx].imageCode;
 			let imageSrc;
-			
+			let s3Url = 'https://dwv4yecgxdd1b.cloudfront.net/upload/';
 			if (imageCode != null) {
-				if (imageCode.length < 3) {
-					imageSrc = "review/"+imageCode+".png";
-				} else {
-					imageSrc = "upload/" + imageCode;
-				}
-				
+				imageSrc = s3Url+imageCode;
 			} else {
-				imageSrc = "review/no-image.png";
+				imageSrc = "img/review/no-image.png";
 			}
 			
 			let context = `	
 				<form class="review-card" action="/review/detail/${seq}" method="get" onClick="submit()">
-					<img class="review-img" src="/img/${imageSrc}">
+					<img class="review-img" src="${imageSrc}">
 					<div class="tour-info">
 						<div class="tour-info-top">
 							<span class="review-title">
