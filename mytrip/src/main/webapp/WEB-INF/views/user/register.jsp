@@ -49,16 +49,34 @@
 					<div id="confirm-password-result"></div>
 		
 					<div class="mb-3">
-							<div class="input-group">
-								<input type="email" class="form-control" id="email"
-									name="email" placeholder="이메일" required/>
+						<div class="row">
+							<div class="col-lg-9 col-md-9 col-sm-9">
+								<div class="input-group">
+									<input type="email" class="form-control" id="email"
+										name="email" placeholder="이메일" required/>
+								</div>
 							</div>
+							<!-- <div class="col-lg-1 col-md-1 col-sm-1"></div>  -->
+							<div class="col-lg-3 col-md-3 col-sm-3">
+								<div class="btn-container">
+									<button type="submit" id="btn-auth" class="btn btn-right">인증</button>
+								</div>	
+							</div>
+						</div>
 					</div>
+					
+					<div class="mb-3">
+						<input
+							type="text" id="email" class="form-control"
+							placeholder="이메일 인증번호 입력" required/>
+					</div>
+					
 					<div class="col-auto text-center">
 						<button type="submit" id="btn-register"
 							class="btn btn-outline-primary mb-3">회원가입</button>
 					</div>
 				</form>
+				
 			</div>
 			<div class="col-lg-1 col-md-1 col-sm-1">
 			</div> 

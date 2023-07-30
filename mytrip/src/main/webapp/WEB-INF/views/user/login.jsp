@@ -28,6 +28,7 @@
 					</span>
 				</div>
 			</div>
+	
 			<form action="/user/login" method="POST" id="form-login">
 				<div class = "mb-3">
 				<input type = "text" class= "form-control" id = "id" name = "id" placeholder="아이디" required/>
@@ -42,11 +43,12 @@
 					</button>
 				</div>
 			</form>
+			
 		</div>
 		<div class="col-lg-2 col-md-2 col-sm-2"></div>
 		<div class="col-lg-5 col-md-5 col-sm-5">
 			<img class="right-img" src="/img/utill/travel.jpg">
-		</div> <!-- 요기에 사진 넣어주세용 -->
+		</div>
 	</div>
 	<div class="col-lg-3 col-md-3 col-sm-3"></div>
 	</div>
