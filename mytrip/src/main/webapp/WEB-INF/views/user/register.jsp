@@ -5,7 +5,7 @@
 <html>
 <head>
 	<%@ include file="/WEB-INF/views/util/head.jsp"%>
-	<!-- <script src="/js/user/register.js" defer></script> -->
+	<script src="/js/user/register.js" defer></script>
 	<link rel="stylesheet" href="/css/user/register.css"/>
 </head>
 <body>
@@ -23,7 +23,7 @@
 						</span>
 					</div>
 				</div>
-				<form id="register-form" method="POST" action="/user/register">
+				<form id="register-form" method="POST" action="/user/register" onsubmit="return formSubmit()">
 					<div class="mb-3">
 						<input
 							type="text" class="form-control" id="id" name="id"
@@ -56,23 +56,29 @@
 										name="email" placeholder="이메일" required/>
 								</div>
 							</div>
-							<!-- <div class="col-lg-1 col-md-1 col-sm-1"></div>  -->
 							<div class="col-lg-3 col-md-3 col-sm-3">
 								<div class="btn-container">
-									<button type="submit" id="btn-auth" class="btn btn-right">인증</button>
+									<button type="button" id="btn-send" class="btn btn-right">인증번호 발송</button>
 								</div>	
 							</div>
 						</div>
 					</div>
 					
-					<div class="mb-3">
-						<input
-							type="text" id="email" class="form-control"
-							placeholder="이메일 인증번호 입력" required/>
+					<div class="row mb-3">
+						<div class="col-lg-9 col-md-9 col-sm-9">
+							<input
+								type="text" id="auth" class="form-control"
+								placeholder="이메일 인증번호 입력" required/>
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-3">
+							<div class="btn-container">
+								<button type="button" id="btn-auth" class="btn btn-right" onclick='comfirmEmail()'>인증번호 확인</button>
+							</div>	
+						</div>
 					</div>
 					
 					<div class="col-auto text-center">
-						<button type="submit" id="btn-register"
+						<button type="button" id="btn-register"
 							class="btn btn-outline-primary mb-3">회원가입</button>
 					</div>
 				</form>
