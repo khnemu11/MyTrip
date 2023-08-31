@@ -97,3 +97,16 @@ function deleteReply(event){
         listReply();
 	})
 }
+
+document.querySelector(".delete-btn").addEventListener("click", () => {
+	
+	if (confirm("정말 삭제하시겠습니까?")) {
+		
+		console.log(document.querySelector("#seq").getAttribute("data-seq"));
+		
+		let seq = document.querySelector("#seq").getAttribute("data-seq");
+		let url = `/review/delete/${seq}`;
+		
+		window.location.href= url;
+	}
+})

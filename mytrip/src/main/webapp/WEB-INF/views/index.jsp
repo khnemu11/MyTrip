@@ -72,10 +72,10 @@
 							<c:if test="${not empty item.imageCode}">
 								<c:choose>
 									<c:when test="${item.imageCode.length() lt 5}">
-										<img src="/img/review/${item.imageCode}.png">
+										<img src="https://dwv4yecgxdd1b.cloudfront.net/review/${item.imageCode}">
 									</c:when>
 									<c:otherwise>
-										<img src="/img/upload/${item.imageCode}">
+										<img src="https://dwv4yecgxdd1b.cloudfront.net/upload/${item.imageCode}">
 									</c:otherwise>
 								</c:choose>
 							</c:if>					

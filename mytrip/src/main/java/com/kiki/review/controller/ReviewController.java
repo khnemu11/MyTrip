@@ -265,6 +265,10 @@ public class ReviewController {
 			model.addAttribute("review", review);
 			List<ReviewImgDto> reviewImg = reviewService.getReviewImg(seq);
 			model.addAttribute("reviewImg", reviewImg);
+			
+			
+			
+			
 			TourDto searchTourDto = new TourDto();
 			searchTourDto.setTitle(review.getTourTitle());
 			TourDto tourDto = tourService.selectTourByTitle(searchTourDto);
@@ -280,7 +284,9 @@ public class ReviewController {
 	@PostMapping("/update/{seq}")
 	public String updateReview(@ModelAttribute("reviewForm") ReviewDto reviewForm,
 			@RequestParam Map<String, String> paramMap, HttpSession session, Model model, @PathVariable("seq") int seq) {
-			logger.debug(" 놀어ㅏㅣㅁ노렁ㄴ모론뢰ㅓ " + seq);
+			logger.debug("=======");
+			logger.debug("리뷰 수정 시작");
+			logger.debug("=======");
 		try {
 			TourDto tourDto = new TourDto();
 			tourDto.setAddress(paramMap.get("tour-address"));
