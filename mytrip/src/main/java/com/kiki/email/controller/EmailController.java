@@ -32,6 +32,7 @@ public class EmailController {
         // 이메일 발신될 데이터 적재
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+        helper.setFrom("MyTrip");
         helper.setTo(email);
         helper.setSubject("[MyTrip] 인증 코드 메일");
         

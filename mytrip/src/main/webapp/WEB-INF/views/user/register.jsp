@@ -78,7 +78,7 @@
 					</div>
 					
 					<div class="col-auto text-center">
-						<button type="button" id="btn-register"
+						<button type="submit" id="btn-register"
 							class="btn btn-outline-primary mb-3">회원가입</button>
 					</div>
 				</form>
