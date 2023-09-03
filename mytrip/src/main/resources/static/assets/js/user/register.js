@@ -73,7 +73,7 @@ document.querySelector("#btn-send").addEventListener("click",function(){
     }
     
     let paramUrl = new URLSearchParams(param);
-    let baseUrl = "http://52.79.119.160:9998/email/send?";
+    let baseUrl = "http://52.79.119.160:9999/email/send?";
    
     fetch(baseUrl+paramUrl)
 	.then((response)=>response.json())
@@ -93,7 +93,7 @@ function comfirmEmail(){
 	}
 	
 	let paramUrl = new URLSearchParams(param);
-	let baseUrl = "http://52.79.119.160:9998/email/authenticate?";
+	let baseUrl = "http://52.79.119.160:9999/email/authenticate?";
 
     fetch(baseUrl+paramUrl.toString())
 	.then((response)=>response.json())
