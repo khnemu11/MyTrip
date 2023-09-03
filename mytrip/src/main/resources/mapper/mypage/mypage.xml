@@ -21,7 +21,7 @@
 	
 	<select id="authenticateUser" resultType="int">
 		SELECT count(*)
-		FROM USER
+		FROM user
 		WHERE password = #{password}
 	</select>
 	
